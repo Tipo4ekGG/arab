@@ -1,0 +1,1221 @@
+<!doctype html><html lang="ru"><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Арабский словарь А1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@400;600&family=Noto+Naskh+Arabic:wght@400;600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Serif:wght@600&display=swap">
+<style>
+  :root{
+    --bg:#F1F3F5;
+    --surface:#FFFFFF;
+    --surface-2:#E7ECEF;
+    --ink:#14202B;
+    --muted:#5E6C7A;
+    --line:#D3DBE1;
+    --accent:#1F5F8B;
+    --accent-soft:#DCE9F2;
+    --gold:#8C6316;
+    --shadow:0 1px 2px rgba(20,32,43,.06);
+    --arfont:"Noto Sans Arabic","Noto Naskh Arabic","Segoe UI","Geeza Pro",Tahoma,sans-serif;
+  }
+  body.font-naskh{--arfont:"Noto Naskh Arabic","Noto Sans Arabic","Geeza Pro",serif;}
+  .ar,.word,.ex,.dar,.digits{font-weight:500;letter-spacing:0;}
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#0F151B;
+      --surface:#161E26;
+      --surface-2:#1D2732;
+      --ink:#E7EEF4;
+      --muted:#93A3B2;
+      --line:#2A3742;
+      --accent:#74B3E0;
+      --accent-soft:#1B2E3D;
+      --gold:#D3A34E;
+      --shadow:0 1px 2px rgba(0,0,0,.4);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#0F151B;
+    --surface:#161E26;
+    --surface-2:#1D2732;
+    --ink:#E7EEF4;
+    --muted:#93A3B2;
+    --line:#2A3742;
+    --accent:#74B3E0;
+    --accent-soft:#1B2E3D;
+    --gold:#D3A34E;
+    --shadow:0 1px 2px rgba(0,0,0,.4);
+  }
+
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:"IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-size:15px;
+    line-height:1.5;
+  }
+  .wrap{max-width:1000px;margin:0 auto;padding-inline:18px;padding-block:0 64px;}
+
+  header.masthead{padding-block:34px 18px;}
+  .eyebrow{
+    font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--gold);font-weight:600;margin:0 0 8px;
+  }
+  h1{
+    font-family:"IBM Plex Serif", Georgia, serif;
+    font-size:clamp(28px,5vw,40px);
+    line-height:1.1;margin:0 0 10px;text-wrap:balance;font-weight:600;
+  }
+  .lede{color:var(--muted);max-width:62ch;margin:0;}
+  .digits{
+    margin-top:16px;display:flex;flex-wrap:wrap;gap:10px;align-items:baseline;
+    font-family:var(--arfont);font-size:22px;color:var(--accent);
+  }
+  .digits span small{
+    display:block;font-family:"IBM Plex Sans",sans-serif;font-size:10px;
+    color:var(--muted);text-align:center;letter-spacing:.04em;
+  }
+
+  .toolbar{
+    position:sticky;top:env(safe-area-inset-top, 0px);z-index:20;
+    background:var(--bg);border-bottom:1px solid var(--line);
+    padding-block:10px;margin-bottom:22px;
+    display:flex;flex-wrap:wrap;gap:10px;align-items:center;
+  }
+  .search{
+    flex:1 1 220px;min-width:0;
+    background:var(--surface);color:var(--ink);
+    border:1px solid var(--line);border-radius:8px;
+    padding:9px 12px;font:inherit;font-size:14px;box-shadow:var(--shadow);
+  }
+  .search::placeholder{color:var(--muted);}
+  .toggles{display:flex;gap:8px;flex-wrap:wrap;}
+  .tgl{
+    background:var(--surface);color:var(--ink);
+    border:1px solid var(--line);border-radius:999px;
+    padding:8px 14px;font:inherit;font-size:13px;cursor:pointer;
+  }
+  .tgl[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--surface);}
+  :root[data-theme="dark"] .tgl[aria-pressed="true"],
+  .tgl[aria-pressed="true"]{color:#fff;}
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]) .tgl[aria-pressed="true"]{color:#0F151B;}
+  }
+  :root[data-theme="dark"] .tgl[aria-pressed="true"]{color:#0F151B;}
+  .tgl:focus-visible,.search:focus-visible,.jump a:focus-visible{outline:2px solid var(--accent);outline-offset:2px;}
+
+  .jump{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:26px;}
+  .jump a{
+    font-size:13px;text-decoration:none;color:var(--muted);
+    border:1px solid var(--line);border-radius:999px;padding:5px 11px;background:var(--surface);
+  }
+  .jump a:hover{color:var(--accent);border-color:var(--accent);}
+
+  section{margin-bottom:38px;}
+  h2{
+    font-family:"IBM Plex Serif",Georgia,serif;font-size:20px;font-weight:600;
+    margin:0 0 3px;scroll-margin-top:90px;
+  }
+  .count{color:var(--muted);font-size:13px;margin:0 0 14px;}
+  .note{
+    color:var(--muted);font-size:13.5px;margin:12px 0 0;max-width:68ch;
+    border-left:2px solid var(--accent-soft);padding-left:12px;
+  }
+  .note b{color:var(--ink);font-weight:600;}
+
+  .tablebox{overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow);}
+  table{border-collapse:collapse;width:100%;font-size:14.5px;}
+  th{
+    text-align:left;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--muted);font-weight:600;padding:10px 14px;border-bottom:1px solid var(--line);
+    white-space:nowrap;background:var(--surface-2);
+  }
+  td{padding:9px 14px;border-bottom:1px solid var(--line);vertical-align:middle;}
+  tr:last-child td{border-bottom:none;}
+  tr.hide{display:none;}
+  .ar{
+    font-family:var(--arfont);font-size:23px;line-height:1.7;
+    direction:rtl;text-align:right;white-space:nowrap;color:var(--ink);
+  }
+  .tr{color:var(--accent);font-variant-numeric:tabular-nums;white-space:nowrap;}
+  .ru{color:var(--ink);}
+  .pos{color:var(--muted);font-size:12.5px;}
+  body.no-ar .ar,body.no-ru .ru{color:transparent;background:var(--surface-2);border-radius:4px;}
+  body.no-ar .ar:hover,body.no-ru .ru:hover{color:var(--ink);background:none;}
+
+  .numgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(148px,1fr));gap:8px;}
+  .num{
+    background:var(--surface);border:1px solid var(--line);border-radius:9px;
+    padding:10px 12px;display:flex;align-items:baseline;gap:10px;
+  }
+  .num .fig{
+    font-family:var(--arfont);font-size:20px;color:var(--gold);
+    min-width:28px;font-variant-numeric:tabular-nums;
+  }
+  .num .word{font-family:var(--arfont);font-size:19px;direction:rtl;line-height:1.6;}
+  .num .say{display:block;font-family:"IBM Plex Sans",sans-serif;font-size:12px;color:var(--accent);direction:ltr;text-align:left;}
+  body.no-tr .tr,body.no-tr .num .say{color:transparent;background:var(--surface-2);border-radius:4px;}
+  body.no-tr .tr:hover,body.no-tr .num .say:hover{color:var(--accent);background:none;}
+  body.no-ar .num .word{color:transparent;}
+  body.no-ar .num .word:hover{color:var(--ink);}
+
+  .formula{
+    background:var(--accent-soft);border-radius:10px;padding:14px 16px;margin-top:14px;
+    font-size:14px;color:var(--ink);
+  }
+  .formula .ex{font-family:var(--arfont);font-size:20px;direction:rtl;display:inline-block;margin-inline-end:8px;}
+
+
+  .plan{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px;}
+  .day{
+    background:var(--surface);border:1px solid var(--line);border-radius:10px;
+    padding:14px 16px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:9px;
+  }
+  .day h3{
+    margin:0;font-family:"IBM Plex Serif",Georgia,serif;font-size:16px;font-weight:600;
+    display:flex;align-items:baseline;justify-content:space-between;gap:8px;
+  }
+  .day h3 span{font-family:"IBM Plex Sans",sans-serif;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--gold);font-weight:600;}
+  .day .load{color:var(--muted);font-size:12.5px;margin:-4px 0 0;}
+  .day ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:7px;}
+  .day li{display:flex;gap:9px;align-items:flex-start;font-size:13.5px;line-height:1.45;}
+  .day input[type="checkbox"]{margin-top:2px;width:15px;height:15px;accent-color:var(--accent);flex:none;}
+  .day input:focus-visible{outline:2px solid var(--accent);outline-offset:2px;}
+  .day label{cursor:pointer;}
+  .day a{color:var(--accent);}
+  .day li.done label{color:var(--muted);text-decoration:line-through;}
+  .routine{
+    margin-top:14px;background:var(--accent-soft);border-radius:10px;padding:14px 16px;font-size:14px;
+  }
+  .routine h3{margin:0 0 8px;font-size:14px;font-family:"IBM Plex Sans",sans-serif;font-weight:600;}
+  .routine ol{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:5px;}
+  footer{border-top:1px solid var(--line);padding-top:16px;color:var(--muted);font-size:13px;}
+  @media (max-width:520px){
+    .ar{font-size:21px;}
+    th,td{padding:8px 10px;}
+  }
+  .rtl{direction:rtl;}
+  .rtl th{text-align:right;}
+
+  .rtl td.rule{direction:ltr;text-align:left;}
+  .dict-box{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px;box-shadow:var(--shadow);}
+  .dict-ctl{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px;}
+  .dict-card{min-height:170px;display:flex;flex-direction:column;justify-content:center;gap:10px;text-align:center;padding:12px 6px;}
+  .dict-count{font-size:12px;color:var(--muted);letter-spacing:.06em;text-transform:uppercase;}
+  .dict-q{font-size:21px;line-height:1.4;font-weight:500;}
+  .dar{font-family:var(--arfont);font-size:32px;line-height:1.7;direction:rtl;color:var(--ink);}
+  .dict-a{border-top:1px dashed var(--line);padding-top:12px;margin-top:4px;}
+  .dict-a .t{color:var(--muted);font-size:14px;}
+  .dict-a .nt{color:var(--gold);font-size:13px;margin-top:6px;}
+  .dict-act{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:6px;}
+  .dict-act button{font:inherit;font-size:15px;padding:10px 20px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer;}
+  .dict-act button.main{background:var(--accent);border-color:var(--accent);color:#fff;}
+  .dict-act button.ok{border-color:#2E7D4F;color:#2E7D4F;}
+  .dict-act button.bad{border-color:#B3402F;color:#B3402F;}
+  .dict-miss{margin:10px 0 0;padding:0;list-style:none;text-align:start;}
+  .dict-miss li{padding:6px 0;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;}
+  details.dict-all{margin-top:18px;}
+  details.dict-all summary{cursor:pointer;color:var(--accent);font-weight:500;}
+  .rtl td span{display:block;}
+  .rtl td .ar{font-size:22px;line-height:1.6;}
+  .rtl td .tr{direction:ltr;text-align:right;font-size:13.5px;}
+</style>
+
+<div class="wrap">
+  <header class="masthead">
+    <p class="eyebrow">Ат-Такаллюм · уровень A1</p>
+    <h1>Арабский словарь А1</h1>
+    <p class="lede">Всё, что прошли с начала курса: глаголы, существительные, прилагательные, цвета, дни недели, фразы для знакомства, служебные слова и числа до ста. Транскрипция дана в паузальной форме — так, как слово звучит вслух, без падежных окончаний.</p>
+    <p class="digits">
+      <span>٠<small>0</small></span><span>١<small>1</small></span><span>٢<small>2</small></span><span>٣<small>3</small></span><span>٤<small>4</small></span><span>٥<small>5</small></span><span>٦<small>6</small></span><span>٧<small>7</small></span><span>٨<small>8</small></span><span>٩<small>9</small></span>
+    </p>
+  </header>
+
+  <div class="toolbar">
+    <input id="q" class="search" type="search" placeholder="Поиск: наберите слово по-русски или транскрипцией" aria-label="Поиск по словарю">
+    <div class="toggles">
+      <button id="hideAr" class="tgl" type="button" aria-pressed="false">Скрыть арабский</button>
+      <button id="hideTr" class="tgl" type="button" aria-pressed="false">Скрыть «вслух»</button>
+      <button id="hideRu" class="tgl" type="button" aria-pressed="false">Скрыть перевод</button>
+      <button id="fontSw" class="tgl" type="button" aria-pressed="false">Шрифт: классический</button>
+    </div>
+  </div>
+
+  <nav class="jump" aria-label="Разделы">
+    <a href="#plan">План на 5 дней</a>
+    <a href="#dictation">Диктант №1</a>
+    <a href="#verbs">Глаголы</a>
+    <a href="#people">Люди</a>
+    <a href="#jobs">Профессии</a>
+    <a href="#things">Предметы</a>
+    <a href="#colors">Цвета</a>
+    <a href="#adj">Прилагательные</a>
+    <a href="#questions">Вопросительные слова</a>
+    <a href="#grammar">Служебные слова</a>
+    <a href="#have">Иметь: عِنْدَ / لَدَى / لِـ</a>
+    <a href="#pronouns">Слитные местоимения</a>
+    <a href="#family">Семья</a>
+    <a href="#classroom">Класс и место</a>
+    <a href="#places">Страны</a>
+    <a href="#days">Дни недели</a>
+    <a href="#prepsuf">Предлоги + местоимения</a>
+    <a href="#phrases">Фразы</a>
+    <a href="#numbers">Числа</a>
+  </nav>
+
+  <section id="plan">
+    <h2>План на пять дней</h2>
+    <p class="count">289 единиц · примерно 58 новых в день плюс повторение</p>
+    <div class="plan">
+
+      <div class="day">
+        <h3>Числа, дни, география <span>день 1</span></h3>
+        <p class="load">49 единиц · <a href="#numbers">числа</a>, <a href="#days">дни</a>, <a href="#places">страны</a></p>
+        <ul>
+          <li><input type="checkbox" id="p2d1a"><label for="p2d1a">Числа 0–20 вслух подряд, три круга без подглядывания</label></li>
+          <li><input type="checkbox" id="p2d1b"><label for="p2d1b">Десятки и формула «единица + وَ + десяток», собрать 10 случайных чисел</label></li>
+          <li><input type="checkbox" id="p2d1e"><label for="p2d1e">Таблица согласования: 1–2, 3–10, 11–99, 100–1000 — по 3 своих примера на каждую строку</label></li>
+          <li><input type="checkbox" id="p2d1c"><label for="p2d1c">7 дней недели через связь с числами (ثلاثة → الثلاثاء)</label></li>
+          <li><input type="checkbox" id="p2d1d"><label for="p2d1d">Страны, города и нисбы: مِصْر → مِصْرِيّ</label></li>
+          <li><input type="checkbox" id="p2d1f"><label for="p2d1f">5 слов о родстве по браку (عَرُوسٌ، عَرِيسٌ، حَمٌ، حَمَاةٌ، ضَيْفٌ)</label></li>
+        </ul>
+      </div>
+
+      <div class="day">
+        <h3>Люди и принадлежность <span>день 2</span></h3>
+        <p class="load">56 единиц · <a href="#people">люди</a>, <a href="#jobs">профессии</a>, <a href="#pronouns">местоимения</a></p>
+        <ul>
+          <li><input type="checkbox" id="p2d2a"><label for="p2d2a">14 слов о людях — парами «он / она»</label></li>
+          <li><input type="checkbox" id="p2d2b"><label for="p2d2b">24 слова о работе и контактах</label></li>
+          <li><input type="checkbox" id="p2d2c"><label for="p2d2c">12 слитных местоимений + три шага склейки (танвин, ة→ت, окончание)</label></li>
+          <li><input type="checkbox" id="p2d2d"><label for="p2d2d">Проговорить 10 пар: «его адрес», «её работа», «твой номер»</label></li>
+          <li><input type="checkbox" id="p2d2f"><label for="p2d2f">Вопросительные слова: 6 новых (إِلَى أَيْنَ، مَتَى، كَمْ، لِمَاذَا، لِمَنْ، أَيُّ) и по вопросу с каждым из 13</label></li>
+          <li><input type="checkbox" id="p2d2e"><label for="p2d2e">Повтор дня 1, 10 минут</label></li>
+        </ul>
+      </div>
+
+      <div class="day">
+        <h3>Предметы <span>день 3</span></h3>
+        <p class="load">52 единицы · <a href="#things">предметы</a>, <a href="#verbs">глаголы</a></p>
+        <ul>
+          <li><input type="checkbox" id="p2d3a"><label for="p2d3a">Первые 22 слова, сразу с пометкой рода (есть ة или нет)</label></li>
+          <li><input type="checkbox" id="p2d3b"><label for="p2d3b">Оставшиеся 21</label></li>
+          <li><input type="checkbox" id="p2d3c"><label for="p2d3c">Назвать 15 предметов вокруг себя по-арабски</label></li>
+          <li><input type="checkbox" id="p2d3e"><label for="p2d3e">Дом и гости: طَرِيقٌ، طَعَامٌ، زِينَةٌ، صَالُونٌ، أَثَاثٌ и 4 глагола (يُعَلِّقُ، يَسْتَقْبِلُ، يُرَتِّبُ، يَطْبُخُ)</label></li>
+          <li><input type="checkbox" id="p2d3d"><label for="p2d3d">Повтор дней 1–2, 10 минут</label></li>
+        </ul>
+      </div>
+
+      <div class="day">
+        <h3>Признаки и связки <span>день 4</span></h3>
+        <p class="load">52 единицы · <a href="#colors">цвета</a>, <a href="#adj">прилагательные</a>, <a href="#grammar">служебные</a>, <a href="#have">иметь</a></p>
+        <ul>
+          <li><input type="checkbox" id="p2d4a"><label for="p2d4a">9 цветов + правило женского рода для обоих образцов</label></li>
+          <li><input type="checkbox" id="p2d4b"><label for="p2d4b">8 пар антонимов — только парами</label></li>
+          <li><input type="checkbox" id="p2d4c"><label for="p2d4c">32 служебных слова: указательные (هَذَا، هَذِهِ), вопросы, местоимения (все 12 личных), предлоги</label></li>
+          <li><input type="checkbox" id="p2d4d"><label for="p2d4d">15 предложений «предмет + цвет / признак» из вчерашних слов</label></li>
+          <li><input type="checkbox" id="p2d4f"><label for="p2d4f">«Иметь»: три предлога и суффиксы, по 5 фраз на каждый («у меня есть…», «у неё нет…»)</label></li>
+          <li><input type="checkbox" id="p2d4e"><label for="p2d4e">Повтор дня 2, 5 минут</label></li>
+        </ul>
+      </div>
+
+      <div class="day">
+        <h3>Глаголы, речь, прогон <span>день 5</span></h3>
+        <p class="load">57 единиц · <a href="#verbs">глаголы</a>, <a href="#phrases">фразы</a></p>
+        <ul>
+          <li><input type="checkbox" id="p2d5a"><label for="p2d5a">14 глаголов в двух временах + спряжение по лицам</label></li>
+          <li><input type="checkbox" id="p2d5f"><label for="p2d5f">6 указательных (ذَلِكَ، تِلْكَ، هَذَانِ، هَاتَانِ، هَؤُلَاءِ، أُولَئِكَ) и 3 слова о семье (فَرْدٌ، الْقَرَابَةُ، تَتَكَوَّنُ مِنْ)</label></li>
+          <li><input type="checkbox" id="p2d5b"><label for="p2d5b">33 фразы — приветствия парами «вопрос → ответ»</label></li>
+          <li><input type="checkbox" id="p2d5c"><label for="p2d5c">Разыграть знакомство целиком: салям → как дела → имя → откуда → кем работаешь → прощание</label></li>
+          <li><input type="checkbox" id="p2d5d"><label for="p2d5d">Полный прогон: скрыть перевод, пройти все разделы сверху вниз</label></li>
+          <li><input type="checkbox" id="p2d5g"><label for="p2d5g">Диктант №1: два круга — русский → арабский, потом арабский → русский; ошибки переписать от руки</label></li>
+          <li><input type="checkbox" id="p2d5e"><label for="p2d5e">Выписать на бумагу всё, что не далось, и переучить только это</label></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="routine">
+      <h3>Как проходит день — примерно 50 минут</h3>
+      <ol>
+        <li><b>25 минут — новый блок.</b> Включи «Скрыть перевод», иди по списку и называй значение вслух. Всё, на чём споткнулся, отмечай карандашом.</li>
+        <li><b>10 минут — вчерашний блок.</b> Теперь в обратную сторону: «Скрыть арабский», смотришь на русский и вспоминаешь арабское слово. Это сложнее и именно это проверяют на занятии.</li>
+        <li><b>10 минут — письмо.</b> От руки, с огласовками, 10 слов, которые не дались. Рука запоминает то, что не запоминают глаза.</li>
+        <li><b>5 минут — блок позавчерашнего дня,</b> бегло. Это то, что удерживает материал: без повтора на третий день половина осыпется.</li>
+      </ol>
+    </div>
+
+    <p class="note"><b>Обязательно вслух.</b> ح и خ и ه на бумаге — три разных буквы, а в голове превращаются в одно «х», если ты их ни разу не произнёс. То же с ص и س, ظ и ز, хамзой и айном. Молчаливое чтение глазами даёт узнавание, но не даёт воспроизведения.</p>
+    <p class="note"><b>Почему блоки стоят именно так.</b> День 1 — всё механическое и справочное. День 2 — люди и принадлежность вместе, потому что слитные местоимения удобнее всего отрабатывать на «его работа», «её адрес». День 3 — самый большой блок чистого зубрежа, поэтому стоит в середине. День 4 — всё, что цепляется к предметам из дня 3, и сразу строится во фразы. День 5 — глаголы и готовые реплики: из них собирается диалог, в котором всплывают слова всех предыдущих дней.</p>
+    <p class="note"><b>Если добавятся новые слова:</b> кидай их в день своей категории — предмет в день 3, признак в день 4, и так далее. Порог — примерно 45 новых единиц в день; если день перевалил за 50, переноси излишек на день 1, он самый лёгкий по содержанию. Пары (м/ж, антонимы, цвет в двух родах, глагол в двух временах) считай за одну единицу: они учатся вместе.</p>
+  </section>
+
+  <section id="dictation">
+    <h2>Диктант №1 · глава «Знакомство»</h2>
+    <p class="count">34 позиций · преподаватель говорит по-русски, ты пишешь по-арабски, и наоборот</p>
+    <div class="dict-box">
+      <div class="dict-ctl" id="dMode">
+        <button class="tgl" type="button" data-m="ru2ar" aria-pressed="true">Русский → арабский</button>
+        <button class="tgl" type="button" data-m="ar2ru" aria-pressed="false">Арабский → русский</button>
+        <button class="tgl" type="button" data-m="mix" aria-pressed="false">Вперемешку</button>
+        <button class="tgl" type="button" id="dMissed" aria-pressed="false">Только мои ошибки</button>
+      </div>
+      <div class="dict-card" id="dCard"></div>
+    </div>
+    <p class="note"><b>Как пользоваться.</b> Прочитай задание, <b>напиши ответ от руки</b> с огласовками и только потом открой ответ. Честно отметь «Знал» или «Ошибся»: ошибки собираются в конце, и их можно пройти отдельно. Они запоминаются в браузере до следующего раза.</p>
+    <p class="note">В списке несколько вариантов ответа через строку: достаточно любого одного, но лучше знать все. <b>Друг</b> в глоссарии дан формой женского рода (صَدِيقَةٌ / زَمِيلَةٌ); мужская: صَدِيقٌ / زَمِيلٌ.</p>
+    <details class="dict-all">
+      <summary>Весь список диктанта</summary>
+      <div class="tablebox">
+        <table class="rtl">
+          <thead><tr><th>№</th><th>Арабский</th><th>Вслух</th><th>Русский</th></tr></thead>
+          <tbody>
+          <tr><td class="pos">1</td><td class="ar">السَّلَامُ عَلَيْكُمْ</td><td class="tr">ас-саля́му 'але́йкум</td><td class="ru">Мир вам! (приветствие)</td></tr>
+          <tr><td class="pos">2</td><td class="ar">وَعَلَيْكُمُ السَّلَامُ</td><td class="tr">ва-'але́йкуму-с-саля́м</td><td class="ru">И вам мир! (ответ)</td></tr>
+          <tr><td class="pos">3</td><td class="ar">صَبَاحُ الْخَيْرِ</td><td class="tr">саба́ху-ль-хайр</td><td class="ru">Доброе утро! (приветствие)</td></tr>
+          <tr><td class="pos">4</td><td class="ar">صَبَاحُ النُّورِ</td><td class="tr">саба́ху-н-нур</td><td class="ru">Доброе утро! (ответ)</td></tr>
+          <tr><td class="pos">5</td><td class="ar">كَيْفَ حَالُكَ؟<br>كَيْفَ الْحَالُ؟</td><td class="tr">ке́йфа ха́лук<br>ке́йфа-ль-халь</td><td class="ru">Как дела?</td></tr>
+          <tr><td class="pos">6</td><td class="ar">بِخَيْرٍ وَالْحَمْدُ لِلَّهِ<br>بِخَيْرٍ</td><td class="tr">би-хайр ва-ль-ха́мду ли-лля́х<br>би-хайр</td><td class="ru">Слава Аллаху, хорошо.</td></tr>
+          <tr><td class="pos">7</td><td class="ar">أَهْلًا وَسَهْلًا<br>مَرْحَبًا</td><td class="tr">а́хлян ва-са́хлян<br>ма́рхабан</td><td class="ru">Добро пожаловать! Здравствуйте!</td></tr>
+          <tr><td class="pos">8</td><td class="ar">أَهْلًا بِكَ<br>مَرْحَبًا بِكَ</td><td class="tr">а́хлян бик<br>ма́рхабан бик</td><td class="ru">Рады видеть Вас в добром здравии! (ответ хозяину дома) Здравствуйте!</td></tr>
+          <tr><td class="pos">9</td><td class="ar">مَا اسْمُكَ؟</td><td class="tr">ма-сму́к</td><td class="ru">Как тебя зовут?</td></tr>
+          <tr><td class="pos">10</td><td class="ar">اِسْمِي ...</td><td class="tr">и́сми</td><td class="ru">Меня зовут ...</td></tr>
+          <tr><td class="pos">11</td><td class="ar">مَا جِنْسِيَّتُكَ؟<br>مِنْ أَيْنَ أَنْتَ؟</td><td class="tr">ма джинси́йятук<br>мин а́йна анта</td><td class="ru">Кто вы по национальности? / Откуда вы?</td></tr>
+          <tr><td class="pos">12</td><td class="ar">أَنَا مِصْرِيٌّ<br>أَنَا مِنْ مِصْرَ</td><td class="tr">ана ми́сри<br>ана мин миср</td><td class="ru">Я египтянин. / Я из Египта.</td></tr>
+          <tr><td class="pos">13</td><td class="ar">مَسَاءُ الْخَيْرِ</td><td class="tr">маса́'у-ль-хайр</td><td class="ru">Добрый вечер! (приветствие)</td></tr>
+          <tr><td class="pos">14</td><td class="ar">مَسَاءُ النُّورِ</td><td class="tr">маса́'у-н-нур</td><td class="ru">Добрый вечер! (ответ)</td></tr>
+          <tr><td class="pos">15</td><td class="ar">تَشَرَّفْنَا<br>فُرْصَةٌ طَيِّبَةٌ</td><td class="tr">ташарра́фна<br>фу́рса тайи́ба</td><td class="ru">Рад знакомству</td></tr>
+          <tr><td class="pos">16</td><td class="ar">تَشَرَّفْنَا بِكَ<br>فُرْصَةٌ سَعِيدَةٌ</td><td class="tr">ташарра́фна бик<br>фу́рса са'и́да</td><td class="ru">Приятно познакомиться.</td></tr>
+          <tr><td class="pos">17</td><td class="ar">مَعَ السَّلَامَةِ<br>فِي أَمَانِ اللهِ<br>سَلَّمَكَ اللهُ</td><td class="tr">ма'а-с-саля́ма<br>фи 'ама́ни-ллах<br>салла́мака-ллах</td><td class="ru">Прощайте! С Богом!</td></tr>
+          <tr><td class="pos">18</td><td class="ar">إِلَى اللِّقَاءِ<br>مَعَ السَّلَامَةِ</td><td class="tr">иля-ль-лика́'<br>ма'а-с-саля́ма</td><td class="ru">До свидания! До встречи!</td></tr>
+          <tr><td class="pos">19</td><td class="ar">وَظِيفَةٌ<br>مِهْنَةٌ<br>عَمَلٌ</td><td class="tr">вазы́фа<br>ми́хна<br>'а́маль</td><td class="ru">Работа / должность / профессия</td></tr>
+          <tr><td class="pos">20</td><td class="ar">مُتَرْجِمٌ</td><td class="tr">мута́рджим</td><td class="ru">Переводчик</td></tr>
+          <tr><td class="pos">21</td><td class="ar">عَامِلٌ</td><td class="tr">'а́миль</td><td class="ru">Рабочий</td></tr>
+          <tr><td class="pos">22</td><td class="ar">طَالِبٌ<br>تِلْمِيذٌ</td><td class="tr">та́либ<br>тильми́з</td><td class="ru">Студент / ученик</td></tr>
+          <tr><td class="pos">23</td><td class="ar">مُعَلِّمٌ<br>مُدَرِّسٌ<br>أُسْتَاذٌ</td><td class="tr">му'а́ллим<br>муда́ррис<br>уста́з</td><td class="ru">Учитель / преподаватель</td></tr>
+          <tr><td class="pos">24</td><td class="ar">صَدِيقَةٌ<br>زَمِيلَةٌ</td><td class="tr">сады́ка<br>зами́ля</td><td class="ru">Друг</td></tr>
+          <tr><td class="pos">25</td><td class="ar">نَجَّارٌ</td><td class="tr">надджа́р</td><td class="ru">Плотник</td></tr>
+          <tr><td class="pos">26</td><td class="ar">مُتَقَاعِدٌ</td><td class="tr">мутака́'ид</td><td class="ru">Пенсионер</td></tr>
+          <tr><td class="pos">27</td><td class="ar">صَحَفِيٌّ</td><td class="tr">саха́фи</td><td class="ru">Журналист</td></tr>
+          <tr><td class="pos">28</td><td class="ar">هَاتِفٌ مَحْمُولٌ</td><td class="tr">ха́тиф махму́ль</td><td class="ru">Мобильный телефон</td></tr>
+          <tr><td class="pos">29</td><td class="ar">مُحَاسِبٌ</td><td class="tr">муха́сиб</td><td class="ru">Бухгалтер</td></tr>
+          <tr><td class="pos">30</td><td class="ar">بَرِيدٌ إِلِكْتْرُونِيٌّ</td><td class="tr">бари́д иликтру́ни</td><td class="ru">Электронная почта</td></tr>
+          <tr><td class="pos">31</td><td class="ar">هَاتِفٌ ثَابِتٌ<br>هَاتِفٌ أَرْضِيٌّ</td><td class="tr">ха́тиф са́бит<br>ха́тиф 'ардий</td><td class="ru">Домашний телефон</td></tr>
+          <tr><td class="pos">32</td><td class="ar">عُنْوَانٌ</td><td class="tr">'унва́н</td><td class="ru">Адрес</td></tr>
+          <tr><td class="pos">33</td><td class="ar">عَاطِلٌ</td><td class="tr">'а́тыль</td><td class="ru">Безработный</td></tr>
+          <tr><td class="pos">34</td><td class="ar">يَعْمَلُ</td><td class="tr">я́'малу</td><td class="ru">(Он) работает, трудится</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </details>
+    <script>
+    (function(){
+      var D=[{"ru": "Мир вам! (приветствие)", "ar": ["السَّلَامُ عَلَيْكُمْ"], "tr": ["ас-саля́му 'але́йкум"]}, {"ru": "И вам мир! (ответ)", "ar": ["وَعَلَيْكُمُ السَّلَامُ"], "tr": ["ва-'але́йкуму-с-саля́м"]}, {"ru": "Доброе утро! (приветствие)", "ar": ["صَبَاحُ الْخَيْرِ"], "tr": ["саба́ху-ль-хайр"]}, {"ru": "Доброе утро! (ответ)", "ar": ["صَبَاحُ النُّورِ"], "tr": ["саба́ху-н-нур"]}, {"ru": "Как дела?", "ar": ["كَيْفَ حَالُكَ؟", "كَيْفَ الْحَالُ؟"], "tr": ["ке́йфа ха́лук", "ке́йфа-ль-халь"]}, {"ru": "Слава Аллаху, хорошо.", "ar": ["بِخَيْرٍ وَالْحَمْدُ لِلَّهِ", "بِخَيْرٍ"], "tr": ["би-хайр ва-ль-ха́мду ли-лля́х", "би-хайр"]}, {"ru": "Добро пожаловать! Здравствуйте!", "ar": ["أَهْلًا وَسَهْلًا", "مَرْحَبًا"], "tr": ["а́хлян ва-са́хлян", "ма́рхабан"]}, {"ru": "Рады видеть Вас в добром здравии! (ответ хозяину дома) Здравствуйте!", "ar": ["أَهْلًا بِكَ", "مَرْحَبًا بِكَ"], "tr": ["а́хлян бик", "ма́рхабан бик"]}, {"ru": "Как тебя зовут?", "ar": ["مَا اسْمُكَ؟"], "tr": ["ма-сму́к"]}, {"ru": "Меня зовут ...", "ar": ["اِسْمِي ..."], "tr": ["и́сми"]}, {"ru": "Кто вы по национальности? / Откуда вы?", "ar": ["مَا جِنْسِيَّتُكَ؟", "مِنْ أَيْنَ أَنْتَ؟"], "tr": ["ма джинси́йятук", "мин а́йна анта"]}, {"ru": "Я египтянин. / Я из Египта.", "ar": ["أَنَا مِصْرِيٌّ", "أَنَا مِنْ مِصْرَ"], "tr": ["ана ми́сри", "ана мин миср"]}, {"ru": "Добрый вечер! (приветствие)", "ar": ["مَسَاءُ الْخَيْرِ"], "tr": ["маса́'у-ль-хайр"]}, {"ru": "Добрый вечер! (ответ)", "ar": ["مَسَاءُ النُّورِ"], "tr": ["маса́'у-н-нур"]}, {"ru": "Рад знакомству", "ar": ["تَشَرَّفْنَا", "فُرْصَةٌ طَيِّبَةٌ"], "tr": ["ташарра́фна", "фу́рса тайи́ба"]}, {"ru": "Приятно познакомиться.", "ar": ["تَشَرَّفْنَا بِكَ", "فُرْصَةٌ سَعِيدَةٌ"], "tr": ["ташарра́фна бик", "фу́рса са'и́да"]}, {"ru": "Прощайте! С Богом!", "ar": ["مَعَ السَّلَامَةِ", "فِي أَمَانِ اللهِ", "سَلَّمَكَ اللهُ"], "tr": ["ма'а-с-саля́ма", "фи 'ама́ни-ллах", "салла́мака-ллах"]}, {"ru": "До свидания! До встречи!", "ar": ["إِلَى اللِّقَاءِ", "مَعَ السَّلَامَةِ"], "tr": ["иля-ль-лика́'", "ма'а-с-саля́ма"]}, {"ru": "Работа / должность / профессия", "ar": ["وَظِيفَةٌ", "مِهْنَةٌ", "عَمَلٌ"], "tr": ["вазы́фа", "ми́хна", "'а́маль"]}, {"ru": "Переводчик", "ar": ["مُتَرْجِمٌ"], "tr": ["мута́рджим"]}, {"ru": "Рабочий", "ar": ["عَامِلٌ"], "tr": ["'а́миль"]}, {"ru": "Студент / ученик", "ar": ["طَالِبٌ", "تِلْمِيذٌ"], "tr": ["та́либ", "тильми́з"]}, {"ru": "Учитель / преподаватель", "ar": ["مُعَلِّمٌ", "مُدَرِّسٌ", "أُسْتَاذٌ"], "tr": ["му'а́ллим", "муда́ррис", "уста́з"]}, {"ru": "Друг", "ar": ["صَدِيقَةٌ", "زَمِيلَةٌ"], "tr": ["сады́ка", "зами́ля"]}, {"ru": "Плотник", "ar": ["نَجَّارٌ"], "tr": ["надджа́р"]}, {"ru": "Пенсионер", "ar": ["مُتَقَاعِدٌ"], "tr": ["мутака́'ид"]}, {"ru": "Журналист", "ar": ["صَحَفِيٌّ"], "tr": ["саха́фи"]}, {"ru": "Мобильный телефон", "ar": ["هَاتِفٌ مَحْمُولٌ"], "tr": ["ха́тиф махму́ль"]}, {"ru": "Бухгалтер", "ar": ["مُحَاسِبٌ"], "tr": ["муха́сиб"]}, {"ru": "Электронная почта", "ar": ["بَرِيدٌ إِلِكْتْرُونِيٌّ"], "tr": ["бари́д иликтру́ни"]}, {"ru": "Домашний телефон", "ar": ["هَاتِفٌ ثَابِتٌ", "هَاتِفٌ أَرْضِيٌّ"], "tr": ["ха́тиф са́бит", "ха́тиф 'ардий"]}, {"ru": "Адрес", "ar": ["عُنْوَانٌ"], "tr": ["'унва́н"]}, {"ru": "Безработный", "ar": ["عَاطِلٌ"], "tr": ["'а́тыль"]}, {"ru": "(Он) работает, трудится", "ar": ["يَعْمَلُ"], "tr": ["я́'малу"]}];
+      var KEY='arabic-a1-dict1-missed';
+      var mode='ru2ar', queue=[], pos=0, shown=false, missed=[], onlyMissed=false;
+      var card=document.getElementById('dCard');
+      function saved(){ try{ return JSON.parse(localStorage.getItem(KEY)||'[]')||[]; }catch(e){ return []; } }
+      function save(a){ try{ localStorage.setItem(KEY,JSON.stringify(a)); }catch(e){} }
+      function shuffle(a){ for(var i=a.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var t=a[i]; a[i]=a[j]; a[j]=t; } return a; }
+      function ar(lines){ return lines.map(function(l){ return '<div class="dar">'+l+'</div>'; }).join(''); }
+      function tr(lines){ return '<div class="t">'+lines.join(' · ')+'</div>'; }
+      function start(){
+        var idx=[]; var src=onlyMissed?saved():null;
+        D.forEach(function(d,i){ if(!onlyMissed || src.indexOf(i)!==-1){ idx.push(i); } });
+        queue=shuffle(idx).map(function(i){ return {i:i, dir: mode==='mix'?(Math.random()<.5?'ru2ar':'ar2ru'):mode}; });
+        pos=0; shown=false; missed=[]; render();
+      }
+      function render(){
+        if(!queue.length){ card.innerHTML='<div class="dict-q">Ошибок пока нет.</div><div class="t">Пройди круг, и то, что не далось, соберётся здесь.</div>'; return; }
+        if(pos>=queue.length){
+          var all=saved(); var ok=queue.length-missed.length;
+          var html='<div class="dict-count">круг пройден</div><div class="dict-q">Знал '+ok+' из '+queue.length+'</div>';
+          if(missed.length){
+            html+='<ul class="dict-miss">'+missed.map(function(q){ var d=D[q.i]; return '<li><span>'+d.ru+'</span><span class="dar" style="font-size:22px">'+d.ar.join(' / ')+'</span></li>'; }).join('')+'</ul>';
+          }
+          html+='<div class="dict-act"><button class="main" type="button" id="dAgain">Ещё круг</button>'+(missed.length?'<button type="button" id="dRetry">Только ошибки</button>':'')+'</div>';
+          card.innerHTML=html;
+          document.getElementById('dAgain').onclick=start;
+          var r=document.getElementById('dRetry');
+          if(r){ r.onclick=function(){ var m=missed.slice(); queue=shuffle(m.map(function(q){ return {i:q.i,dir:q.dir}; })); pos=0; shown=false; missed=[]; render(); }; }
+          return;
+        }
+        var q=queue[pos], d=D[q.i];
+        var head='<div class="dict-count">'+(pos+1)+' / '+queue.length+'</div>';
+        var prompt = q.dir==='ru2ar' ? '<div class="dict-q">'+d.ru+'</div>' : ar(d.ar);
+        var html=head+prompt;
+        if(!shown){
+          html+='<div class="dict-act"><button class="main" type="button" id="dShow">Показать ответ</button></div>';
+        } else {
+          var ans = q.dir==='ru2ar' ? ar(d.ar)+tr(d.tr) : '<div class="dict-q">'+d.ru+'</div>'+tr(d.tr);
+          html+='<div class="dict-a">'+ans+'</div><div class="dict-act"><button class="ok" type="button" id="dOk">Знал</button><button class="bad" type="button" id="dBad">Ошибся</button></div>';
+        }
+        card.innerHTML=html;
+        var sh=document.getElementById('dShow'); if(sh){ sh.onclick=function(){ shown=true; render(); }; }
+        var ok=document.getElementById('dOk'); if(ok){ ok.onclick=function(){ var a=saved(); var k=a.indexOf(q.i); if(k!==-1){ a.splice(k,1); save(a);} pos++; shown=false; render(); }; }
+        var bad=document.getElementById('dBad'); if(bad){ bad.onclick=function(){ var a=saved(); if(a.indexOf(q.i)===-1){ a.push(q.i); save(a);} missed.push(q); pos++; shown=false; render(); }; }
+      }
+      var btns=document.querySelectorAll('#dMode [data-m]');
+      Array.prototype.forEach.call(btns,function(b){
+        b.addEventListener('click',function(){
+          mode=b.getAttribute('data-m');
+          Array.prototype.forEach.call(btns,function(x){ x.setAttribute('aria-pressed', x===b?'true':'false'); });
+          start();
+        });
+      });
+      document.getElementById('dMissed').addEventListener('click',function(){
+        onlyMissed=!onlyMissed; this.setAttribute('aria-pressed', onlyMissed?'true':'false'); start();
+      });
+      start();
+    })();
+    </script>
+  </section>
+
+  <section id="verbs">
+    <h2>Глаголы</h2>
+    <p class="count">19 глаголов · прошедшее и настоящее время</p>
+    <div class="tablebox">
+      <table>
+        <thead><tr><th>Прошедшее</th><th>Вслух</th><th>Настоящее</th><th>Вслух</th><th>Перевод</th></tr></thead>
+        <tbody>
+          <tr><td class="ar">كَتَبَ</td><td class="tr">ка́таба</td><td class="ar">يَكْتُبُ</td><td class="tr">я́ктубу</td><td class="ru">писать</td></tr>
+          <tr><td class="ar">دَرَسَ</td><td class="tr">да́раса</td><td class="ar">يَدْرُسُ</td><td class="tr">я́друсу</td><td class="ru">учиться</td></tr>
+          <tr><td class="ar">فَتَحَ</td><td class="tr">фа́таха</td><td class="ar">يَفْتَحُ</td><td class="tr">я́фтаху</td><td class="ru">открывать</td></tr>
+          <tr><td class="ar">خَرَجَ</td><td class="tr">ха́раджа</td><td class="ar">يَخْرُجُ</td><td class="tr">я́хруджу</td><td class="ru">выходить</td></tr>
+          <tr><td class="ar">سَمِعَ</td><td class="tr">са́ми'а</td><td class="ar">يَسْمَعُ</td><td class="tr">я́сма'у</td><td class="ru">слушать</td></tr>
+          <tr><td class="ar">شَرِبَ</td><td class="tr">ша́риба</td><td class="ar">يَشْرَبُ</td><td class="tr">я́шрабу</td><td class="ru">пить</td></tr>
+          <tr><td class="ar">جَلَسَ</td><td class="tr">джа́ласа</td><td class="ar">يَجْلِسُ</td><td class="tr">я́джлису</td><td class="ru">сидеть</td></tr>
+          <tr><td class="ar">نَظَرَ</td><td class="tr">на́зара</td><td class="ar">يَنْظُرُ</td><td class="tr">я́нзуру</td><td class="ru">смотреть</td></tr>
+          <tr><td class="ar">رَجَعَ</td><td class="tr">ра́джа'а</td><td class="ar">يَرْجِعُ</td><td class="tr">я́рджи'у</td><td class="ru">возвращаться</td></tr>
+          <tr><td class="ar">قَرَأَ</td><td class="tr">ка́ра'а</td><td class="ar">يَقْرَأُ</td><td class="tr">я́кра'у</td><td class="ru">читать</td></tr>
+          <tr><td class="ar">عَمِلَ</td><td class="tr">а́мила</td><td class="ar">يَعْمَلُ</td><td class="tr">я́'малу</td><td class="ru">работать</td></tr>
+          <tr><td class="ar">فَهِمَ</td><td class="tr">фа́хима</td><td class="ar">يَفْهَمُ</td><td class="tr">я́фхаму</td><td class="ru">понимать</td></tr>
+          <tr><td class="ar">سَكَنَ</td><td class="tr">са́кана</td><td class="ar">يَسْكُنُ</td><td class="tr">я́скуну</td><td class="ru">жить, проживать</td></tr>
+          <tr><td class="ar">ذَهَبَ</td><td class="tr">за́хаба</td><td class="ar">يَذْهَبُ</td><td class="tr">я́зхабу</td><td class="ru">идти, ехать</td></tr>
+          <tr><td class="ar">أَحَبَّ</td><td class="tr">аха́бба</td><td class="ar">يُحِبُّ</td><td class="tr">юхи́ббу</td><td class="ru">любить</td></tr>
+          <tr><td class="ar">عَلَّقَ</td><td class="tr">'а́ллака</td><td class="ar">يُعَلِّقُ</td><td class="tr">ю'а́ллику</td><td class="ru">вешать, развешивать</td></tr>
+          <tr><td class="ar">اِسْتَقْبَلَ</td><td class="tr">иста́кбала</td><td class="ar">يَسْتَقْبِلُ</td><td class="tr">яста́кбилу</td><td class="ru">встречать, принимать (гостей)</td></tr>
+          <tr><td class="ar">رَتَّبَ</td><td class="tr">ра́ттаба</td><td class="ar">يُرَتِّبُ</td><td class="tr">юра́ттибу</td><td class="ru">приводить в порядок, расставлять</td></tr>
+          <tr><td class="ar">طَبَخَ</td><td class="tr">та́баха</td><td class="ar">يَطْبُخُ</td><td class="tr">я́тбуху</td><td class="ru">готовить (еду)</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note"><b>Спряжение в настоящем времени.</b> Берёшь форму «он» и меняешь приставку: <b>أَ</b> — я, <b>تَـ</b> — ты (м) и она, <b>يَـ</b> — он, <b>تَـ … ـِينَ</b> — ты (ж). Огласовка внутри слова не меняется: يَكْتُبُ → أَكْتُبُ، تَكْتُبُ، تَكْتُبِينَ. Конечная дамма обязательна — без неё получается другое наклонение.</p>
+    <p class="note"><b>Усиленные и десятая породы.</b> В новых глаголах вы видите другой рисунок: عَلَّقَ، رَتَّبَ с шаддой на средней корневой (в настоящем времени приставка <b>يُـ</b> с даммой: يُعَلِّقُ، يُرَتِّبُ), и اِسْتَقْبَلَ с приставкой <b>اِسْتَ</b> (يَسْتَقْبِلُ). В учебнике они даны сразу в настоящем времени, поэтому для вашего диктанта достаточно знать, что приставка <b>يُـ</b> и <b>يَسْتَـ</b> — это не «он» + что-то другое, а часть формы глагола. Для «она» меняйте первую букву на تَ: تَطْبُخُ، تُرَتِّبُ، تَسْتَقْبِلُ. Глагол جَلَسَ / يَجْلِسُ («сидеть») у вас уже есть.</p>
+    <p class="note">Глаголы — единственное место, где транскрипция дана с конечной огласовкой: это словарная форма, в которой их называют на занятии. Ударение во всех десяти на первом слоге. В настоящем времени приставка <b>يَـ</b>, сукун на первой коренной, а огласовка второй коренной у каждого своя — её и надо запоминать.</p>
+  </section>
+
+  <section id="people">
+    <h2>Люди и профессии</h2>
+    <p class="count">14 слов · пары «он / она» отличаются только ة</p>
+    <div class="tablebox">
+      <table>
+        <thead><tr><th>Слово</th><th>Вслух</th><th>Перевод</th></tr></thead>
+        <tbody>
+          <tr><td class="ar">طَبِيبٌ</td><td class="tr">таби́б</td><td class="ru">врач</td></tr>
+          <tr><td class="ar">طَبِيبَةٌ</td><td class="tr">таби́ба</td><td class="ru">врач (женщина)</td></tr>
+          <tr><td class="ar">مُمَرِّضٌ</td><td class="tr">мума́ррид</td><td class="ru">медбрат</td></tr>
+          <tr><td class="ar">مُمَرِّضَةٌ</td><td class="tr">мума́ррида</td><td class="ru">медсестра</td></tr>
+          <tr><td class="ar">مُعَلِّمٌ</td><td class="tr">му'а́ллим</td><td class="ru">учитель</td></tr>
+          <tr><td class="ar">مُعَلِّمَةٌ</td><td class="tr">му'а́ллима</td><td class="ru">учительница</td></tr>
+          <tr><td class="ar">طَالِبٌ</td><td class="tr">та́либ</td><td class="ru">студент, учащийся</td></tr>
+          <tr><td class="ar">طَالِبَةٌ</td><td class="tr">та́либа</td><td class="ru">студентка</td></tr>
+          <tr><td class="ar">ضَابِطٌ</td><td class="tr">да́бит</td><td class="ru">офицер</td></tr>
+          <tr><td class="ar">طِفْلٌ</td><td class="tr">тыфль</td><td class="ru">ребёнок</td></tr>
+          <tr><td class="ar">أُسْرَةٌ</td><td class="tr">у́сра</td><td class="ru">семья</td></tr>
+          <tr><td class="ar">صَدِيقٌ</td><td class="tr">сады́к</td><td class="ru">друг</td></tr>
+          <tr><td class="ar">صَدِيقَةٌ</td><td class="tr">сады́ка</td><td class="ru">подруга</td></tr>
+          <tr><td class="ar">زَمِيلٌ</td><td class="tr">зами́ль</td><td class="ru">коллега, однокурсник</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">Имена из упражнений: <b>مُحَمَّدٌ</b> Мухаммад, <b>أَحْمَدُ</b> Ахмад, <b>حَسَنٌ</b> Хасан, <b>إِبْرَاهِيمُ</b> Ибрахим, <b>فَاطِمَةُ</b> Фатима, <b>عَائِشَةُ</b> Аиша, <b>زَيْنَبُ</b> Зайнаб, <b>لَيْلَى</b> Лейла, <b>خَدِيجَةُ</b> Хадиджа, <b>صَالِحٌ</b> Салих, <b>خَمِيسٌ</b> Хамис, <b>حَسَّانٌ</b> Хассан, <b>شُكْرِي</b> Шукри. Все, кроме مُحَمَّدٌ и حَسَنٌ, идут без танвина — одна дамма на конце.</p>
+  </section>
+
+  <section id="jobs">
+    <h2>Профессии, работа, контакты</h2>
+    <p class="count">24 слова · из глоссария к первой главе</p>
+    <div class="tablebox">
+      <table>
+        <thead><tr><th>Слово</th><th>Вслух</th><th>Перевод</th></tr></thead>
+        <tbody>
+          <tr><td class="ar">وَظِيفَةٌ</td><td class="tr">вазы́фа</td><td class="ru">должность, работа</td></tr>
+          <tr><td class="ar">مِهْنَةٌ</td><td class="tr">ми́хна</td><td class="ru">профессия</td></tr>
+          <tr><td class="ar">عَمَلٌ</td><td class="tr">'а́маль</td><td class="ru">работа, труд</td></tr>
+          <tr><td class="ar">يَعْمَلُ</td><td class="tr">я'маль</td><td class="ru">(он) работает</td></tr>
+          <tr><td class="ar">مُتَرْجِمٌ</td><td class="tr">мута́рджим</td><td class="ru">переводчик</td></tr>
+          <tr><td class="ar">عَامِلٌ</td><td class="tr">'а́миль</td><td class="ru">рабочий</td></tr>
+          <tr><td class="ar">نَجَّارٌ</td><td class="tr">надджа́р</td><td class="ru">плотник</td></tr>
+          <tr><td class="ar">مُحَاسِبٌ</td><td class="tr">муха́сиб</td><td class="ru">бухгалтер</td></tr>
+          <tr><td class="ar">صَحَفِيٌّ</td><td class="tr">саха́фи</td><td class="ru">журналист</td></tr>
+          <tr><td class="ar">مُتَقَاعِدٌ</td><td class="tr">мутака́'ид</td><td class="ru">пенсионер</td></tr>
+          <tr><td class="ar">عَاطِلٌ</td><td class="tr">'а́тыль</td><td class="ru">безработный</td></tr>
+          <tr><td class="ar">تِلْمِيذٌ</td><td class="tr">тильми́з</td><td class="ru">ученик (школьник)</td></tr>
+          <tr><td class="ar">مُدَرِّسٌ</td><td class="tr">муда́ррис</td><td class="ru">преподаватель</td></tr>
+          <tr><td class="ar">أُسْتَاذٌ</td><td class="tr">уста́з</td><td class="ru">преподаватель, профессор</td></tr>
+          <tr><td class="ar">صَدِيقَةٌ / زَمِيلَةٌ</td><td class="tr">сады́ка / зами́ля</td><td class="ru">подруга / коллега (ж)</td></tr>
+          <tr><td class="ar">هَاتِفٌ مَحْمُولٌ</td><td class="tr">ха́тиф махму́ль</td><td class="ru">мобильный телефон</td></tr>
+          <tr><td class="ar">هَاتِفٌ ثَابِتٌ / أَرْضِيٌّ</td><td class="tr">ха́тиф са́бит / 'ардий</td><td class="ru">домашний телефон</td></tr>
+          <tr><td class="ar">بَرِيدٌ إِلِكْتْرُونِيٌّ</td><td class="tr">бари́д иликтру́ни</td><td class="ru">электронная почта</td></tr>
+          <tr><td class="ar">عُنْوَانٌ</td><td class="tr">'унва́н</td><td class="ru">адрес</td></tr>
+          <tr><td class="ar">مُهَنْدِسٌ</td><td class="tr">муха́ндис</td><td class="ru">инженер</td></tr>
+          <tr><td class="ar">مُحَاسِبَةٌ</td><td class="tr">муха́сиба</td><td class="ru">бухгалтер (женщина)</td></tr>
+          <tr><td class="ar">شَارِعٌ</td><td class="tr">ша́ри'</td><td class="ru">улица</td></tr>
+          <tr><td class="ar">رَقْمٌ</td><td class="tr">ракм</td><td class="ru">номер</td></tr>
+          <tr><td class="ar">جِنْسِيَّةٌ</td><td class="tr">джинси́йя</td><td class="ru">гражданство, национальность</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">Мужская форма делается из женской и наоборот по тому же правилу, что и везде: صَدِيقٌ друг — صَدِيقَةٌ подруга, زَمِيلٌ коллега — زَمِيلَةٌ. Три слова для учителя различаются по месту работы: مُعَلِّمٌ в школе, مُدَرِّسٌ шире, أُسْتَاذٌ в университете и как вежливое обращение.</p>
+  </section>
+
+  <section id="things">
+    <h2>Предметы, места, еда</h2>
+    <p class="count">48 слов · род определяется по ة на конце</p>
+    <div class="tablebox">
+      <table>
+        <thead><tr><th>Слово</th><th>Вслух</th><th>Перевод</th><th>Род</th></tr></thead>
+        <tbody>
+          <tr><td class="ar">بَيْتٌ</td><td class="tr">байт</td><td class="ru">дом</td><td class="pos">м</td></tr>
+          <tr><td class="ar">عِمَارَةٌ</td><td class="tr">'има́ра</td><td class="ru">здание</td><td class="pos">ж</td></tr>
+          <tr><td class="ar">بَابٌ</td><td class="tr">баб</td><td class="ru">дверь</td><td class="pos">м</td></tr>
+          <tr><td class="ar">شُبَّاكٌ</td><td class="tr">шубба́к</td><td class="ru">окно</td><td class="pos">м</td></tr>
+          <tr><td class="ar">سُلَّمٌ</td><td class="tr">су́ллям</td><td class="ru">лестница</td><td class="pos">м</td></tr>
+          <tr><td class="ar">سَيَّارَةٌ</td><td class="tr">сайя́ра</td><td class="ru">машина</td><td class="pos">ж</td></tr>
+          <tr><td class="ar">كِتَابٌ</td><td class="tr">кита́б</td><td class="ru">книга</td><td class="pos">м</td></tr>
+          <tr><td class="ar">كُتُبٌ</td><td class="tr">ку́туб</td><td class="ru">книги</td><td class="pos">мн</td></tr>
+          <tr><td class="ar">قَلَمٌ</td><td class="tr">ка́лям</td><td class="ru">ручка, карандаш</td><td class="pos">м</td></tr>
+          <tr><td class="ar">دَرْسٌ</td><td class="tr">дарс</td><td class="ru">урок</td><td class="pos">м</td></tr>
+          <tr><td class="ar">سَبُّورَةٌ</td><td class="tr">саббу́ра</td><td class="ru">доска</td><td class="pos">ж</td></tr>
+          <tr><td class="ar">خَرِيطَةٌ</td><td class="tr">хари́та</td><td class="ru">карта</td><td class="pos">ж</td></tr>
+          <tr><td class="ar">حَاسُوبٌ</td><td class="tr">хасу́б</td><td class="ru">компьютер</td><td class="pos">м</td></tr>
+          <tr><td class="ar">هَاتِفٌ</td><td class="tr">ха́тиф</td><td class="ru">телефон</td><td class="pos">м</td></tr>
+          <tr><td class="ar">سَاعَةٌ</td><td class="tr">са́'а</td><td class="ru">часы</td><td class="pos">ж</td></tr>
+          <tr><td class="ar">نَظَّارَةٌ</td><td class="tr">назза́ра</td><td class="ru">очки</td><td class="pos">ж</td></tr>
+          <tr><td class="ar">مِحْفَظَةٌ</td><td class="tr">ми́хфаза</td><td class="ru">портфель, кошелёк</td><td class="pos">ж</td></tr>
+          <tr><td class="ar">غَسَّالَةٌ</td><td class="tr">гасса́ла</td><td class="ru">стиральная машина</td><td class="pos">ж</td></tr>
+          <tr><td class="ar">وِسَادَةٌ</td><td class="tr">виса́да</td><td class="ru">подушка</td><td class="pos">ж</td></tr>
+          <tr><td class="ar">ثَوْبٌ</td><td class="tr">сауб</td><td class="ru">одежда, платье</td><td class="pos">м</td></tr>
+          <tr><td class="ar">فُرْشَاةٌ</td><td class="tr">фурша́</td><td class="ru">щётка</td><td class="pos">ж</td></tr>
+          <tr><td class="ar">كُوبٌ</td><td class="tr">куб</td><td class="ru">стакан</td><td class="pos">м</td></tr>
+          <tr><td class="ar">كُرَةٌ</td><td class="tr">ку́ра</td><td class="ru">мяч</td><td class="pos">ж</td></tr>
+          <tr><td class="ar">وَزْنٌ</td><td class="tr">вазн</td><td class="ru">вес</td><td class="pos">м</td></tr>
+          <tr><td class="ar">عَلَمٌ</td><td class="tr">'а́лям</td><td class="ru">флаг</td><td class="pos">м</td></tr>
+          <tr><td class="ar">قَمَرٌ</td><td class="tr">ка́мар</td><td class="ru">луна</td><td class="pos">м</td></tr>
+          <tr><td class="ar">دُولَارٌ</td><td class="tr">дуля́р</td><td class="ru">доллар</td><td class="pos">м</td></tr>
+          <tr><td class="ar">رِيَالٌ</td><td class="tr">рия́ль</td><td class="ru">риал</td><td class="pos">м</td></tr>
+          <tr><td class="ar">قِطَّةٌ</td><td class="tr">ки́тта</td><td class="ru">кошка</td><td class="pos">ж</td></tr>
+          <tr><td class="ar">ذُبَابَةٌ</td><td class="tr">зуба́ба</td><td class="ru">муха</td><td class="pos">ж</td></tr>
+          <tr><td class="ar">تَمْرٌ</td><td class="tr">тамр</td><td class="ru">финики</td><td class="pos">м</td></tr>
+          <tr><td class="ar">زَيْتُونٌ</td><td class="tr">зайту́н</td><td class="ru">оливки</td><td class="pos">м</td></tr>
+          <tr><td class="ar">بَيْضٌ</td><td class="tr">байд</td><td class="ru">яйца</td><td class="pos">м</td></tr>
+          <tr><td class="ar">خُبْزٌ</td><td class="tr">хубз</td><td class="ru">хлеб</td><td class="pos">м</td></tr>
+          <tr><td class="ar">طَمَاطِمُ</td><td class="tr">тама́тым</td><td class="ru">помидоры</td><td class="pos">мн</td></tr>
+          <tr><td class="ar">تِينٌ</td><td class="tr">тин</td><td class="ru">инжир</td><td class="pos">м</td></tr>
+          <tr><td class="ar">جُبْنٌ</td><td class="tr">джубн</td><td class="ru">сыр</td><td class="pos">м</td></tr>
+          <tr><td class="ar">لَحْمٌ</td><td class="tr">лахм</td><td class="ru">мясо</td><td class="pos">м</td></tr>
+          <tr><td class="ar">وَرْدَةٌ</td><td class="tr">ва́рда</td><td class="ru">роза, цветок</td><td class="pos">ж</td></tr>
+          <tr><td class="ar">ظَرْفٌ</td><td class="tr">зарф</td><td class="ru">конверт</td><td class="pos">м</td></tr>
+          <tr><td class="ar">تَنُّورَةٌ</td><td class="tr">танну́ра</td><td class="ru">юбка</td><td class="pos">ж</td></tr>
+          <tr><td class="ar">يَوْمٌ</td><td class="tr">яум</td><td class="ru">день</td><td class="pos">м</td></tr>
+          <tr><td class="ar">أُسْبُوعٌ</td><td class="tr">усбу́'</td><td class="ru">неделя</td><td class="pos">м</td></tr>
+          <tr><td class="ar">طَرِيقٌ</td><td class="tr">тари́к</td><td class="ru">дорога, путь</td><td class="pos">м</td></tr>
+          <tr><td class="ar">طَعَامٌ</td><td class="tr">та'а́м</td><td class="ru">еда</td><td class="pos">м</td></tr>
+          <tr><td class="ar">زِينَةٌ</td><td class="tr">зи́на</td><td class="ru">украшение</td><td class="pos">ж</td></tr>
+          <tr><td class="ar">صَالُونٌ</td><td class="tr">салу́н</td><td class="ru">гостиная</td><td class="pos">м</td></tr>
+          <tr><td class="ar">أَثَاثٌ</td><td class="tr">'аса́с</td><td class="ru">мебель</td><td class="pos">м</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">С определённым артиклем танвин исчезает: <b>بَيْتٌ</b> → <b>الْبَيْتُ</b>. Перед «солнечными» буквами (ت ث د ذ ر ز س ش ص ض ط ظ ل ن) артикль теряет «л»: السَّيَّارَة звучит <i>ас-сайя́ра</i>, а не «аль-сайяра».</p>
+  </section>
+
+  <section id="colors">
+    <h2>Цвета</h2>
+    <p class="count">9 цветов · мужская и женская форма</p>
+    <div class="tablebox">
+      <table>
+        <thead><tr><th>Перевод</th><th>Мужской род</th><th>Вслух</th><th>Женский род</th><th>Вслух</th></tr></thead>
+        <tbody>
+          <tr><td class="ru">белый</td><td class="ar">أَبْيَضُ</td><td class="tr">'а́бьяд</td><td class="ar">بَيْضَاءُ</td><td class="tr">байда́'</td></tr>
+          <tr><td class="ru">чёрный</td><td class="ar">أَسْوَدُ</td><td class="tr">'а́свад</td><td class="ar">سَوْدَاءُ</td><td class="tr">савда́'</td></tr>
+          <tr><td class="ru">синий, голубой</td><td class="ar">أَزْرَقُ</td><td class="tr">'а́зрак</td><td class="ar">زَرْقَاءُ</td><td class="tr">зарка́'</td></tr>
+          <tr><td class="ru">жёлтый</td><td class="ar">أَصْفَرُ</td><td class="tr">'а́сфар</td><td class="ar">صَفْرَاءُ</td><td class="tr">сафра́'</td></tr>
+          <tr><td class="ru">зелёный</td><td class="ar">أَخْضَرُ</td><td class="tr">'а́хдар</td><td class="ar">خَضْرَاءُ</td><td class="tr">хадра́'</td></tr>
+          <tr><td class="ru">красный</td><td class="ar">أَحْمَرُ</td><td class="tr">'а́хмар</td><td class="ar">حَمْرَاءُ</td><td class="tr">хамра́'</td></tr>
+          <tr><td class="ru">коричневый</td><td class="ar">بُنِّيٌّ</td><td class="tr">бу́нни</td><td class="ar">بُنِّيَّةٌ</td><td class="tr">бунни́йя</td></tr>
+          <tr><td class="ru">оранжевый</td><td class="ar">بُرْتُقَالِيٌّ</td><td class="tr">буртука́ли</td><td class="ar">بُرْتُقَالِيَّةٌ</td><td class="tr">буртукали́йя</td></tr>
+          <tr><td class="ru">фиолетовый</td><td class="ar">بَنَفْسَجِيٌّ</td><td class="tr">бана́фсаджи</td><td class="ar">بَنَفْسَجِيَّةٌ</td><td class="tr">банафсаджи́йя</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">Два разных образца. Если цвет начинается на <b>أَ</b>, женский род делается через <b>ـَاءُ</b> и танвина нет нигде: أَسْوَدُ → سَوْدَاءُ. Если цвет кончается на <b>ـِيٌّ</b> (он образован от предмета: بُنّ кофе, بُرْتُقَال апельсин, بَنَفْسَج фиалка), женский род обычный, через ة, и танвин на месте: بُنِّيٌّ → بُنِّيَّةٌ.</p>
+  </section>
+
+  <section id="adj">
+    <h2>Прилагательные</h2>
+    <p class="count">8 пар антонимов</p>
+    <div class="tablebox">
+      <table>
+        <thead><tr><th>Слово</th><th>Вслух</th><th>Перевод</th><th>Антоним</th><th>Вслух</th><th>Перевод</th></tr></thead>
+        <tbody>
+          <tr><td class="ar">كَبِيرٌ</td><td class="tr">каби́р</td><td class="ru">большой</td><td class="ar">صَغِيرٌ</td><td class="tr">сагы́р</td><td class="ru">маленький</td></tr>
+          <tr><td class="ar">طَوِيلٌ</td><td class="tr">тави́ль</td><td class="ru">длинный, высокий</td><td class="ar">قَصِيرٌ</td><td class="tr">касы́р</td><td class="ru">короткий, низкий</td></tr>
+          <tr><td class="ar">خَفِيفٌ</td><td class="tr">хафи́ф</td><td class="ru">лёгкий (вес)</td><td class="ar">ثَقِيلٌ</td><td class="tr">саки́ль</td><td class="ru">тяжёлый</td></tr>
+          <tr><td class="ar">نَظِيفٌ</td><td class="tr">назы́ф</td><td class="ru">чистый</td><td class="ar">وَسِخٌ</td><td class="tr">ва́сих</td><td class="ru">грязный</td></tr>
+          <tr><td class="ar">سَهْلٌ</td><td class="tr">сахль</td><td class="ru">лёгкий (урок)</td><td class="ar">صَعْبٌ</td><td class="tr">са'б</td><td class="ru">трудный</td></tr>
+          <tr><td class="ar">جَدِيدٌ</td><td class="tr">джади́д</td><td class="ru">новый</td><td class="ar">قَدِيمٌ</td><td class="tr">кади́м</td><td class="ru">старый</td></tr>
+          <tr><td class="ar">نَشِيطٌ</td><td class="tr">наши́т</td><td class="ru">активный, прилежный</td><td class="ar">كَسْلَانُ</td><td class="tr">касля́н</td><td class="ru">ленивый</td></tr>
+          <tr><td class="ar">مَفْتُوحٌ</td><td class="tr">мафту́х</td><td class="ru">открытый</td><td class="ar">مُغْلَقٌ</td><td class="tr">му́глак</td><td class="ru">закрытый</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">Прилагательное согласуется в роде: السَّيَّارَةُ وَسِخَةٌ — «машина грязная», с ة. И следите за артиклем: <b>الْبَيْتُ كَبِيرٌ</b> — «дом большой» (предложение), <b>الْبَيْتُ الْكَبِيرُ</b> — «большой дом» (словосочетание). У كَسْلَانُ танвина нет никогда.</p>
+  </section>
+
+  <section id="questions">
+    <h2>Вопросительные слова</h2>
+    <p class="count">15 слов · вопрос и ответ · таблица читается справа налево</p>
+    <div class="tablebox">
+      <table class="rtl">
+        <thead><tr><th>Слово</th><th>Вслух</th><th>Значение</th><th>Пример</th></tr></thead>
+        <tbody>
+          <tr><td><span class="ar">مَنْ</span></td><td class="tr">ман</td><td class="ru">кто?</td><td><span class="ar">مَنْ هَذَا؟</span><span class="tr">ман ха́за?</span><span class="ru">Кто это?</span></td></tr>
+          <tr><td><span class="ar">مَا</span></td><td class="tr">ма</td><td class="ru">что? (перед именем)</td><td><span class="ar">مَا هَذَا؟</span><span class="tr">ма ха́за?</span><span class="ru">Что это?</span></td></tr>
+          <tr><td><span class="ar">مَاذَا</span></td><td class="tr">ма́за</td><td class="ru">что? (перед глаголом)</td><td><span class="ar">مَاذَا يَعْمَلُ أَبُوكَ؟</span><span class="tr">ма́за я́'малу 'абу́к?</span><span class="ru">Кем работает твой отец?</span></td></tr>
+          <tr><td><span class="ar">أَيْنَ</span></td><td class="tr">а́йна</td><td class="ru">где?</td><td><span class="ar">أَيْنَ بَيْتُكُمْ؟</span><span class="tr">а́йна ба́йтукум?</span><span class="ru">Где ваш дом?</span></td></tr>
+          <tr><td><span class="ar">مِنْ أَيْنَ</span></td><td class="tr">мин а́йна</td><td class="ru">откуда?</td><td><span class="ar">مِنْ أَيْنَ أَنْتَ؟</span><span class="tr">мин а́йна а́нта?</span><span class="ru">Откуда ты?</span></td></tr>
+          <tr><td><span class="ar">إِلَى أَيْنَ</span></td><td class="tr">иля а́йна</td><td class="ru">куда?</td><td><span class="ar">إِلَى أَيْنَ تَذْهَبُ؟</span><span class="tr">иля а́йна та́зхабу?</span><span class="ru">Куда ты идёшь?</span></td></tr>
+          <tr><td><span class="ar">مَتَى</span></td><td class="tr">ма́та</td><td class="ru">когда?</td><td><span class="ar">مَتَى تَذْهَبُ؟</span><span class="tr">ма́та та́зхабу?</span><span class="ru">Когда ты идёшь?</span></td></tr>
+          <tr><td><span class="ar">كَيْفَ</span></td><td class="tr">ке́йфа</td><td class="ru">как?</td><td><span class="ar">كَيْفَ حَالُكَ؟</span><span class="tr">ке́йфа ха́лук?</span><span class="ru">Как дела?</span></td></tr>
+          <tr><td><span class="ar">كَمْ</span></td><td class="tr">кам</td><td class="ru">сколько?</td><td><span class="ar">كَمْ عُمْرُكَ؟</span><span class="tr">кам 'у́мрук?</span><span class="ru">Сколько тебе лет?</span></td></tr>
+          <tr><td><span class="ar">لِمَاذَا</span></td><td class="tr">лима́за</td><td class="ru">почему? зачем?</td><td><span class="ar">لِمَاذَا تَدْرُسُ الْعَرَبِيَّةَ؟</span><span class="tr">лима́за та́друсу аль-'араби́йя?</span><span class="ru">Почему ты изучаешь арабский?</span></td></tr>
+          <tr><td><span class="ar">لِمَنْ</span></td><td class="tr">лима́н</td><td class="ru">чей? кому?</td><td><span class="ar">لِمَنْ هَذَا الْكِتَابُ؟</span><span class="tr">лима́н ха́за-ль-кита́б?</span><span class="ru">Чья это книга?</span></td></tr>
+          <tr><td><span class="ar">أَيُّ</span></td><td class="tr">а́ййу</td><td class="ru">какой? который?</td><td><span class="ar">أَيُّ كِتَابٍ تُرِيدُ؟</span><span class="tr">а́ййу кита́б тури́ду?</span><span class="ru">Какую книгу ты хочешь?</span></td></tr>
+          <tr><td><span class="ar">هَلْ</span></td><td class="tr">халь</td><td class="ru">ли? (вопрос «да/нет»)</td><td><span class="ar">هَلْ أَنْتَ طَالِبٌ؟</span><span class="tr">халь а́нта та́либ?</span><span class="ru">Ты студент?</span></td></tr>
+          <tr><td><span class="ar">نَعَمْ</span></td><td class="tr">на'ам</td><td class="ru">да</td><td><span class="ar">نَعَمْ، أَنَا طَالِبٌ.</span><span class="tr">на'ам, а́на та́либ.</span><span class="ru">Да, я студент.</span></td></tr>
+          <tr><td><span class="ar">لَا</span></td><td class="tr">ля</td><td class="ru">нет</td><td><span class="ar">لَا، أَنَا مُهَنْدِسٌ.</span><span class="tr">ля, а́на мухандис.</span><span class="ru">Нет, я инженер.</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note"><b>Порядок.</b> Вопросительное слово стоит в начале фразы, дальше обычный порядок. Знак вопроса арабский — <b>؟</b>, он стоит в конце фразы, то есть слева.</p>
+    <p class="note"><b>مَا или مَاذَا.</b> مَا ставится перед именем и в именных фразах (مَا اسْمُكَ؟ «как тебя зовут?», مَا هَذَا؟). مَاذَا ставится перед глаголом (مَاذَا يَعْمَلُ؟).</p>
+    <p class="note"><b>كَمْ</b> требует после себя существительное в единственном числе, в винительном падеже: كَمْ أَخًا لَهُمَا؟ «сколько у них двоих братьев?». Для «сколько лет» используют كَمْ عُمْرُكَ؟ или كَمْ سَنَةً؟.</p>
+    <p class="note"><b>Общий вопрос.</b> Фраза с هَلْ — это вопрос «да или нет»; отвечают نَعَمْ или لَا. В литературном языке вместо هَلْ бывает приставка أَ (أَأَنْتَ طَالِبٌ؟), в учебнике на первом этапе её нет.</p>
+    <p class="note"><b>Вопросы из вашего текста про знакомство:</b> كَيْفَ حَالُكَ؟ · مَا اسْمُكَ؟ · مَا جِنْسِيَّتُكَ؟ · مِنْ أَيْنَ أَنْتَ؟ · أَيْنَ بَيْتُكُمْ؟ · مَاذَا يَعْمَلُ أَبُوكُنَّ؟ · هَلْ هَذَا عُنْوَانُهُنَّ؟</p>
+  </section>
+
+  <section id="grammar">
+    <h2>Служебные слова</h2>
+    <p class="count">31 слово · указательные, вопросы, местоимения, предлоги</p>
+    <div class="tablebox">
+      <table>
+        <thead><tr><th>Слово</th><th>Вслух</th><th>Перевод</th><th>Группа</th></tr></thead>
+        <tbody>
+          <tr><td class="ar">هَذَا</td><td class="tr">ха́за</td><td class="ru">это, этот (м)</td><td class="pos">указательное</td></tr>
+          <tr><td class="ar">هَذِهِ</td><td class="tr">ха́зихи</td><td class="ru">это, эта (ж)</td><td class="pos">указательное</td></tr>
+          <tr><td class="ar">ذَلِكَ</td><td class="tr">за́лика</td><td class="ru">тот (м)</td><td class="pos">указательное</td></tr>
+          <tr><td class="ar">تِلْكَ</td><td class="tr">ти́лька</td><td class="ru">та (ж)</td><td class="pos">указательное</td></tr>
+          <tr><td class="ar">هَذَانِ</td><td class="tr">ха́зани</td><td class="ru">эти двое (дв. число, м)</td><td class="pos">указательное</td></tr>
+          <tr><td class="ar">هَاتَانِ</td><td class="tr">ха́тани</td><td class="ru">эти две (дв. число, ж)</td><td class="pos">указательное</td></tr>
+          <tr><td class="ar">هَؤُلَاءِ</td><td class="tr">ха'уля́'и</td><td class="ru">эти (о людях)</td><td class="pos">указательное</td></tr>
+          <tr><td class="ar">أُولَئِكَ</td><td class="tr">'у́ляика</td><td class="ru">те (о людях)</td><td class="pos">указательное</td></tr>
+          <tr><td class="ar">نَعَمْ</td><td class="tr">на́'ам</td><td class="ru">да</td><td class="pos">ответ</td></tr>
+          <tr><td class="ar">لَا</td><td class="tr">ля</td><td class="ru">нет</td><td class="pos">ответ</td></tr>
+          <tr><td class="ar">وَ</td><td class="tr">ва</td><td class="ru">и (пишется слитно)</td><td class="pos">союз</td></tr>
+          <tr><td class="ar">أَنَا</td><td class="tr">а́на</td><td class="ru">я</td><td class="pos">местоимение</td></tr>
+          <tr><td class="ar">أَنْتَ</td><td class="tr">а́нта</td><td class="ru">ты (м)</td><td class="pos">местоимение</td></tr>
+          <tr><td class="ar">أَنْتِ</td><td class="tr">а́нти</td><td class="ru">ты (ж)</td><td class="pos">местоимение</td></tr>
+          <tr><td class="ar">هُوَ</td><td class="tr">ху́ва</td><td class="ru">он</td><td class="pos">местоимение</td></tr>
+          <tr><td class="ar">هِيَ</td><td class="tr">хи́я</td><td class="ru">она</td><td class="pos">местоимение</td></tr>
+          <tr><td class="ar">نَحْنُ</td><td class="tr">на́хну</td><td class="ru">мы</td><td class="pos">местоимение</td></tr>
+          <tr><td class="ar">أَنْتُمَا</td><td class="tr">а́нтума</td><td class="ru">вы оба (дв. число, м. и ж.)</td><td class="pos">местоимение</td></tr>
+          <tr><td class="ar">أَنْتُمْ</td><td class="tr">а́нтум</td><td class="ru">вы (м)</td><td class="pos">местоимение</td></tr>
+          <tr><td class="ar">أَنْتُنَّ</td><td class="tr">а́нтунна</td><td class="ru">вы (ж)</td><td class="pos">местоимение</td></tr>
+          <tr><td class="ar">هُمَا</td><td class="tr">ху́ма</td><td class="ru">они оба (дв. число, м. и ж.)</td><td class="pos">местоимение</td></tr>
+          <tr><td class="ar">هُمْ</td><td class="tr">хум</td><td class="ru">они (м)</td><td class="pos">местоимение</td></tr>
+          <tr><td class="ar">هُنَّ</td><td class="tr">хунна</td><td class="ru">они (ж)</td><td class="pos">местоимение</td></tr>
+          <tr><td class="ar">فِي</td><td class="tr">фи</td><td class="ru">в</td><td class="pos">предлог</td></tr>
+          <tr><td class="ar">عَلَى</td><td class="tr">'аля́</td><td class="ru">на (с касанием)</td><td class="pos">предлог</td></tr>
+          <tr><td class="ar">فَوْقَ</td><td class="tr">фа́вка</td><td class="ru">над</td><td class="pos">предлог</td></tr>
+          <tr><td class="ar">تَحْتَ</td><td class="tr">та́хта</td><td class="ru">под</td><td class="pos">предлог</td></tr>
+          <tr><td class="ar">أَمَامَ</td><td class="tr">ама́ма</td><td class="ru">перед</td><td class="pos">предлог</td></tr>
+          <tr><td class="ar">خَلْفَ</td><td class="tr">ха́льфа</td><td class="ru">за, позади</td><td class="pos">предлог</td></tr>
+          <tr><td class="ar">هُنَا</td><td class="tr">ху́на</td><td class="ru">здесь</td><td class="pos">наречие</td></tr>
+          <tr><td class="ar">هُنَاكَ</td><td class="tr">хуна́ка</td><td class="ru">там</td><td class="pos">наречие</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="tablebox">
+      <table class="rtl">
+        <thead><tr><th>Значение</th><th>Мн. число</th><th>Дв. число</th><th>Ед. число</th><th>Род</th></tr></thead>
+        <tbody>
+          <tr><td class="rule">этот / тот</td><td><span class="ar">هَؤُلَاءِ / أُولَئِكَ</span><span class="tr">ха'уля́'и / 'у́ляика (о людях)</span></td><td><span class="ar">هَذَانِ</span><span class="tr">ха́зани</span></td><td><span class="ar">هَذَا / ذَلِكَ</span><span class="tr">ха́за / за́лика</span></td><td class="rule">муж.</td></tr>
+          <tr><td class="rule">эта / та</td><td><span class="ar">هَؤُلَاءِ / أُولَئِكَ</span><span class="tr">ха'уля́'и / 'у́ляика (о людях)</span></td><td><span class="ar">هَاتَانِ</span><span class="tr">ха́тани</span></td><td><span class="ar">هَذِهِ / تِلْكَ</span><span class="tr">ха́зихи / ти́лька</span></td><td class="rule">жен.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note"><b>Указательные по числам.</b> هَذَا / هَذِهِ — «это, этот / эта» (близко), ذَلِكَ / تِلْكَ — «тот / та» (далеко). Для двоих есть свои формы: هَذَانِ (м) и هَاتَانِ (ж). Множественное число зависит от того, о чём речь: <b>о людях</b> — هَؤُلَاءِ («эти») и أُولَئِكَ («те») для обоих родов; <b>о предметах</b> — форма женского рода единственного числа, то есть هَذِهِ и تِلْكَ: هَذِهِ كُتُبٌ «это книги». В учебнике أُولَئِكَ иногда пишется с ا после ل: أُولَائِكَ, значение то же. Родительный и винительный падежи двойственного числа: هَذَيْنِ، هَاتَيْنِ.</p>
+    <p class="note">После предлога слово всегда стоит в родительном падеже — с кясрой: <b>فِي الْبَيْتِ</b>. На слух кясра не звучит, но на письме её ставить обязательно. А фатха в أَمَامَ، خَلْفَ، فَوْقَ، تَحْتَ не отпадает никогда: это часть самого слова.</p>
+  </section>
+
+  <section id="days">
+    <h2>Дни недели</h2>
+    <p class="count">7 дней · неделя начинается с субботы</p>
+    <div class="tablebox">
+      <table>
+        <thead><tr><th>Перевод</th><th>Слово</th><th>Вслух</th><th>От числа</th></tr></thead>
+        <tbody>
+          <tr><td class="ru">суббота</td><td class="ar">السَّبْتُ</td><td class="tr">ас-сабт</td><td class="pos">день покоя</td></tr>
+          <tr><td class="ru">воскресенье</td><td class="ar">الْأَحَدُ</td><td class="tr">аль-'а́хад</td><td class="pos">أَحَد — один</td></tr>
+          <tr><td class="ru">понедельник</td><td class="ar">الْإِثْنَيْنِ</td><td class="tr">аль-исна́йн</td><td class="pos">اِثْنَان — два</td></tr>
+          <tr><td class="ru">вторник</td><td class="ar">الثُّلَاثَاءُ</td><td class="tr">ас-суля́са'</td><td class="pos">ثَلَاثَة — три</td></tr>
+          <tr><td class="ru">среда</td><td class="ar">الْأَرْبِعَاءُ</td><td class="tr">аль-'арби'а́'</td><td class="pos">أَرْبَعَة — четыре</td></tr>
+          <tr><td class="ru">четверг</td><td class="ar">الْخَمِيسُ</td><td class="tr">аль-хами́с</td><td class="pos">خَمْسَة — пять</td></tr>
+          <tr><td class="ru">пятница</td><td class="ar">الْجُمُعَةُ</td><td class="tr">аль-джу́му'а</td><td class="pos">جَمَعَ — собирать</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">Пять дней из семи — это числа, которые ты уже знаешь: корень совпадает буква в букву. Названия дней всегда идут с артиклем. «В понедельник» — يَوْمَ الْإِثْنَيْنِ, <i>яума-ль-исна́йн</i>.</p>
+  </section>
+
+  <section id="prepsuf">
+    <h2>Слитные местоимения с предлогами</h2>
+    <p class="count">10 предлогов · 12 лиц · таблица читается справа налево, листайте вбок</p>
+    <div class="tablebox">
+      <table class="rtl">
+        <thead><tr><th>Лицо</th><th><span class="ar">عَلَى</span><span class="ru rule" style="font-size:12px">на</span></th><th><span class="ar">فِي</span><span class="ru rule" style="font-size:12px">в</span></th><th><span class="ar">تَحْتَ</span><span class="ru rule" style="font-size:12px">под</span></th><th><span class="ar">إِلَى</span><span class="ru rule" style="font-size:12px">к</span></th><th><span class="ar">أَمَامَ</span><span class="ru rule" style="font-size:12px">перед</span></th><th><span class="ar">مِنْ</span><span class="ru rule" style="font-size:12px">из, от</span></th><th><span class="ar">عَنْ</span><span class="ru rule" style="font-size:12px">о, от</span></th><th><span class="ar">خَلْفَ</span><span class="ru rule" style="font-size:12px">за, позади</span></th><th><span class="ar">قُرْبَ</span><span class="ru rule" style="font-size:12px">возле</span></th><th><span class="ar">بِ</span><span class="ru rule" style="font-size:12px">с, при помощи</span></th></tr></thead>
+        <tbody>
+          <tr><td class="ru rule">я<span class="ar">أَنَا</span></td><td><span class="ar">عَلَيَّ</span><span class="tr">'аля́йя</span></td><td><span class="ar">فِيَّ</span><span class="tr">фи́йя</span></td><td><span class="ar">تَحْتِي</span><span class="tr">та́хти</span></td><td><span class="ar">إِلَيَّ</span><span class="tr">'иля́йя</span></td><td><span class="ar">أَمَامِي</span><span class="tr">'ама́ми</span></td><td><span class="ar">مِنِّي</span><span class="tr">ми́нни</span></td><td><span class="ar">عَنِّي</span><span class="tr">'а́нни</span></td><td><span class="ar">خَلْفِي</span><span class="tr">ха́лфи</span></td><td><span class="ar">قُرْبِي</span><span class="tr">ку́рби</span></td><td><span class="ar">بِي</span><span class="tr">би</span></td></tr>
+          <tr><td class="ru rule">ты (м)<span class="ar">أَنْتَ</span></td><td><span class="ar">عَلَيْكَ</span><span class="tr">'але́йк</span></td><td><span class="ar">فِيكَ</span><span class="tr">фи́к</span></td><td><span class="ar">تَحْتَكَ</span><span class="tr">та́хтак</span></td><td><span class="ar">إِلَيْكَ</span><span class="tr">'иле́йк</span></td><td><span class="ar">أَمَامَكَ</span><span class="tr">'ама́мак</span></td><td><span class="ar">مِنْكَ</span><span class="tr">ми́нк</span></td><td><span class="ar">عَنْكَ</span><span class="tr">'а́нк</span></td><td><span class="ar">خَلْفَكَ</span><span class="tr">ха́лфак</span></td><td><span class="ar">قُرْبَكَ</span><span class="tr">ку́рбак</span></td><td><span class="ar">بِكَ</span><span class="tr">бик</span></td></tr>
+          <tr><td class="ru rule">ты (ж)<span class="ar">أَنْتِ</span></td><td><span class="ar">عَلَيْكِ</span><span class="tr">'але́йки</span></td><td><span class="ar">فِيكِ</span><span class="tr">фи́ки</span></td><td><span class="ar">تَحْتَكِ</span><span class="tr">та́хтаки</span></td><td><span class="ar">إِلَيْكِ</span><span class="tr">'иле́йки</span></td><td><span class="ar">أَمَامَكِ</span><span class="tr">'ама́маки</span></td><td><span class="ar">مِنْكِ</span><span class="tr">ми́нки</span></td><td><span class="ar">عَنْكِ</span><span class="tr">'а́нки</span></td><td><span class="ar">خَلْفَكِ</span><span class="tr">ха́лфаки</span></td><td><span class="ar">قُرْبَكِ</span><span class="tr">ку́рбаки</span></td><td><span class="ar">بِكِ</span><span class="tr">бики</span></td></tr>
+          <tr><td class="ru rule">он<span class="ar">هُوَ</span></td><td><span class="ar">عَلَيْهِ</span><span class="tr">'але́йх</span></td><td><span class="ar">فِيهِ</span><span class="tr">фи́х</span></td><td><span class="ar">تَحْتَهُ</span><span class="tr">та́хтах</span></td><td><span class="ar">إِلَيْهِ</span><span class="tr">'иле́йх</span></td><td><span class="ar">أَمَامَهُ</span><span class="tr">'ама́мах</span></td><td><span class="ar">مِنْهُ</span><span class="tr">ми́нх</span></td><td><span class="ar">عَنْهُ</span><span class="tr">'а́нх</span></td><td><span class="ar">خَلْفَهُ</span><span class="tr">ха́лфах</span></td><td><span class="ar">قُرْبَهُ</span><span class="tr">ку́рбах</span></td><td><span class="ar">بِهِ</span><span class="tr">бих</span></td></tr>
+          <tr><td class="ru rule">она<span class="ar">هِيَ</span></td><td><span class="ar">عَلَيْهَا</span><span class="tr">'але́йха</span></td><td><span class="ar">فِيهَا</span><span class="tr">фи́ха</span></td><td><span class="ar">تَحْتَهَا</span><span class="tr">та́хтаха</span></td><td><span class="ar">إِلَيْهَا</span><span class="tr">'иле́йха</span></td><td><span class="ar">أَمَامَهَا</span><span class="tr">'ама́маха</span></td><td><span class="ar">مِنْهَا</span><span class="tr">ми́нха</span></td><td><span class="ar">عَنْهَا</span><span class="tr">'а́нха</span></td><td><span class="ar">خَلْفَهَا</span><span class="tr">ха́лфаха</span></td><td><span class="ar">قُرْبَهَا</span><span class="tr">ку́рбаха</span></td><td><span class="ar">بِهَا</span><span class="tr">биха</span></td></tr>
+          <tr><td class="ru rule">вы двое<span class="ar">أَنْتُمَا</span></td><td><span class="ar">عَلَيْكُمَا</span><span class="tr">'але́йкума</span></td><td><span class="ar">فِيكُمَا</span><span class="tr">фи́кума</span></td><td><span class="ar">تَحْتَكُمَا</span><span class="tr">та́хтакума</span></td><td><span class="ar">إِلَيْكُمَا</span><span class="tr">'иле́йкума</span></td><td><span class="ar">أَمَامَكُمَا</span><span class="tr">'ама́макума</span></td><td><span class="ar">مِنْكُمَا</span><span class="tr">ми́нкума</span></td><td><span class="ar">عَنْكُمَا</span><span class="tr">'а́нкума</span></td><td><span class="ar">خَلْفَكُمَا</span><span class="tr">ха́лфакума</span></td><td><span class="ar">قُرْبَكُمَا</span><span class="tr">ку́рбакума</span></td><td><span class="ar">بِكُمَا</span><span class="tr">бикума</span></td></tr>
+          <tr><td class="ru rule">они двое<span class="ar">هُمَا</span></td><td><span class="ar">عَلَيْهِمَا</span><span class="tr">'але́йхима</span></td><td><span class="ar">فِيهِمَا</span><span class="tr">фи́хима</span></td><td><span class="ar">تَحْتَهُمَا</span><span class="tr">та́хтахума</span></td><td><span class="ar">إِلَيْهِمَا</span><span class="tr">'иле́йхима</span></td><td><span class="ar">أَمَامَهُمَا</span><span class="tr">'ама́махума</span></td><td><span class="ar">مِنْهُمَا</span><span class="tr">ми́нхума</span></td><td><span class="ar">عَنْهُمَا</span><span class="tr">'а́нхума</span></td><td><span class="ar">خَلْفَهُمَا</span><span class="tr">ха́лфахума</span></td><td><span class="ar">قُرْبَهُمَا</span><span class="tr">ку́рбахума</span></td><td><span class="ar">بِهِمَا</span><span class="tr">бихима</span></td></tr>
+          <tr><td class="ru rule">мы<span class="ar">نَحْنُ</span></td><td><span class="ar">عَلَيْنَا</span><span class="tr">'але́йна</span></td><td><span class="ar">فِينَا</span><span class="tr">фи́на</span></td><td><span class="ar">تَحْتَنَا</span><span class="tr">та́хтана</span></td><td><span class="ar">إِلَيْنَا</span><span class="tr">'иле́йна</span></td><td><span class="ar">أَمَامَنَا</span><span class="tr">'ама́мана</span></td><td><span class="ar">مِنَّا</span><span class="tr">ми́нна</span></td><td><span class="ar">عَنَّا</span><span class="tr">'а́нна</span></td><td><span class="ar">خَلْفَنَا</span><span class="tr">ха́лфана</span></td><td><span class="ar">قُرْبَنَا</span><span class="tr">ку́рбана</span></td><td><span class="ar">بِنَا</span><span class="tr">бина</span></td></tr>
+          <tr><td class="ru rule">вы (м)<span class="ar">أَنْتُمْ</span></td><td><span class="ar">عَلَيْكُمْ</span><span class="tr">'але́йкум</span></td><td><span class="ar">فِيكُمْ</span><span class="tr">фи́кум</span></td><td><span class="ar">تَحْتَكُمْ</span><span class="tr">та́хтакум</span></td><td><span class="ar">إِلَيْكُمْ</span><span class="tr">'иле́йкум</span></td><td><span class="ar">أَمَامَكُمْ</span><span class="tr">'ама́макум</span></td><td><span class="ar">مِنْكُمْ</span><span class="tr">ми́нкум</span></td><td><span class="ar">عَنْكُمْ</span><span class="tr">'а́нкум</span></td><td><span class="ar">خَلْفَكُمْ</span><span class="tr">ха́лфакум</span></td><td><span class="ar">قُرْبَكُمْ</span><span class="tr">ку́рбакум</span></td><td><span class="ar">بِكُمْ</span><span class="tr">бикум</span></td></tr>
+          <tr><td class="ru rule">вы (ж)<span class="ar">أَنْتُنَّ</span></td><td><span class="ar">عَلَيْكُنَّ</span><span class="tr">'алейку́нна</span></td><td><span class="ar">فِيكُنَّ</span><span class="tr">фику́нна</span></td><td><span class="ar">تَحْتَكُنَّ</span><span class="tr">тахтаку́нна</span></td><td><span class="ar">إِلَيْكُنَّ</span><span class="tr">'илейку́нна</span></td><td><span class="ar">أَمَامَكُنَّ</span><span class="tr">'амамаку́нна</span></td><td><span class="ar">مِنْكُنَّ</span><span class="tr">минку́нна</span></td><td><span class="ar">عَنْكُنَّ</span><span class="tr">'анку́нна</span></td><td><span class="ar">خَلْفَكُنَّ</span><span class="tr">халфаку́нна</span></td><td><span class="ar">قُرْبَكُنَّ</span><span class="tr">курбаку́нна</span></td><td><span class="ar">بِكُنَّ</span><span class="tr">бику́нна</span></td></tr>
+          <tr><td class="ru rule">они (м)<span class="ar">هُمْ</span></td><td><span class="ar">عَلَيْهِمْ</span><span class="tr">'але́йхим</span></td><td><span class="ar">فِيهِمْ</span><span class="tr">фи́хим</span></td><td><span class="ar">تَحْتَهُمْ</span><span class="tr">та́хтахум</span></td><td><span class="ar">إِلَيْهِمْ</span><span class="tr">'иле́йхим</span></td><td><span class="ar">أَمَامَهُمْ</span><span class="tr">'ама́махум</span></td><td><span class="ar">مِنْهُمْ</span><span class="tr">ми́нхум</span></td><td><span class="ar">عَنْهُمْ</span><span class="tr">'а́нхум</span></td><td><span class="ar">خَلْفَهُمْ</span><span class="tr">ха́лфахум</span></td><td><span class="ar">قُرْبَهُمْ</span><span class="tr">ку́рбахум</span></td><td><span class="ar">بِهِمْ</span><span class="tr">бихим</span></td></tr>
+          <tr><td class="ru rule">они (ж)<span class="ar">هُنَّ</span></td><td><span class="ar">عَلَيْهِنَّ</span><span class="tr">'алейхи́нна</span></td><td><span class="ar">فِيهِنَّ</span><span class="tr">фихи́нна</span></td><td><span class="ar">تَحْتَهُنَّ</span><span class="tr">тахтаху́нна</span></td><td><span class="ar">إِلَيْهِنَّ</span><span class="tr">'илейхи́нна</span></td><td><span class="ar">أَمَامَهُنَّ</span><span class="tr">'амамаху́нна</span></td><td><span class="ar">مِنْهُنَّ</span><span class="tr">минху́нна</span></td><td><span class="ar">عَنْهُنَّ</span><span class="tr">'анху́нна</span></td><td><span class="ar">خَلْفَهُنَّ</span><span class="tr">халфаху́нна</span></td><td><span class="ar">قُرْبَهُنَّ</span><span class="tr">курбаху́нна</span></td><td><span class="ar">بِهِنَّ</span><span class="tr">бихи́нна</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note"><b>Что получается.</b> Слитное окончание «меня, тебя, его…» приклеивается к предлогу и образует одно слово: <b>عَلَيْهِ</b> «на нём», <b>مِنِّي</b> «от меня», <b>بِهَا</b> «с ней», <b>أَمَامَكَ</b> «перед тобой», <b>فِينَا</b> «в нас». Окончания те же, что у существительных (ـكَ، ـهُ، ـنَا…), только «я» меняется.</p>
+    <p class="note"><b>Четыре типа предлогов.</b></p>
+    <ul class="note">
+      <li><b>تَحْتَ، أَمَامَ، خَلْفَ، قُرْبَ</b> (кончаются на фатху): окончание приклеивается как есть, а в форме «я» фатха меняется на кясру: <b>تَحْتِي، أَمَامِي، خَلْفِي، قُرْبِي</b>.</li>
+      <li><b>عَلَى، إِلَى</b> (кончаются на ى): перед окончанием ى превращается в يْ, а «я» даёт шадду: <b>عَلَيْكَ، عَلَيَّ، إِلَيْهِ، إِلَيَّ</b>. То же с <b>فِي</b>: <b>فِيكَ، فِيَّ</b>.</li>
+      <li><b>مِنْ، عَنْ</b> (кончаются на ن): с «я» и «мы» ن удваивается: <b>مِنِّي، مِنَّا، عَنِّي، عَنَّا</b>, а с остальными окончаниями стоит сукун: <b>مِنْكَ، عَنْهُ</b>.</li>
+      <li><b>بِ</b> (одна буква): пишется слитно со всеми окончаниями: <b>بِي، بِكَ، بِهِ</b>. Так же устроен <b>لِـ</b> (<b>لِي، لَكَ، لَهُ</b>).</li>
+    </ul>
+    <p class="note"><b>После кясры и «й» окончание меняется.</b> Если перед окончанием стоит кясра или звук «й», то ـهُ, ـهُمَا, ـهُمْ, ـهُنَّ превращаются в ـهِ, ـهِمَا, ـهِمْ, ـهِنَّ: <b>عَلَيْهِ، فِيهِمْ، بِهِمَا</b>. Окончание ـهَا не меняется: <b>عَلَيْهَا، فِيهَا، بِهَا</b>. После фатхи и сукуна остаётся ـهُ: <b>تَحْتَهُ، مِنْهُ</b>.</p>
+  </section>
+
+  <section id="phrases">
+    <h2>Приветствия и знакомство</h2>
+    <p class="count">36 фраз · глава «التَّعَارُف»</p>
+    <div class="tablebox">
+      <table>
+        <thead><tr><th>Фраза</th><th>Вслух</th><th>Перевод</th></tr></thead>
+        <tbody>
+          <tr><td class="ar">السَّلَامُ عَلَيْكُمْ</td><td class="tr">ас-саля́му 'але́йкум</td><td class="ru">Мир вам (приветствие)</td></tr>
+          <tr><td class="ar">وَعَلَيْكُمُ السَّلَامُ</td><td class="tr">ва-'але́йкуму-с-саля́м</td><td class="ru">И вам мир (ответ)</td></tr>
+          <tr><td class="ar">صَبَاحُ الْخَيْرِ</td><td class="tr">саба́ху-ль-хайр</td><td class="ru">Доброе утро</td></tr>
+          <tr><td class="ar">صَبَاحُ النُّورِ</td><td class="tr">саба́ху-н-нур</td><td class="ru">Доброе утро (ответ)</td></tr>
+          <tr><td class="ar">مَسَاءُ الْخَيْرِ</td><td class="tr">маса́'у-ль-хайр</td><td class="ru">Добрый вечер</td></tr>
+          <tr><td class="ar">مَسَاءُ النُّورِ</td><td class="tr">маса́'у-н-нур</td><td class="ru">Добрый вечер (ответ)</td></tr>
+          <tr><td class="ar">كَيْفَ حَالُكَ؟</td><td class="tr">ке́йфа ха́лук</td><td class="ru">Как дела? (к мужчине)</td></tr>
+          <tr><td class="ar">كَيْفَ الْحَالُ؟</td><td class="tr">ке́йфа-ль-халь</td><td class="ru">Как дела? (нейтрально)</td></tr>
+          <tr><td class="ar">بِخَيْرٍ وَالْحَمْدُ لِلَّهِ</td><td class="tr">би-хайр ва-ль-ха́мду ли-лля́х</td><td class="ru">Хорошо, слава Богу</td></tr>
+          <tr><td class="ar">أَهْلًا وَسَهْلًا</td><td class="tr">а́хлян ва-са́хлян</td><td class="ru">Добро пожаловать</td></tr>
+          <tr><td class="ar">مَرْحَبًا</td><td class="tr">ма́рхабан</td><td class="ru">Здравствуйте, привет</td></tr>
+          <tr><td class="ar">أَهْلًا بِكَ</td><td class="tr">а́хлян бик</td><td class="ru">Рады тебе (ответ)</td></tr>
+          <tr><td class="ar">مَا اسْمُكَ؟</td><td class="tr">ма-сму́к</td><td class="ru">Как тебя зовут?</td></tr>
+          <tr><td class="ar">اِسْمِي ...</td><td class="tr">и́сми</td><td class="ru">Меня зовут ...</td></tr>
+          <tr><td class="ar">مِنْ أَيْنَ أَنْتَ؟</td><td class="tr">мин а́йна анта</td><td class="ru">Откуда ты?</td></tr>
+          <tr><td class="ar">مَا جِنْسِيَّتُكَ؟</td><td class="tr">ма джинси́йятук</td><td class="ru">Кто ты по национальности?</td></tr>
+          <tr><td class="ar">أَنَا مِنْ مِصْرَ</td><td class="tr">ана мин миср</td><td class="ru">Я из Египта</td></tr>
+          <tr><td class="ar">تَشَرَّفْنَا</td><td class="tr">ташарра́фна</td><td class="ru">Рад знакомству</td></tr>
+          <tr><td class="ar">فُرْصَةٌ سَعِيدَةٌ</td><td class="tr">фу́рса са'и́да</td><td class="ru">Приятно познакомиться</td></tr>
+          <tr><td class="ar">مَعَ السَّلَامَةِ</td><td class="tr">ма'а-с-саля́ма</td><td class="ru">До свидания, счастливо</td></tr>
+          <tr><td class="ar">إِلَى اللِّقَاءِ</td><td class="tr">иля-ль-лика́'</td><td class="ru">До встречи</td></tr>
+          <tr><td class="ar">حَسَنًا</td><td class="tr">ха́сана</td><td class="ru">Хорошо, ладно</td></tr>
+          <tr><td class="ar">مِنْ فَضْلِكَ</td><td class="tr">мин фа́длик</td><td class="ru">Пожалуйста (просьба)</td></tr>
+          <tr><td class="ar">تَفَضَّلْ</td><td class="tr">тафа́ддаль</td><td class="ru">Вот, прошу, пожалуйста</td></tr>
+          <tr><td class="ar">شُكْرًا</td><td class="tr">шу́кран</td><td class="ru">Спасибо</td></tr>
+          <tr><td class="ar">مَرَّةً أُخْرَى</td><td class="tr">ма́рратан у́хра</td><td class="ru">Ещё раз</td></tr>
+          <tr><td class="ar">وَأَنَا أَيْضًا</td><td class="tr">ва ана а́йдан</td><td class="ru">И я тоже</td></tr>
+          <tr><td class="ar">الْآنَ</td><td class="tr">аль-а́н</td><td class="ru">сейчас</td></tr>
+          <tr><td class="ar">رَقْمُ هَاتِفِي</td><td class="tr">ракму ха́тифи</td><td class="ru">мой номер телефона</td></tr>
+          <tr><td class="ar">هَذَا رَقْمُ هَاتِفِي</td><td class="tr">ха́за ракму ха́тифи</td><td class="ru">Вот мой номер телефона</td></tr>
+          <tr><td class="ar">مَرْحَبًا بِكَ</td><td class="tr">мархабан бик</td><td class="ru">Рады видеть тебя (ответ)</td></tr>
+          <tr><td class="ar">تَشَرَّفْنَا بِكَ</td><td class="tr">ташарра́фна бик</td><td class="ru">Приятно с тобой познакомиться</td></tr>
+          <tr><td class="ar">فُرْصَةٌ طَيِّبَةٌ</td><td class="tr">фу́рса тайи́ба</td><td class="ru">Рад знакомству</td></tr>
+          <tr><td class="ar">فِي أَمَانِ اللهِ</td><td class="tr">фи 'ама́ни-ллах</td><td class="ru">С Богом (прощание)</td></tr>
+          <tr><td class="ar">سَلَّمَكَ اللهُ</td><td class="tr">салла́мака-ллах</td><td class="ru">Да хранит тебя Аллах (прощание)</td></tr>
+          <tr><td class="ar">اُنْظُرْ وَاسْتَمِعْ وَكَرِّرْ</td><td class="tr">у́нзур ва-иста́ми' ва-ка́ррир</td><td class="ru">Посмотри, послушай и повтори (задание в учебнике)</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note"><b>رَقْمُ هَاتِفِي</b> — двойная конструкция: идафа «номер телефона» (رَقْمُ الْهَاتِفِ), где второе слово получило окончание «мой» и потому лишилось артикля. Первое слово в идафе артикля не имеет никогда. По той же модели: رَقْمُ هَاتِفِكَ — твой номер, بَرِيدِي الْإِلِكْتْرُونِيُّ — моя электронная почта.</p>
+    <p class="note">Приветствия работают парами: на صَبَاحُ الْخَيْرِ («утро добра») отвечают صَبَاحُ النُّورِ («утро света»), на أَهْلًا — أَهْلًا بِكَ. Окончание <b>ـكَ</b> в حَالُكَ، اسْمُكَ، بِكَ — это «твой», мужской род; женщине говорят <b>ـكِ</b>: كَيْفَ حَالُكِ، مَا اسْمُكِ.</p>
+  </section>
+
+  <section id="have">
+    <h2>Иметь: عِنْدَ / لَدَى / لِـ</h2>
+    <p class="count">3 предлога · 12 форм с суффиксами · таблица читается справа налево</p>
+    <div class="tablebox">
+      <table class="rtl">
+        <thead><tr><th>Значение</th><th>لَدَى</th><th>عِنْدَ</th><th>لِـ</th></tr></thead>
+        <tbody>
+          <tr><td class="ru">у меня</td><td><span class="ar">لَدَيَّ</span><span class="tr">лада́йя</span></td><td><span class="ar">عِنْدِي</span><span class="tr">'инди́</span></td><td><span class="ar">لِي</span><span class="tr">ли</span></td></tr>
+          <tr><td class="ru">у тебя (м)</td><td><span class="ar">لَدَيْكَ</span><span class="tr">ладе́йк</span></td><td><span class="ar">عِنْدَكَ</span><span class="tr">'и́ндак</span></td><td><span class="ar">لَكَ</span><span class="tr">лак</span></td></tr>
+          <tr><td class="ru">у тебя (ж)</td><td><span class="ar">لَدَيْكِ</span><span class="tr">ладе́йки</span></td><td><span class="ar">عِنْدَكِ</span><span class="tr">'и́ндаки</span></td><td><span class="ar">لَكِ</span><span class="tr">ла́ки</span></td></tr>
+          <tr><td class="ru">у него</td><td><span class="ar">لَدَيْهِ</span><span class="tr">ладе́йх</span></td><td><span class="ar">عِنْدَهُ</span><span class="tr">'и́ндах</span></td><td><span class="ar">لَهُ</span><span class="tr">лах</span></td></tr>
+          <tr><td class="ru">у неё</td><td><span class="ar">لَدَيْهَا</span><span class="tr">ладе́йха</span></td><td><span class="ar">عِنْدَهَا</span><span class="tr">'и́ндаха</span></td><td><span class="ar">لَهَا</span><span class="tr">ла́ха</span></td></tr>
+          <tr><td class="ru">у вас (дв. число)</td><td><span class="ar">لَدَيْكُمَا</span><span class="tr">ладе́йкума</span></td><td><span class="ar">عِنْدَكُمَا</span><span class="tr">'и́ндакума</span></td><td><span class="ar">لَكُمَا</span><span class="tr">ла́кума</span></td></tr>
+          <tr><td class="ru">у них (дв. число)</td><td><span class="ar">لَدَيْهِمَا</span><span class="tr">ладе́йхима</span></td><td><span class="ar">عِنْدَهُمَا</span><span class="tr">'и́ндахума</span></td><td><span class="ar">لَهُمَا</span><span class="tr">ла́хума</span></td></tr>
+          <tr><td class="ru">у нас</td><td><span class="ar">لَدَيْنَا</span><span class="tr">ладе́йна</span></td><td><span class="ar">عِنْدَنَا</span><span class="tr">'и́ндана</span></td><td><span class="ar">لَنَا</span><span class="tr">ла́на</span></td></tr>
+          <tr><td class="ru">у вас (м)</td><td><span class="ar">لَدَيْكُمْ</span><span class="tr">ладе́йкум</span></td><td><span class="ar">عِنْدَكُمْ</span><span class="tr">'и́ндакум</span></td><td><span class="ar">لَكُمْ</span><span class="tr">ла́кум</span></td></tr>
+          <tr><td class="ru">у вас (ж)</td><td><span class="ar">لَدَيْكُنَّ</span><span class="tr">ладейку́нна</span></td><td><span class="ar">عِنْدَكُنَّ</span><span class="tr">'индаку́нна</span></td><td><span class="ar">لَكُنَّ</span><span class="tr">лаку́нна</span></td></tr>
+          <tr><td class="ru">у них (м)</td><td><span class="ar">لَدَيْهِمْ</span><span class="tr">ладе́йхим</span></td><td><span class="ar">عِنْدَهُمْ</span><span class="tr">'и́ндахум</span></td><td><span class="ar">لَهُمْ</span><span class="tr">ла́хум</span></td></tr>
+          <tr><td class="ru">у них (ж)</td><td><span class="ar">لَدَيْهِنَّ</span><span class="tr">ладейхи́нна</span></td><td><span class="ar">عِنْدَهُنَّ</span><span class="tr">'индаху́нна</span></td><td><span class="ar">لَهُنَّ</span><span class="tr">лаху́нна</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note"><b>Глагола «иметь» в арабском нет.</b> «У меня есть» = предлог + суффикс «я». То, что есть, стоит после предлога и остаётся в именительном падеже: <b>عِنْدِي كِتَابٌ</b> — «у меня есть книга»; <b>لِي أَخٌ وَاحِدٌ</b> — «у меня один брат»; <b>لَنَا ثَلَاثَةُ أَوْلَادٍ</b> — «у нас трое детей».</p>
+    <p class="note"><b>Чем они различаются.</b> عِنْدَ — самый частый, в живой речи; لَدَى — то же значение, но книжнее и официальнее; لِـ — буквально «для, принадлежит», поэтому хорошо подходит для родства и владения.</p>
+    <p class="note"><b>Отрицание и прошедшее:</b> لَيْسَ عِنْدِي كِتَابٌ — «у меня нет книги»; كَانَ عِنْدِي كِتَابٌ — «у меня была книга».</p>
+    <p class="note"><b>Что меняется при склейке.</b> В لَدَى конечная ى превращается в ي: لَدَيْهِ، لَدَيْنَا، а «у меня» даёт لَدَيَّ с шаддой. После ي суффиксы ـهُ، ـهُمْ получают кясру: لَدَيْهِ، لَدَيْهِمْ (после فتحة остаётся дамма: عِنْدَهُ). У لِـ кясра остаётся только с «я» (لِي), со всеми остальными суффиксами — фатха: لَكَ، لَهُ، لَنَا. Формы «у тебя» м./ж. различаются только огласовкой ـكَ / ـكِ, поэтому в паузе мужская кончается на согласную (лак), а женская сохраняет -и (ла́ки).</p>
+  
+    <h3 style="margin:28px 0 8px;">Есть и нет: يُوجَدُ / لَيْسَ</h3>
+    <div class="tablebox">
+      <table class="rtl">
+        <thead><tr><th>Значение</th><th>Мужской род</th><th>Женский род</th></tr></thead>
+        <tbody>
+          <tr><td class="ru rule">есть, имеется</td><td><span class="ar">يُوجَدُ</span><span class="tr">йу́джаду</span></td><td><span class="ar">تُوجَدُ</span><span class="tr">ту́джаду</span></td></tr>
+          <tr><td class="ru rule">нет, не имеется</td><td><span class="ar">لَا يُوجَدُ</span><span class="tr">ля йу́джаду</span></td><td><span class="ar">لَا تُوجَدُ</span><span class="tr">ля ту́джаду</span></td></tr>
+          <tr><td class="ru rule">нет (отрицание)</td><td><span class="ar">لَيْسَ</span><span class="tr">ле́йса</span></td><td><span class="ar">لَيْسَتْ</span><span class="tr">ле́йсат</span></td></tr>
+          <tr><td class="ru rule">было, был</td><td><span class="ar">كَانَ</span><span class="tr">ка́на</span></td><td><span class="ar">كَانَتْ</span><span class="tr">ка́нат</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note"><b>Примеры.</b> يُوجَدُ فِي الصَّفِّ قَلَمٌ — «в классе есть ручка». تُوجَدُ فِي الصَّفِّ سَبُّورَةٌ — «в классе есть доска». لَا يُوجَدُ فِي الصَّفِّ مُكَيِّفٌ — «в классе нет кондиционера». لَيْسَ فِي الصَّفِّ مُكَيِّفٌ — то же самое. لَيْسَ عِنْدِي قَلَمٌ — «у меня нет ручки».</p>
+    <p class="note"><b>Как выбрать.</b> Глагол يُوجَدُ («находится, имеется») согласуется с первым существительным в роде, а число не меняет: يُوجَدُ فِي الصَّفِّ كِتَابٌ وَقَلَمٌ — «в классе есть книга и ручка». Существительное после него стоит в именительном падеже. Для «нет» берут либо لَا يُوجَدُ (книжнее), либо لَيْسَ (короче, разговорнее). Без отрицания глагол не нужен: فِي الصَّفِّ سَبُّورَةٌ — «в классе (есть) доска».</p>
+  </section>
+
+  <section id="pronouns">
+    <h2>Слитные местоимения</h2>
+    <p class="count">«Мой, твой, его» — не слова, а окончания</p>
+    <h3 style="margin:8px 0 8px;">Все местоимения вместе</h3>
+    <div class="tablebox">
+      <table class="rtl">
+        <thead><tr><th>Лицо</th><th>Отдельное (подлежащее)</th><th>Окончание («мой, твой…»)</th><th>«У меня есть…»</th></tr></thead>
+        <tbody>
+          <tr><td class="ru">я</td><td><span class="ar">أَنَا</span><span class="tr">а́на</span></td><td><span class="ar">ـِي</span><span class="tr">-и</span></td><td><span class="ar">عِنْدِي</span><span class="tr">'и́нди</span></td></tr>
+          <tr><td class="ru">ты (м)</td><td><span class="ar">أَنْتَ</span><span class="tr">а́нта</span></td><td><span class="ar">ـكَ</span><span class="tr">-ка</span></td><td><span class="ar">عِنْدَكَ</span><span class="tr">'и́ндак</span></td></tr>
+          <tr><td class="ru">ты (ж)</td><td><span class="ar">أَنْتِ</span><span class="tr">а́нти</span></td><td><span class="ar">ـكِ</span><span class="tr">-ки</span></td><td><span class="ar">عِنْدَكِ</span><span class="tr">'и́ндаки</span></td></tr>
+          <tr><td class="ru">он</td><td><span class="ar">هُوَ</span><span class="tr">ху́ва</span></td><td><span class="ar">ـهُ</span><span class="tr">-ху</span></td><td><span class="ar">عِنْدَهُ</span><span class="tr">'и́ндах</span></td></tr>
+          <tr><td class="ru">она</td><td><span class="ar">هِيَ</span><span class="tr">хи́я</span></td><td><span class="ar">ـهَا</span><span class="tr">-ха</span></td><td><span class="ar">عِنْدَهَا</span><span class="tr">'и́ндаха</span></td></tr>
+          <tr><td class="ru">мы</td><td><span class="ar">نَحْنُ</span><span class="tr">на́хну</span></td><td><span class="ar">ـنَا</span><span class="tr">-на</span></td><td><span class="ar">عِنْدَنَا</span><span class="tr">'и́ндана</span></td></tr>
+          <tr><td class="ru">вы двое</td><td><span class="ar">أَنْتُمَا</span><span class="tr">а́нтума</span></td><td><span class="ar">ـكُمَا</span><span class="tr">-кума</span></td><td><span class="ar">عِنْدَكُمَا</span><span class="tr">'и́ндакума</span></td></tr>
+          <tr><td class="ru">они двое</td><td><span class="ar">هُمَا</span><span class="tr">ху́ма</span></td><td><span class="ar">ـهُمَا</span><span class="tr">-хума</span></td><td><span class="ar">عِنْدَهُمَا</span><span class="tr">'и́ндахума</span></td></tr>
+          <tr><td class="ru">вы (м)</td><td><span class="ar">أَنْتُمْ</span><span class="tr">а́нтум</span></td><td><span class="ar">ـكُمْ</span><span class="tr">-кум</span></td><td><span class="ar">عِنْدَكُمْ</span><span class="tr">'и́ндакум</span></td></tr>
+          <tr><td class="ru">вы (ж)</td><td><span class="ar">أَنْتُنَّ</span><span class="tr">а́нтунна</span></td><td><span class="ar">ـكُنَّ</span><span class="tr">-кунна</span></td><td><span class="ar">عِنْدَكُنَّ</span><span class="tr">'и́ндакунна</span></td></tr>
+          <tr><td class="ru">они (м)</td><td><span class="ar">هُمْ</span><span class="tr">хум</span></td><td><span class="ar">ـهُمْ</span><span class="tr">-хум</span></td><td><span class="ar">عِنْدَهُمْ</span><span class="tr">'и́ндахум</span></td></tr>
+          <tr><td class="ru">они (ж)</td><td><span class="ar">هُنَّ</span><span class="tr">хунна</span></td><td><span class="ar">ـهُنَّ</span><span class="tr">-хунна</span></td><td><span class="ar">عِنْدَهُنَّ</span><span class="tr">'и́ндахунна</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">Один и тот же набор лиц встречается в трёх видах: <b>отдельное</b> слово (أَنَا مُهَنْدِسٌ — «я инженер»), <b>окончание</b> на существительном (بَيْتِي — «мой дом») и <b>окончание</b> на предлоге (عِنْدِي، لَدَيَّ، لِي — «у меня»). Окончание на предлоге и окончание на существительном почти совпадают, отличается только «я»: بَيْتِي, но عِنْدِي، لِي.</p>
+    <h3 style="margin:24px 0 8px;">Окончания на существительном</h3>
+    <div class="tablebox">
+      <table>
+        <thead><tr><th>Чьё</th><th>Окончание</th><th>Пример</th><th>Вслух</th></tr></thead>
+        <tbody>
+          <tr><td class="ru">мой</td><td class="ar">ـِي</td><td class="ar">بَيْتِي</td><td class="tr">ба́йти</td></tr>
+          <tr><td class="ru">твой (м)</td><td class="ar">ـُكَ</td><td class="ar">بَيْتُكَ</td><td class="tr">ба́йтук</td></tr>
+          <tr><td class="ru">твой (ж)</td><td class="ar">ـُكِ</td><td class="ar">بَيْتُكِ</td><td class="tr">ба́йтуки</td></tr>
+          <tr><td class="ru">его</td><td class="ar">ـُهُ</td><td class="ar">بَيْتُهُ</td><td class="tr">ба́йтух</td></tr>
+          <tr><td class="ru">её</td><td class="ar">ـُهَا</td><td class="ar">بَيْتُهَا</td><td class="tr">ба́йтуха</td></tr>
+          <tr><td class="ru">наш</td><td class="ar">ـُنَا</td><td class="ar">بَيْتُنَا</td><td class="tr">ба́йтуна</td></tr>
+          <tr><td class="ru">ваш</td><td class="ar">ـُكُمْ</td><td class="ar">بَيْتُكُمْ</td><td class="tr">ба́йтукум</td></tr>
+          <tr><td class="ru">их</td><td class="ar">ـُهُمْ</td><td class="ar">بَيْتُهُمْ</td><td class="tr">ба́йтухум</td></tr>
+          <tr><td class="ru">ваш (дв. число)</td><td class="ar">ـُكُمَا</td><td class="ar">بَيْتُكُمَا</td><td class="tr">ба́йтукума</td></tr>
+          <tr><td class="ru">их (дв. число)</td><td class="ar">ـُهُمَا</td><td class="ar">بَيْتُهُمَا</td><td class="tr">ба́йтухума</td></tr>
+          <tr><td class="ru">ваш (ж)</td><td class="ar">ـُكُنَّ</td><td class="ar">بَيْتُكُنَّ</td><td class="tr">ба́йтукунна</td></tr>
+          <tr><td class="ru">их (ж)</td><td class="ar">ـُهُنَّ</td><td class="ar">بَيْتُهُنَّ</td><td class="tr">ба́йтухунна</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">Три шага при склейке: <b>снять танвин</b> (بَيْتٌ → بَيْتُ), <b>ة превратить в ت</b> у женских слов (سَاعَةٌ → سَاعَتُكَ, وِسَادَةٌ → وِسَادَتِي), <b>приклеить окончание</b>. Артикль при этом не ставится: «моя подушка» — وِسَادَتِي, а не الْوِسَادَتِي. У «моего» гласная перед ي — кясра, у всех остальных — дамма.</p>
+    <p class="note"><b>Двойственное число</b> (два человека) имеет свои формы и отдельно, и в виде окончаний: أَنْتُمَا / ـكُمَا для «вы двое», هُمَا / ـهُمَا для «они двое», одинаково для м. и ж. Женский род множественного числа (ـكُنَّ، ـهُنَّ) отличается от мужского (ـكُمْ، ـهُمْ) тем, что вместо م стоит نَّ.</p>
+    <p class="note">Отдельные местоимения (أَنَا، أَنْتَ، هُوَ، هِيَ) принадлежность не выражают — они только подлежащее. Сказать «حَاسُوب هِيَ» нельзя, только حَاسُوبُهَا.</p>
+  </section>
+
+  <section id="family">
+    <h2>Семья</h2>
+    <p class="count">38 слов · родство, семейное положение, возраст</p>
+    <div class="tablebox">
+      <table>
+        <thead><tr><th>Слово</th><th>Вслух</th><th>Перевод</th><th>Мн. число</th></tr></thead>
+        <tbody>
+          <tr><td class="ar">أُسْرَةٌ / عَائِلَةٌ</td><td class="tr">у́сра / 'а́иля</td><td class="ru">семья</td><td class="pos"></td></tr>
+          <tr><td class="ar">جَدٌّ</td><td class="tr">джадд</td><td class="ru">дедушка</td><td class="pos"></td></tr>
+          <tr><td class="ar">جَدَّةٌ</td><td class="tr">джа́дда</td><td class="ru">бабушка</td><td class="pos"></td></tr>
+          <tr><td class="ar">أَبٌ / وَالِدٌ</td><td class="tr">аб / ва́лид</td><td class="ru">отец</td><td class="pos"></td></tr>
+          <tr><td class="ar">أُمٌّ / وَالِدَةٌ</td><td class="tr">умм / ва́лида</td><td class="ru">мать</td><td class="pos"></td></tr>
+          <tr><td class="ar">أَخٌ</td><td class="tr">ах</td><td class="ru">брат</td><td class="pos"></td></tr>
+          <tr><td class="ar">أُخْتٌ</td><td class="tr">ухт</td><td class="ru">сестра</td><td class="pos"></td></tr>
+          <tr><td class="ar">أَخٌ تَوْأَمٌ</td><td class="tr">ах та́у'ам</td><td class="ru">брат-близнец</td><td class="pos"></td></tr>
+          <tr><td class="ar">تَوْأَمَانِ</td><td class="tr">тау'ама́н</td><td class="ru">близнецы (дв. число)</td><td class="pos"></td></tr>
+          <tr><td class="ar">حَفِيدٌ / حَفِيدَةٌ</td><td class="tr">хафи́д / хафи́да</td><td class="ru">внук / внучка</td><td class="pos"></td></tr>
+          <tr><td class="ar">عَمٌّ</td><td class="tr">'амм</td><td class="ru">дядя по отцу</td><td class="pos"></td></tr>
+          <tr><td class="ar">عَمَّةٌ</td><td class="tr">'а́мма</td><td class="ru">тётя по отцу</td><td class="pos"></td></tr>
+          <tr><td class="ar">خَالٌ</td><td class="tr">халь</td><td class="ru">дядя по матери</td><td class="pos"></td></tr>
+          <tr><td class="ar">خَالَةٌ</td><td class="tr">ха́ля</td><td class="ru">тётя по матери</td><td class="pos"></td></tr>
+          <tr><td class="ar">زَوْجٌ</td><td class="tr">зауж</td><td class="ru">муж</td><td class="pos"></td></tr>
+          <tr><td class="ar">زَوْجَةٌ</td><td class="tr">за́уджа</td><td class="ru">жена</td><td class="pos"></td></tr>
+          <tr><td class="ar">اِبْنٌ</td><td class="tr">ибн</td><td class="ru">сын</td><td class="pos">мн. أَبْنَاءُ</td></tr>
+          <tr><td class="ar">اِبْنَةٌ</td><td class="tr">и́бна</td><td class="ru">дочь</td><td class="pos">мн. بَنَاتٌ</td></tr>
+          <tr><td class="ar">وَلَدٌ</td><td class="tr">ва́лад</td><td class="ru">мальчик, ребёнок</td><td class="pos">мн. أَوْلَادٌ</td></tr>
+          <tr><td class="ar">بِنْتٌ</td><td class="tr">бинт</td><td class="ru">девочка</td><td class="pos">мн. بَنَاتٌ</td></tr>
+          <tr><td class="ar">صِهْرٌ</td><td class="tr">сихр</td><td class="ru">родственник по браку</td><td class="pos">мн. أَصْهَارٌ</td></tr>
+          <tr><td class="ar">قَرِيبٌ</td><td class="tr">кари́б</td><td class="ru">родственник</td><td class="pos">мн. أَقَارِبُ</td></tr>
+          <tr><td class="ar">لَقَبٌ</td><td class="tr">ла́каб</td><td class="ru">фамилия, прозвище</td><td class="pos">мн. أَلْقَابٌ</td></tr>
+          <tr><td class="ar">عَزَبٌ</td><td class="tr">'а́заб</td><td class="ru">холостяк</td><td class="pos"></td></tr>
+          <tr><td class="ar">آنِسَةٌ</td><td class="tr">а́ниса</td><td class="ru">незамужняя девушка</td><td class="pos"></td></tr>
+          <tr><td class="ar">مُتَزَوِّجٌ / ـةٌ</td><td class="tr">мутаза́ввидж / -а</td><td class="ru">женат / замужем</td><td class="pos"></td></tr>
+          <tr><td class="ar">خَاطِبٌ / مَخْطُوبَةٌ</td><td class="tr">ха́тыб / махту́ба</td><td class="ru">жених / невеста</td><td class="pos"></td></tr>
+          <tr><td class="ar">عُمْرٌ</td><td class="tr">'умр</td><td class="ru">возраст</td><td class="pos"></td></tr>
+          <tr><td class="ar">سِنٌّ</td><td class="tr">синн</td><td class="ru">возраст (в годах); зуб</td><td class="pos"></td></tr>
+          <tr><td class="ar">عَامٌ / سَنَةٌ</td><td class="tr">'ам / са́на</td><td class="ru">год</td><td class="pos"></td></tr>
+          <tr><td class="ar">فَرْدٌ</td><td class="tr">фард</td><td class="ru">член (семьи), отдельный человек</td><td class="pos">أَفْرَادٌ ('афра́д)</td></tr>
+          <tr><td class="ar">الْقَرَابَةُ</td><td class="tr">аль-кара́ба</td><td class="ru">родство</td><td class="pos"></td></tr>
+          <tr><td class="ar">تَتَكَوَّنُ مِنْ</td><td class="tr">тата́каввану мин</td><td class="ru">состоит из (ж. род, о семье)</td><td class="pos"></td></tr>
+          <tr><td class="ar">عَرُوسٌ</td><td class="tr">'ару́с</td><td class="ru">невеста; молодая жена</td><td class="pos"></td></tr>
+          <tr><td class="ar">عَرِيسٌ</td><td class="tr">'ари́с</td><td class="ru">жених; молодой муж</td><td class="pos"></td></tr>
+          <tr><td class="ar">حَمٌ / حَمَا</td><td class="tr">хам / хама́</td><td class="ru">свёкор, тесть (отец мужа или жены)</td><td class="pos">мн. أَحْمَاءُ ('ахма́')</td></tr>
+          <tr><td class="ar">حَمَاةٌ</td><td class="tr">хама́</td><td class="ru">свекровь, тёща</td><td class="pos">мн. حَمَوَاتٌ (хамава́т)</td></tr>
+          <tr><td class="ar">ضَيْفٌ</td><td class="tr">зайф</td><td class="ru">гость</td><td class="pos">мн. ضُيُوفٌ (зуйу́ф)</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note"><b>«Состоит из».</b> تَتَكَوَّنُ مِنْ — полезная связка для рассказа о семье: أُسْرَتِي تَتَكَوَّنُ مِنْ خَمْسَةِ أَفْرَادٍ — «моя семья состоит из пяти человек». Глагол в женском роде, потому что أُسْرَةٌ женского рода; после числа 3–10 слово أَفْرَادٌ стоит во множественном числе в родительном падеже. Для мужского рода: يَتَكَوَّنُ.</p>
+    <p class="note"><b>Родственники по браку.</b> حَمٌ — отец мужа или жены, حَمَاةٌ — мать мужа или жены; во множественном числе أَحْمَاءُ «родственники мужа / жены». حَمَا — вторая форма того же слова (в учебнике через косую черту). Со слитным окончанием слово меняется по падежам: حَمُوكَ، حَمَاكَ، حَمِيكَ («твой тесть»), пока достаточно знать حَمٌ / حَمَا. Слова عَرُوسٌ и عَرِيسٌ различаются одной гласной буквой: عَرُوسٌ с «у» (و), عَرِيسٌ с «и» (ي). Слова عَزَبٌ, خَاطِبٌ, مَخْطُوبَةٌ из этой же темы у вас выше.</p>
+    <p class="note"><b>Дядя и тётя различаются по линии родства.</b> عَمٌّ и عَمَّةٌ — брат и сестра отца, خَالٌ и خَالَةٌ — брат и сестра матери. В русском для обоих одно слово, в арабском спутать нельзя.</p>
+    <p class="note"><b>Возраст:</b> «ему 17 лет» строится как «его возраст — семнадцать»: عُمْرُهُ سَبْعَةَ عَشَرَ عَامًا. Вопрос — كَمْ عُمْرُكَ؟ После чисел 11–99 слово «год» стоит в единственном числе с окончанием -ан: عَامًا или سَنَةً.</p>
+    <p class="note"><b>Возраст через سِنّ:</b> عَائِشَةُ سِنُّهَا ثَمَانِي عَشْرَةَ سَنَةً — «Аише восемнадцать лет» (буквально «её возраст — восемнадцать лет»). Близнецы: أَحْمَدُ وَحَسَنٌ تَوْأَمَانِ، سِنُّهُمَا ثَلَاثَ عَشْرَةَ سَنَةً.</p>
+    <p class="note">Пометка <b>(ج)</b> в учебнике — это الْجَمْع, множественное число. Оно в арабском чаще всего не строится по правилу, а запоминается вместе со словом: اِبْنٌ → أَبْنَاءُ, وَلَدٌ → أَوْلَادٌ, قَرِيبٌ → أَقَارِبُ.</p>
+  </section>
+
+  <section id="classroom">
+    <h2>Класс и положение в пространстве</h2>
+    <p class="count">19 слов и выражений · таблицы читаются справа налево</p>
+    <h3 style="margin:8px 0 8px;">В аудитории</h3>
+    <div class="tablebox">
+      <table class="rtl">
+        <thead><tr><th>Слово</th><th>Вслух</th><th>Значение</th></tr></thead>
+        <tbody>
+          <tr><td class="ar">صَفٌّ</td><td class="tr">сафф</td><td class="ru rule">класс, аудитория; ряд (м)</td></tr>
+          <tr><td class="ar">شَاشَةُ عَرْضٍ</td><td class="tr">ша́шат 'ард</td><td class="ru rule">экран (проектора, дисплея) (ж)</td></tr>
+          <tr><td class="ar">مِمْحَاةٌ</td><td class="tr">мимха́</td><td class="ru rule">ластик (ж); мн. مَمَاحٍ (мама́х)</td></tr>
+          <tr><td class="ar">نَاجِحٌ × رَاسِبٌ</td><td class="tr">на́джих × ра́сиб</td><td class="ru rule">успешный, сдавший × не сдавший, неуспевающий</td></tr>
+          <tr><td class="ar">سَلَّةُ مُهْمَلَاتٍ</td><td class="tr">са́ллат мухмала́т</td><td class="ru rule">мусорная корзина (ж)</td></tr>
+          <tr><td class="ar">مَكْتَبَةٌ</td><td class="tr">ма́ктаба</td><td class="ru rule">библиотека; книжный магазин (ж)</td></tr>
+          <tr><td class="ar">قَامُوسٌ / مُعْجَمٌ</td><td class="tr">ка́мус / му'джам</td><td class="ru rule">словарь (м)</td></tr>
+          <tr><td class="ar">غَائِبٌ × حَاضِرٌ</td><td class="tr">га́'иб × ха́дир</td><td class="ru rule">отсутствующий × присутствующий</td></tr>
+          <tr><td class="ar">صَفْحَةٌ</td><td class="tr">са́фха</td><td class="ru rule">страница (ж)</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <h3 style="margin:24px 0 8px;">Где находится?</h3>
+    <div class="tablebox">
+      <table class="rtl">
+        <thead><tr><th>Слово</th><th>Вслух</th><th>Значение</th></tr></thead>
+        <tbody>
+          <tr><td class="ar">بَيْنَ</td><td class="tr">байна</td><td class="ru rule">между</td></tr>
+          <tr><td class="ar">خَلْفَ / وَرَاءَ</td><td class="tr">халф / вара́'</td><td class="ru rule">позади, за</td></tr>
+          <tr><td class="ar">بِجَانِبِ</td><td class="tr">би-джа́ниб</td><td class="ru rule">рядом с, возле</td></tr>
+          <tr><td class="ar">تَحْتَ / أَسْفَلَ</td><td class="tr">тахт / 'асфаль</td><td class="ru rule">под, внизу</td></tr>
+          <tr><td class="ar">عَنْ يَمِينِ</td><td class="tr">'ан йами́н</td><td class="ru rule">справа (от)</td></tr>
+          <tr><td class="ar">عَنْ يَسَارِ</td><td class="tr">'ан яса́р</td><td class="ru rule">слева (от)</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">Знак <b>×</b> в учебнике значит «противоположность». После предлогов места слово стоит в родительном падеже: <b>الْمَكْتَبَةُ بِجَانِبِ الْمَدْرَسَةِ</b> — «библиотека рядом со школой»; <b>الْقَلَمُ تَحْتَ الْكِتَابِ</b> — «ручка под книгой»; <b>الْمَدْرَسَةُ عَنْ يَمِينِ الْجَامِعَةِ</b> — «школа справа от университета». Слово بَيْنَ требует двух имён: بَيْنَ الْمَدْرَسَةِ وَالْجَامِعَةِ — «между школой и университетом».</p>
+    <h3 style="margin:24px 0 8px;">Команды преподавателя</h3>
+    <div class="tablebox">
+      <table class="rtl">
+        <thead><tr><th>Команда</th><th>Вслух</th><th>Значение</th></tr></thead>
+        <tbody>
+          <tr><td class="ar">هَاتِ</td><td class="tr">ха́ти</td><td class="ru rule">дай, подай</td></tr>
+          <tr><td class="ar">اِرْفَعْ × اِخْفِضْ</td><td class="tr">ирфа' × ихфид</td><td class="ru rule">подними × опусти</td></tr>
+          <tr><td class="ar">اِفْتَحْ × أَغْلِقْ</td><td class="tr">ифтах × 'аглик</td><td class="ru rule">открой × закрой</td></tr>
+          <tr><td class="ar">خُذْ / تَفَضَّلْ</td><td class="tr">хуз / тафа́ддаль</td><td class="ru rule">возьми / пожалуйста, прошу (берите, проходите)</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note"><b>Команды</b> (повелительное наклонение) здесь обращены к одному человеку мужского рода. К девушке: اِرْفَعِي، اِفْتَحِي، خُذِي (с окончанием ـِي). Вежливое <b>تَفَضَّلْ</b> («прошу, пожалуйста») говорят, когда протягивают что-то или приглашают. Основа команды совпадает с основой настоящего времени: يَفْتَحُ → اِفْتَحْ.</p>
+  </section>
+
+  <section id="places">
+    <h2>Страны, города, национальности</h2>
+    <p class="count">9 слов · нисба на ـِيٌّ</p>
+    <div class="tablebox">
+      <table>
+        <thead><tr><th>Слово</th><th>Вслух</th><th>Перевод</th></tr></thead>
+        <tbody>
+          <tr><td class="ar">مِصْرُ</td><td class="tr">миср</td><td class="ru">Египет</td></tr>
+          <tr><td class="ar">الْقَاهِرَةُ</td><td class="tr">аль-ка́хира</td><td class="ru">Каир</td></tr>
+          <tr><td class="ar">السُّعُودِيَّةُ</td><td class="tr">ас-су'уди́йя</td><td class="ru">Саудовская Аравия</td></tr>
+          <tr><td class="ar">الرِّيَاضُ</td><td class="tr">ар-рия́д</td><td class="ru">Эр-Рияд</td></tr>
+          <tr><td class="ar">إِسْطَنْبُولُ</td><td class="tr">истанбу́ль</td><td class="ru">Стамбул</td></tr>
+          <tr><td class="ar">الْإِسْكَنْدَرِيَّةُ</td><td class="tr">аль-'искандари́йя</td><td class="ru">Александрия</td></tr>
+          <tr><td class="ar">مِصْرِيٌّ</td><td class="tr">ми́сри</td><td class="ru">египтянин</td></tr>
+          <tr><td class="ar">سُعُودِيٌّ</td><td class="tr">су'у́ди</td><td class="ru">саудовец</td></tr>
+          <tr><td class="ar">أَمْرِيكِيٌّ</td><td class="tr">амри́ки</td><td class="ru">американец</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">Название жителя строится от страны окончанием <b>ـِيٌّ</b>, как цвета بُنِّيٌّ и بُرْتُقَالِيٌّ. Женская форма — через ة: مِصْرِيَّةٌ، أَمْرِيكِيَّةٌ. Вопрос о происхождении: <b>مِنْ أَيْنَ أَنْتَ؟</b> — أَنَا مِنْ مِصْرَ, или <b>مَا جِنْسِيَّتُكَ؟</b> — أَنَا مِصْرِيٌّ. Перед словом с артиклем مِنْ получает фатху: <b>مِنَ الْإِسْكَنْدَرِيَّةِ</b> — «из Александрии».</p>
+  </section>
+
+  <section id="numbers">
+    <h2>Числа от 0 до 100</h2>
+    <p class="count">Единицы и десятки наизусть, остальное собирается по формуле</p>
+
+    <div class="numgrid">
+      <div class="num"><span class="fig">٠</span><span class="word">صِفْرٌ<span class="say">сыфр</span></span></div>
+      <div class="num"><span class="fig">١</span><span class="word">وَاحِدٌ<span class="say">ва́хид</span></span></div>
+      <div class="num"><span class="fig">٢</span><span class="word">اِثْنَانِ<span class="say">исна́н</span></span></div>
+      <div class="num"><span class="fig">٣</span><span class="word">ثَلَاثَةٌ<span class="say">саля́са</span></span></div>
+      <div class="num"><span class="fig">٤</span><span class="word">أَرْبَعَةٌ<span class="say">'а́рба'а</span></span></div>
+      <div class="num"><span class="fig">٥</span><span class="word">خَمْسَةٌ<span class="say">ха́мса</span></span></div>
+      <div class="num"><span class="fig">٦</span><span class="word">سِتَّةٌ<span class="say">си́тта</span></span></div>
+      <div class="num"><span class="fig">٧</span><span class="word">سَبْعَةٌ<span class="say">са́б'а</span></span></div>
+      <div class="num"><span class="fig">٨</span><span class="word">ثَمَانِيَةٌ<span class="say">сама́ния</span></span></div>
+      <div class="num"><span class="fig">٩</span><span class="word">تِسْعَةٌ<span class="say">ти́с'а</span></span></div>
+      <div class="num"><span class="fig">١٠</span><span class="word">عَشَرَةٌ<span class="say">'а́шара</span></span></div>
+      <div class="num"><span class="fig">١١</span><span class="word">أَحَدَ عَشَرَ<span class="say">'а́хада 'а́шар</span></span></div>
+      <div class="num"><span class="fig">١٢</span><span class="word">اِثْنَا عَشَرَ<span class="say">исна́ 'а́шар</span></span></div>
+      <div class="num"><span class="fig">١٣</span><span class="word">ثَلَاثَةَ عَشَرَ<span class="say">саля́сата 'а́шар</span></span></div>
+      <div class="num"><span class="fig">١٤</span><span class="word">أَرْبَعَةَ عَشَرَ<span class="say">'а́рба'ата 'а́шар</span></span></div>
+      <div class="num"><span class="fig">١٥</span><span class="word">خَمْسَةَ عَشَرَ<span class="say">ха́мсата 'а́шар</span></span></div>
+      <div class="num"><span class="fig">١٦</span><span class="word">سِتَّةَ عَشَرَ<span class="say">си́ттата 'а́шар</span></span></div>
+      <div class="num"><span class="fig">١٧</span><span class="word">سَبْعَةَ عَشَرَ<span class="say">са́б'ата 'а́шар</span></span></div>
+      <div class="num"><span class="fig">١٨</span><span class="word">ثَمَانِيَةَ عَشَرَ<span class="say">сама́нията 'а́шар</span></span></div>
+      <div class="num"><span class="fig">١٩</span><span class="word">تِسْعَةَ عَشَرَ<span class="say">ти́с'ата 'а́шар</span></span></div>
+    </div>
+
+    <p class="note" style="margin-bottom:14px;">11–19 = единица + <b>عَشَرَ</b>. Единица теряет танвин и получает фатху, «один» берётся в форме أَحَدَ, а «два» — اِثْنَا.</p>
+
+    <div class="numgrid">
+      <div class="num"><span class="fig">٢٠</span><span class="word">عِشْرُونَ<span class="say">'ишру́н</span></span></div>
+      <div class="num"><span class="fig">٣٠</span><span class="word">ثَلَاثُونَ<span class="say">саляcу́н</span></span></div>
+      <div class="num"><span class="fig">٤٠</span><span class="word">أَرْبَعُونَ<span class="say">'арба'у́н</span></span></div>
+      <div class="num"><span class="fig">٥٠</span><span class="word">خَمْسُونَ<span class="say">хамсу́н</span></span></div>
+      <div class="num"><span class="fig">٦٠</span><span class="word">سِتُّونَ<span class="say">ситту́н</span></span></div>
+      <div class="num"><span class="fig">٧٠</span><span class="word">سَبْعُونَ<span class="say">саб'у́н</span></span></div>
+      <div class="num"><span class="fig">٨٠</span><span class="word">ثَمَانُونَ<span class="say">саману́н</span></span></div>
+      <div class="num"><span class="fig">٩٠</span><span class="word">تِسْعُونَ<span class="say">тис'у́н</span></span></div>
+      <div class="num"><span class="fig">١٠٠</span><span class="word">مِئَةٌ<span class="say">ми'а</span></span></div>
+    </div>
+
+    <div class="formula">
+      <p style="margin:0 0 10px;"><b>21–99 собираются по одной формуле: единица + وَ + десяток.</b> Порядок обратный русскому — сначала единицы, потом десятки, как в немецком «einundzwanzig».</p>
+      <p style="margin:0 0 6px;"><span class="ex">وَاحِدٌ وَعِشْرُونَ</span> ٢١ — <span class="tr">ва́хид ва-'ишру́н</span></p>
+      <p style="margin:0 0 6px;"><span class="ex">خَمْسَةٌ وَثَلَاثُونَ</span> ٣٥ — <span class="tr">ха́мса ва-саляcу́н</span></p>
+      <p style="margin:0 0 6px;"><span class="ex">سَبْعَةٌ وَأَرْبَعُونَ</span> ٤٧ — <span class="tr">са́б'а ва-'арба'у́н</span></p>
+      <p style="margin:0;"><span class="ex">تِسْعَةٌ وَتِسْعُونَ</span> ٩٩ — <span class="tr">ти́с'а ва-тис'у́н</span></p>
+    </div>
+
+    <p class="note">Десятки от 20 до 90 — это не «два-десять», а отдельная форма на <b>-ӯна</b>, та же, что у множественного числа. В паузе конечное «-а» отпадает: <i>'ишру́н</i>, <i>хамсу́н</i>. Сто — مِئَةٌ, пишется через ئ, но читается просто <i>ми'а</i>.</p>
+    <p class="note"><b>С существительными женского рода</b> (например, سَنَةٌ «год») единица теряет ة, а عَشَرَ меняется: <b>ثَلَاثَ عَشْرَةَ سَنَةً</b> — 13 лет, <b>ثَمَانِي عَشْرَةَ سَنَةً</b> — 18 лет. Таблица выше даёт формы для мужского рода. Слово после числа стоит в единственном числе с окончанием -ан (سَنَةً).</p>
+  
+    <h3 style="margin:28px 0 8px;">Согласование числительных с исчисляемым</h3>
+    <div class="tablebox">
+      <table class="rtl">
+        <thead><tr><th>Числа</th><th>Правило</th><th>Примеры</th></tr></thead>
+        <tbody>
+          <tr><td class="rule">1–2</td><td class="rule">Числительные — прилагательные, стоят <b>после</b> существительного. Род совпадает с существительным.</td><td><span class="ar">طَالِبَةٌ وَاحِدَةٌ</span><span class="tr">та́либа ва́хида — одна студентка</span><span class="ar">طَالِبَانِ اثْنَانِ</span><span class="tr">тали́бани 'исна́ни — два студента</span></td></tr>
+          <tr><td class="rule">3–10</td><td class="rule">Стоят <b>перед</b> существительным. Род <b>противоположный</b> существительному. Существительное во мн. числе, в родительном падеже (-ин), без артикля.</td><td><span class="ar">سِتَّةُ جَنِيهَاتٍ</span><span class="tr">си́тта джаниха́т — шесть фунтов</span><span class="ar">عَشَرَةُ دُرُوسٍ</span><span class="tr">'а́шара дуру́с — десять уроков</span></td></tr>
+          <tr><td class="rule">11–99</td><td class="rule">Стоят <b>перед</b> существительным. Существительное в ед. числе, в винительном падеже (-ан), без артикля.</td><td><span class="ar">إِحْدَى عَشْرَةَ دَقِيقَةً</span><span class="tr">'и́хда 'а́шра даки́ка — одиннадцать минут</span><span class="ar">خَمْسَةٌ وَخَمْسُونَ قِرْشًا</span><span class="tr">ха́мса ва-хамсу́н ки́рша — пятьдесят пять пиастров</span></td></tr>
+          <tr><td class="rule">100–1000</td><td class="rule">Стоят <b>перед</b> существительным. Существительное в ед. числе, в родительном падеже (-ин), без артикля.</td><td><span class="ar">مِئَةُ دُولَارٍ</span><span class="tr">ми'а дола́р — сто долларов</span><span class="ar">أَلْفُ طَالِبٍ</span><span class="tr">'альф та́либ — тысяча студентов</span><span class="ar">ثَلَاثَةُ آلَافِ طَالِبَةٍ</span><span class="tr">саляса 'ала́ф та́либа — три тысячи студенток</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note"><b>Разница с русским:</b> после 3–10 исчисляемое стоит во множественном числе («три урока»), после 11–99 в единственном («одиннадцать минут»), после сотен и тысяч тоже в единственном, но в родительном падеже. <b>«Противоположный род»</b> для 3–10 значит: с мужским существительным число имеет ة (ثَلَاثَةُ كُتُبٍ — три книги, كِتَابٌ м.р.), с женским ة нет (ثَلَاثُ طَالِبَاتٍ — три студентки).</p>
+  </section>
+
+  <footer>
+    <p>Транскрипция: <b>'</b> — гортанное сжатие (хамза ء или айн ع); <b>с</b> в ثَلَاثَة и ثَوْب — межзубный звук, как <i>th</i> в английском <i>think</i>; <b>ы</b> после ص, ض, ط, ظ — знак того, что согласный «толстый».</p>
+    <p style="margin-bottom:0">Кнопки вверху скрывают арабский, произношение или перевод — так можно проверять себя. Наведи курсор на скрытую ячейку, чтобы подсмотреть ответ.</p>
+  </footer>
+</div>
+
+<script>
+(function(){
+  var q = document.getElementById('q');
+  var rows = Array.prototype.slice.call(document.querySelectorAll('tbody tr'));
+  var cards = Array.prototype.slice.call(document.querySelectorAll('.num'));
+  var sections = Array.prototype.slice.call(document.querySelectorAll('section'));
+
+  function norm(s){ return (s||'').toLowerCase().replace(/ё/g,'е').replace(/[́]/g,''); }
+
+  q.addEventListener('input', function(){
+    var term = norm(q.value.trim());
+    rows.forEach(function(r){
+      r.classList.toggle('hide', term !== '' && norm(r.textContent).indexOf(term) === -1);
+    });
+    cards.forEach(function(c){
+      var hit = term === '' || norm(c.textContent).indexOf(term) !== -1;
+      c.style.display = hit ? '' : 'none';
+    });
+    sections.forEach(function(s){
+      var items = s.querySelectorAll('tbody tr, .num');
+      if(!items.length){ return; }
+      var visible = Array.prototype.some.call(items, function(el){
+        return !el.classList.contains('hide') && el.style.display !== 'none';
+      });
+      s.hidden = !visible;
+    });
+  });
+
+  function wire(btn, cls){
+    btn.addEventListener('click', function(){
+      var on = btn.getAttribute('aria-pressed') === 'true';
+      btn.setAttribute('aria-pressed', on ? 'false' : 'true');
+      document.body.classList.toggle(cls, !on);
+    });
+  }
+
+  var boxes = Array.prototype.slice.call(document.querySelectorAll('.day input[type="checkbox"]'));
+  var KEY = 'arabic-a1-plan';
+  var saved = {};
+  try { saved = JSON.parse(localStorage.getItem(KEY) || '{}') || {}; } catch(e) { saved = {}; }
+  function paint(b){ b.parentNode.classList.toggle('done', b.checked); }
+  boxes.forEach(function(b){
+    if(saved[b.id]){ b.checked = true; }
+    paint(b);
+    b.addEventListener('change', function(){
+      paint(b);
+      saved[b.id] = b.checked;
+      try { localStorage.setItem(KEY, JSON.stringify(saved)); } catch(e) {}
+    });
+  });
+
+  wire(document.getElementById('hideAr'), 'no-ar');
+  wire(document.getElementById('hideTr'), 'no-tr');
+  wire(document.getElementById('hideRu'), 'no-ru');
+  (function(){
+    var b=document.getElementById('fontSw'), K='arabic-a1-font';
+    function apply(on){ document.body.classList.toggle('font-naskh',on); b.setAttribute('aria-pressed',on?'true':'false'); b.textContent=on?'Шрифт: простой':'Шрифт: классический'; }
+    var on=false; try{ on=localStorage.getItem(K)==='naskh'; }catch(e){}
+    apply(on);
+    b.addEventListener('click',function(){ on=!on; apply(on); try{ localStorage.setItem(K,on?'naskh':'sans'); }catch(e){} });
+  })();
+})();
+</script>
+
+</body></html>
