@@ -1,4 +1,4 @@
-<!doctype html><html lang="ru"><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style><link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png"><link rel="icon" type="image/png" sizes="48x48" href="icons/favicon-48.png"><link rel="apple-touch-icon" href="icons/apple-touch-icon.png"><link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#0e5a4c"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Арабский"></head><body>
+<!doctype html><html lang="ru"><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}#ptr{position:fixed;left:0;right:0;top:0;z-index:9999;display:flex;justify-content:center;pointer-events:none;transform:translateY(-70px);opacity:0;padding-top:env(safe-area-inset-top,0px)}#ptr span{margin-top:10px;background:#0e5a4c;color:#fbf1d6;font:500 13px -apple-system,BlinkMacSystemFont,sans-serif;padding:8px 16px;border-radius:999px;box-shadow:0 2px 10px rgba(0,0,0,.25)}#ptr.go span::before{content:"";display:inline-block;width:11px;height:11px;margin-right:8px;vertical-align:-1px;border:2px solid #fbf1d6;border-top-color:transparent;border-radius:50%;animation:ptrspin .7s linear infinite}@keyframes ptrspin{to{transform:rotate(360deg)}}html,body{overscroll-behavior-y:contain}</style><link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png"><link rel="icon" type="image/png" sizes="48x48" href="icons/favicon-48.png"><link rel="apple-touch-icon" href="icons/apple-touch-icon.png"><link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#0e5a4c"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Арабский"></head><body>
 <title>Арабский словарь А1</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -960,4 +960,38 @@
 })();
 </script>
 
+<div id="ptr" aria-hidden="true"><span>↓ Потяните, чтобы обновить</span></div>
+<script>
+(function(){
+  var el=document.getElementById('ptr'); if(!el) return;
+  var lab=el.firstChild, startY=null, pull=0, busy=false, LIM=70, MAX=110;
+  function set(p,anim){
+    el.style.transition=anim?'transform .2s,opacity .2s':'none';
+    el.style.transform='translateY('+(p-70)+'px)';
+    el.style.opacity=p>8?'1':'0';
+  }
+  function top(){ return (window.pageYOffset||document.documentElement.scrollTop||0)<=0; }
+  addEventListener('touchstart',function(e){
+    if(busy||e.touches.length!==1||!top()){ startY=null; return; }
+    startY=e.touches[0].clientY; pull=0;
+  },{passive:true});
+  addEventListener('touchmove',function(e){
+    if(startY===null||busy) return;
+    var dy=e.touches[0].clientY-startY;
+    if(dy<=0||!top()){ pull=0; set(0,false); return; }
+    pull=Math.min(dy*0.5,MAX); set(pull,false);
+    lab.textContent=pull>=LIM?'↑ Отпустите для обновления':'↓ Потяните, чтобы обновить';
+  },{passive:true});
+  function end(){
+    if(startY===null) return; startY=null;
+    if(pull>=LIM && !busy){
+      busy=true; el.className='go'; lab.textContent='Обновляю…'; set(LIM,true);
+      setTimeout(function(){ location.reload(); },250);
+    } else { set(0,true); }
+    pull=0;
+  }
+  addEventListener('touchend',end,{passive:true});
+  addEventListener('touchcancel',end,{passive:true});
+})();
+</script>
 </body></html>
