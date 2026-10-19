@@ -2,231 +2,205 @@
 <title>Арабский словарь А1</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@400;600&family=Noto+Naskh+Arabic:wght@400;600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Serif:wght@600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@400;500;600&family=Noto+Naskh+Arabic:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Serif:wght@600&display=swap">
 <style>
+  /* Макет: зелёная шапка как у иконки приложения, под ней липкая панель (поиск, проверка, разделы), дальше разделы-таблицы в одну колонку. */
   :root{
-    --bg:#F1F3F5;
-    --surface:#FFFFFF;
-    --surface-2:#E7ECEF;
-    --ink:#14202B;
-    --muted:#5E6C7A;
-    --line:#D3DBE1;
-    --accent:#1F5F8B;
-    --accent-soft:#DCE9F2;
-    --gold:#8C6316;
-    --shadow:0 1px 2px rgba(20,32,43,.06);
+    --bg:#F4F1E9;
+    --surface:#FFFDF8;
+    --surface-2:#EEE8DA;
+    --ink:#13231F;
+    --muted:#5B6A64;
+    --line:#DED6C4;
+    --accent:#0E5A4C;
+    --accent-ink:#FBF1D6;
+    --accent-soft:#DDEBE4;
+    --gold:#94680F;
+    --band:#0E5A4C;
+    --band-ink:#FBF1D6;
+    --band-muted:rgba(251,241,214,.78);
+    --mask:#E2DBC9;
+    --shadow:0 1px 2px rgba(19,35,31,.06),0 4px 14px rgba(19,35,31,.04);
     --arfont:"Noto Sans Arabic","Noto Naskh Arabic","Segoe UI","Geeza Pro",Tahoma,sans-serif;
+    --ui:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+    --display:"IBM Plex Serif",Georgia,serif;
+    --stick:132px;
   }
-  body.font-naskh{--arfont:"Noto Naskh Arabic","Noto Sans Arabic","Geeza Pro",serif;}
-  .ar,.word,.ex,.dar,.digits{font-weight:500;letter-spacing:0;}
   @media (prefers-color-scheme: dark){
     :root:not([data-theme="light"]){
-      --bg:#0F151B;
-      --surface:#161E26;
-      --surface-2:#1D2732;
-      --ink:#E7EEF4;
-      --muted:#93A3B2;
-      --line:#2A3742;
-      --accent:#74B3E0;
-      --accent-soft:#1B2E3D;
-      --gold:#D3A34E;
-      --shadow:0 1px 2px rgba(0,0,0,.4);
+      --bg:#0B1613;--surface:#12211D;--surface-2:#192C27;--ink:#E7F0EC;--muted:#93A79F;
+      --line:#233631;--accent:#63C3A7;--accent-ink:#0B1613;--accent-soft:#16302A;--gold:#DDAA4C;
+      --band:#0F2C25;--band-ink:#F3E8CC;--band-muted:rgba(243,232,204,.72);--mask:#22362F;
+      --shadow:0 1px 2px rgba(0,0,0,.35);color-scheme:dark;
     }
   }
   :root[data-theme="dark"]{
-    --bg:#0F151B;
-    --surface:#161E26;
-    --surface-2:#1D2732;
-    --ink:#E7EEF4;
-    --muted:#93A3B2;
-    --line:#2A3742;
-    --accent:#74B3E0;
-    --accent-soft:#1B2E3D;
-    --gold:#D3A34E;
-    --shadow:0 1px 2px rgba(0,0,0,.4);
+    --bg:#0B1613;--surface:#12211D;--surface-2:#192C27;--ink:#E7F0EC;--muted:#93A79F;
+    --line:#233631;--accent:#63C3A7;--accent-ink:#0B1613;--accent-soft:#16302A;--gold:#DDAA4C;
+    --band:#0F2C25;--band-ink:#F3E8CC;--band-muted:rgba(243,232,204,.72);--mask:#22362F;
+    --shadow:0 1px 2px rgba(0,0,0,.35);color-scheme:dark;
   }
+  body.font-naskh{--arfont:"Noto Naskh Arabic","Noto Sans Arabic","Geeza Pro",serif;}
+  html{scroll-padding-top:var(--stick);}
+  @media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth;}}
+  body{background:var(--bg);color:var(--ink);font-family:var(--ui);font-size:15px;line-height:1.5;-webkit-tap-highlight-color:transparent;}
+  body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:31;background:var(--bg);}
+  .inner{max-width:1000px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));}
 
-  body{
-    background:var(--bg);
-    color:var(--ink);
-    font-family:"IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
-    font-size:15px;
-    line-height:1.5;
-  }
-  .wrap{max-width:1000px;margin:0 auto;padding-inline:18px;padding-block:0 64px;}
+  /* Шапка */
+  .masthead{background:var(--band);color:var(--band-ink);}
+  .masthead .inner{padding-block:28px 22px;display:grid;gap:8px;}
+  .eyebrow{margin:0;font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;color:var(--band-muted);}
+  h1{margin:0;font-family:var(--display);font-weight:600;font-size:clamp(28px,6.5vw,42px);line-height:1.08;text-wrap:balance;}
+  h1 .h1ar{display:block;font-family:var(--arfont);font-weight:500;font-size:.62em;line-height:1.5;direction:rtl;text-align:left;opacity:.9;}
+  .lede{margin:2px 0 0;max-width:62ch;color:var(--band-muted);font-size:14px;}
+  .digits{margin:10px 0 0;display:flex;flex-wrap:wrap;gap:4px 14px;font-family:var(--arfont);font-size:22px;line-height:1.2;}
+  .digits span{display:flex;flex-direction:column;align-items:center;}
+  .digits small{font-family:var(--ui);font-size:10px;color:var(--band-muted);}
 
-  header.masthead{padding-block:34px 18px;}
-  .eyebrow{
-    font-size:11px;letter-spacing:.14em;text-transform:uppercase;
-    color:var(--gold);font-weight:600;margin:0 0 8px;
-  }
-  h1{
-    font-family:"IBM Plex Serif", Georgia, serif;
-    font-size:clamp(28px,5vw,40px);
-    line-height:1.1;margin:0 0 10px;text-wrap:balance;font-weight:600;
-  }
-  .lede{color:var(--muted);max-width:62ch;margin:0;}
-  .digits{
-    margin-top:16px;display:flex;flex-wrap:wrap;gap:10px;align-items:baseline;
-    font-family:var(--arfont);font-size:22px;color:var(--accent);
-  }
-  .digits span small{
-    display:block;font-family:"IBM Plex Sans",sans-serif;font-size:10px;
-    color:var(--muted);text-align:center;letter-spacing:.04em;
-  }
-
-  .toolbar{
-    position:sticky;top:env(safe-area-inset-top, 0px);z-index:20;
-    background:var(--bg);border-bottom:1px solid var(--line);
-    padding-block:10px;margin-bottom:22px;
-    display:flex;flex-wrap:wrap;gap:10px;align-items:center;
-  }
-  .search{
-    flex:1 1 220px;min-width:0;
-    background:var(--surface);color:var(--ink);
-    border:1px solid var(--line);border-radius:8px;
-    padding:9px 12px;font:inherit;font-size:14px;box-shadow:var(--shadow);
-  }
+  /* Липкая панель */
+  .bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:30;background:var(--bg);border-bottom:1px solid var(--line);}
+  .bar .inner{padding-block:10px 0;display:grid;gap:8px;}
+  .bar-row{display:flex;gap:8px;align-items:center;}
+  .searchbox{flex:1;min-width:0;position:relative;display:flex;align-items:center;}
+  .searchbox svg{position:absolute;left:12px;width:17px;height:17px;color:var(--muted);pointer-events:none;}
+  .search{width:100%;min-width:0;box-sizing:border-box;background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:12px;padding:10px 38px 10px 38px;font:inherit;font-size:16px;-webkit-appearance:none;appearance:none;}
   .search::placeholder{color:var(--muted);}
-  .toggles{display:flex;gap:8px;flex-wrap:wrap;}
-  .tgl{
-    background:var(--surface);color:var(--ink);
-    border:1px solid var(--line);border-radius:999px;
-    padding:8px 14px;font:inherit;font-size:13px;cursor:pointer;
-  }
-  .tgl[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--surface);}
-  :root[data-theme="dark"] .tgl[aria-pressed="true"],
-  .tgl[aria-pressed="true"]{color:#fff;}
-  @media (prefers-color-scheme: dark){
-    :root:not([data-theme="light"]) .tgl[aria-pressed="true"]{color:#0F151B;}
-  }
-  :root[data-theme="dark"] .tgl[aria-pressed="true"]{color:#0F151B;}
-  .tgl:focus-visible,.search:focus-visible,.jump a:focus-visible{outline:2px solid var(--accent);outline-offset:2px;}
+  .search::-webkit-search-cancel-button{display:none;}
+  .clear{position:absolute;right:6px;width:28px;height:28px;border:0;border-radius:50%;background:var(--surface-2);color:var(--muted);font:inherit;font-size:16px;line-height:1;cursor:pointer;}
+  .testbtn{flex:none;display:flex;align-items:center;gap:6px;background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:12px;padding:10px 12px;font:inherit;font-size:14px;font-weight:500;cursor:pointer;}
+  .testbtn[aria-expanded="true"],.testbtn.on{background:var(--accent);border-color:var(--accent);color:var(--accent-ink);}
+  .testbtn .dot{min-width:18px;height:18px;border-radius:9px;background:var(--gold);color:#fff;font-size:11px;font-weight:600;display:inline-grid;place-items:center;padding:0 5px;box-sizing:border-box;}
+  .panel{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:12px;display:grid;gap:10px;}
+  .panel-row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;}
+  .panel-label{font-size:12px;color:var(--muted);letter-spacing:.06em;text-transform:uppercase;font-weight:600;margin-right:2px;}
+  .hint{margin:0;font-size:13px;color:var(--muted);}
+  .tgl{background:var(--surface-2);color:var(--ink);border:1px solid transparent;border-radius:999px;padding:7px 13px;font:inherit;font-size:14px;cursor:pointer;}
+  .tgl[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink);}
+  .chips{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding-bottom:10px;margin-inline:-4px;padding-inline:4px;scroll-padding-inline:16px;}
+  .chips::-webkit-scrollbar{display:none;}
+  .chips a{flex:none;font-size:13.5px;text-decoration:none;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:5px 12px;background:var(--surface);white-space:nowrap;}
+  .chips a.active{background:var(--ink);border-color:var(--ink);color:var(--bg);}
+  .chips a[data-empty]{opacity:.35;}
+  .found{margin:0;padding-bottom:8px;font-size:13px;color:var(--muted);}
+  .empty{margin:24px 0;padding:18px;border:1px dashed var(--line);border-radius:14px;color:var(--muted);text-align:center;}
+  .tgl:focus-visible,.search:focus-visible,.chips a:focus-visible,.testbtn:focus-visible,.clear:focus-visible,.totop:focus-visible{outline:2px solid var(--accent);outline-offset:2px;}
 
-  .jump{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:26px;}
-  .jump a{
-    font-size:13px;text-decoration:none;color:var(--muted);
-    border:1px solid var(--line);border-radius:999px;padding:5px 11px;background:var(--surface);
-  }
-  .jump a:hover{color:var(--accent);border-color:var(--accent);}
-
-  section{margin-bottom:38px;}
-  h2{
-    font-family:"IBM Plex Serif",Georgia,serif;font-size:20px;font-weight:600;
-    margin:0 0 3px;scroll-margin-top:90px;
-  }
-  .count{color:var(--muted);font-size:13px;margin:0 0 14px;}
-  .note{
-    color:var(--muted);font-size:13.5px;margin:12px 0 0;max-width:68ch;
-    border-left:2px solid var(--accent-soft);padding-left:12px;
-  }
+  /* Разделы */
+  .wrap{max-width:1000px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:22px 72px;}
+  section{margin-bottom:44px;}
+  h2{font-family:var(--display);font-size:22px;font-weight:600;margin:0 0 2px;line-height:1.2;text-wrap:balance;}
+  h3{font-family:var(--ui);font-size:15px;font-weight:600;}
+  .count{color:var(--muted);font-size:13px;margin:0 0 12px;}
+  .note{color:var(--muted);font-size:14px;margin:12px 0 0;max-width:68ch;border-inline-start:3px solid var(--accent-soft);padding-inline-start:12px;}
+  ul.note{padding-inline-start:28px;display:grid;gap:6px;}
   .note b{color:var(--ink);font-weight:600;}
 
-  .tablebox{overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow);}
-  table{border-collapse:collapse;width:100%;font-size:14.5px;}
-  th{
-    text-align:left;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;
-    color:var(--muted);font-weight:600;padding:10px 14px;border-bottom:1px solid var(--line);
-    white-space:nowrap;background:var(--surface-2);
-  }
-  td{padding:9px 14px;border-bottom:1px solid var(--line);vertical-align:middle;}
-  tr:last-child td{border-bottom:none;}
+  .tablebox{overflow-x:auto;-webkit-overflow-scrolling:touch;background:var(--surface);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);}
+  .tablebox + .tablebox{margin-top:14px;}
+  .tablebox{direction:rtl;} /* таблицы справа налево: прокрутка вбок начинается с правого края */
+  table{border-collapse:collapse;width:100%;font-size:15px;}
+  th{text-align:left;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:600;padding:10px 14px;border-bottom:1px solid var(--line);white-space:nowrap;background:var(--surface-2);}
+  td{padding:8px 14px;border-bottom:1px solid var(--line);vertical-align:middle;}
+  tbody tr:last-child td{border-bottom:none;}
   tr.hide{display:none;}
-  .ar{
-    font-family:var(--arfont);font-size:23px;line-height:1.7;
-    direction:rtl;text-align:right;white-space:nowrap;color:var(--ink);
-  }
+  .ar{font-family:var(--arfont);font-weight:500;font-size:24px;line-height:1.7;direction:rtl;text-align:right;white-space:nowrap;color:var(--ink);}
   .tr{color:var(--accent);font-variant-numeric:tabular-nums;white-space:nowrap;}
   .ru{color:var(--ink);}
   .pos{color:var(--muted);font-size:12.5px;}
-  body.no-ar .ar,body.no-ru .ru{color:transparent;background:var(--surface-2);border-radius:4px;}
-  body.no-ar .ar:hover,body.no-ru .ru:hover{color:var(--ink);background:none;}
-
-  .numgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(148px,1fr));gap:8px;}
-  .num{
-    background:var(--surface);border:1px solid var(--line);border-radius:9px;
-    padding:10px 12px;display:flex;align-items:baseline;gap:10px;
-  }
-  .num .fig{
-    font-family:var(--arfont);font-size:20px;color:var(--gold);
-    min-width:28px;font-variant-numeric:tabular-nums;
-  }
-  .num .word{font-family:var(--arfont);font-size:19px;direction:rtl;line-height:1.6;}
-  .num .say{display:block;font-family:"IBM Plex Sans",sans-serif;font-size:12px;color:var(--accent);direction:ltr;text-align:left;}
-  body.no-tr .tr,body.no-tr .num .say{color:transparent;background:var(--surface-2);border-radius:4px;}
-  body.no-tr .tr:hover,body.no-tr .num .say:hover{color:var(--accent);background:none;}
-  body.no-ar .num .word{color:transparent;}
-  body.no-ar .num .word:hover{color:var(--ink);}
-
-  .formula{
-    background:var(--accent-soft);border-radius:10px;padding:14px 16px;margin-top:14px;
-    font-size:14px;color:var(--ink);
-  }
-  .formula .ex{font-family:var(--arfont);font-size:20px;direction:rtl;display:inline-block;margin-inline-end:8px;}
-
-
-  .routine{
-    margin-top:14px;background:var(--accent-soft);border-radius:10px;padding:14px 16px;font-size:14px;
-  }
-  .routine h3{margin:0 0 8px;font-size:14px;font-family:"IBM Plex Sans",sans-serif;font-weight:600;}
-  .routine ol{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:5px;}
-  footer{border-top:1px solid var(--line);padding-top:16px;color:var(--muted);font-size:13px;}
-  @media (max-width:520px){
-    .ar{font-size:21px;}
-    th,td{padding:8px 10px;}
-  }
   .rtl{direction:rtl;}
   .rtl th{text-align:right;}
-
   .rtl td.ru,.rtl td.pos,.rtl td.tr,.rtl span.ru{direction:ltr;text-align:right;unicode-bidi:isolate;}
   .rtl td.rule{direction:ltr;text-align:left;}
-  .dar{font-family:var(--arfont);font-size:32px;line-height:1.7;direction:rtl;color:var(--ink);}
-  details.dict-all{margin-top:18px;}
-  details.dict-all summary{cursor:pointer;color:var(--accent);font-weight:500;}
   .rtl td span{display:block;}
   .rtl td .ar{font-size:22px;line-height:1.6;}
   .rtl td .tr{direction:ltr;text-align:right;font-size:13.5px;}
+  mark{background:color-mix(in srgb,var(--gold) 28%,transparent);color:inherit;border-radius:3px;}
+
+  .numgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;}
+  .num{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:10px 12px;display:flex;align-items:baseline;gap:10px;}
+  .num .fig{font-family:var(--arfont);font-size:20px;color:var(--gold);min-width:28px;font-variant-numeric:tabular-nums;}
+  .num .word{font-family:var(--arfont);font-weight:500;font-size:19px;direction:rtl;line-height:1.6;}
+  .num .say{display:block;font-family:var(--ui);font-size:12.5px;color:var(--accent);direction:ltr;text-align:left;}
+  .formula{background:var(--accent-soft);border-radius:14px;padding:14px 16px;margin-top:14px;font-size:14px;color:var(--ink);}
+  .formula .ex{font-family:var(--arfont);font-size:20px;direction:rtl;display:inline-block;margin-inline-end:8px;}
+
+  /* Проверка себя: закрытые ячейки открываются касанием */
+  body.no-ar tbody .ar:not(.peek),body.no-ar .num .word:not(.peek),
+  body.no-tr tbody .tr:not(.peek),body.no-tr .num .say:not(.peek),
+  body.no-ru tbody .ru:not(.peek){color:transparent!important;background:var(--mask);border-radius:6px;cursor:pointer;}
+  body.no-ar .num .word:not(.peek) .say{background:none;}
+  .peek{outline:1px dashed var(--gold);outline-offset:-2px;border-radius:6px;}
+
+  .totop{position:fixed;right:calc(16px + env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:25;width:46px;height:46px;border-radius:50%;border:0;background:var(--ink);color:var(--bg);font-size:20px;line-height:1;box-shadow:0 4px 14px rgba(0,0,0,.2);cursor:pointer;}
+  footer{border-top:1px solid var(--line);padding-top:16px;color:var(--muted);font-size:13px;}
+  @media (max-width:520px){
+    .ar{font-size:22px;}
+    th,td{padding:7px 10px;}
+    .masthead .inner{padding-block:22px 18px;}
+    .lede{font-size:13.5px;}
+  }
 </style>
 
-<div class="wrap">
-  <header class="masthead">
+<header class="masthead">
+  <div class="inner">
     <p class="eyebrow">Ат-Такаллюм · уровень A1</p>
     <h1>Арабский словарь А1</h1>
     <p class="lede">Всё, что прошли с начала курса: глаголы, существительные, прилагательные, цвета, дни недели, фразы для знакомства, служебные слова и числа до ста. Транскрипция дана в паузальной форме — так, как слово звучит вслух, без падежных окончаний.</p>
-    <p class="digits">
+    <p class="digits" aria-label="Арабские цифры от 0 до 9">
       <span>٠<small>0</small></span><span>١<small>1</small></span><span>٢<small>2</small></span><span>٣<small>3</small></span><span>٤<small>4</small></span><span>٥<small>5</small></span><span>٦<small>6</small></span><span>٧<small>7</small></span><span>٨<small>8</small></span><span>٩<small>9</small></span>
     </p>
-  </header>
-
-  <div class="toolbar">
-    <input id="q" class="search" type="search" placeholder="Поиск: наберите слово по-русски или транскрипцией" aria-label="Поиск по словарю">
-    <div class="toggles">
-      <button id="hideAr" class="tgl" type="button" aria-pressed="false">Скрыть арабский</button>
-      <button id="hideTr" class="tgl" type="button" aria-pressed="false">Скрыть «вслух»</button>
-      <button id="hideRu" class="tgl" type="button" aria-pressed="false">Скрыть перевод</button>
-      <button id="fontSw" class="tgl" type="button" aria-pressed="false">Шрифт: классический</button>
-    </div>
   </div>
+</header>
 
-  <nav class="jump" aria-label="Разделы">
-    <a href="#verbs">Глаголы</a>
-    <a href="#people">Люди</a>
-    <a href="#jobs">Профессии</a>
-    <a href="#things">Предметы</a>
-    <a href="#colors">Цвета</a>
-    <a href="#adj">Прилагательные</a>
-    <a href="#questions">Вопросительные слова</a>
-    <a href="#grammar">Служебные слова</a>
-    <a href="#have">Иметь: عِنْدَ / لَدَى / لِـ</a>
-    <a href="#pronouns">Слитные местоимения</a>
-    <a href="#family">Семья</a>
-    <a href="#classroom">Класс и место</a>
-    <a href="#places">Страны</a>
-    <a href="#days">Дни недели</a>
-    <a href="#prepsuf">Предлоги + местоимения</a>
-    <a href="#phrases">Фразы</a>
-    <a href="#numbers">Числа</a>
-  </nav>
+<div class="bar" id="bar">
+  <div class="inner">
+    <div class="bar-row">
+      <label class="searchbox">
+        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="8.5" cy="8.5" r="5.5"/><path d="M13 13l4 4"/></svg>
+        <input id="q" class="search" type="search" placeholder="Поиск: по-русски, «вслух» или по-арабски" aria-label="Поиск по словарю" autocomplete="off" autocorrect="off" spellcheck="false">
+        <button id="qClear" class="clear" type="button" aria-label="Очистить поиск" hidden>×</button>
+      </label>
+      <button id="testBtn" class="testbtn" type="button" aria-expanded="false" aria-controls="testPanel">Проверка <span class="dot" id="testDot" hidden></span></button>
+    </div>
+    <div class="panel" id="testPanel" hidden>
+      <div class="panel-row">
+        <span class="panel-label">Скрыть</span>
+        <button id="hideAr" class="tgl" type="button" aria-pressed="false">Арабский</button>
+        <button id="hideTr" class="tgl" type="button" aria-pressed="false">«Вслух»</button>
+        <button id="hideRu" class="tgl" type="button" aria-pressed="false">Перевод</button>
+      </div>
+      <p class="hint">Закрой колонку и вспоминай. Нажми на закрытую ячейку, чтобы подсмотреть, нажми ещё раз, чтобы закрыть.</p>
+      <div class="panel-row">
+        <span class="panel-label">Шрифт</span>
+        <button id="fontSw" class="tgl" type="button" aria-pressed="false">Классический</button>
+      </div>
+    </div>
+    <nav class="chips" id="chips" aria-label="Разделы">
+      <a href="#verbs">Глаголы</a>
+      <a href="#people">Люди</a>
+      <a href="#jobs">Профессии</a>
+      <a href="#things">Предметы</a>
+      <a href="#colors">Цвета</a>
+      <a href="#adj">Прилагательные</a>
+      <a href="#questions">Вопросы</a>
+      <a href="#grammar">Служебные слова</a>
+      <a href="#days">Дни недели</a>
+      <a href="#prepsuf">Предлоги + местоимения</a>
+      <a href="#phrases">Фразы</a>
+      <a href="#have">Иметь</a>
+      <a href="#pronouns">Местоимения</a>
+      <a href="#family">Семья</a>
+      <a href="#classroom">Класс и место</a>
+      <a href="#places">Страны</a>
+      <a href="#numbers">Числа</a>
+    </nav>
+    <p class="found" id="found" hidden></p>
+  </div>
+</div>
+
+<div class="wrap">
+  <p class="empty" id="empty" hidden>Ничего не нашлось. Попробуй по-русски, транскрипцией или арабскими буквами — огласовки ставить не нужно.</p>
 
   <section id="verbs">
     <h2>Глаголы</h2>
@@ -908,56 +882,120 @@
 
   <footer>
     <p>Транскрипция: <b>'</b> — гортанное сжатие (хамза ء или айн ع); <b>с</b> в ثَلَاثَة и ثَوْب — межзубный звук, как <i>th</i> в английском <i>think</i>; <b>ы</b> после ص, ض, ط, ظ — знак того, что согласный «толстый».</p>
-    <p style="margin-bottom:0">Кнопки вверху скрывают арабский, произношение или перевод — так можно проверять себя. Наведи курсор на скрытую ячейку, чтобы подсмотреть ответ.</p>
+    <p style="margin-bottom:0">Кнопка «Проверка» закрывает арабский, «вслух» или перевод — так можно проверять себя. Нажми на закрытую ячейку, чтобы подсмотреть ответ.</p>
   </footer>
 </div>
 
 <script>
 (function(){
-  var q = document.getElementById('q');
-  var rows = Array.prototype.slice.call(document.querySelectorAll('tbody tr'));
+  var $ = function(id){ return document.getElementById(id); };
+  var root = document.documentElement, body = document.body;
+  var bar = $('bar'), q = $('q'), qClear = $('qClear'), found = $('found'), empty = $('empty');
+  var chips = $('chips'), chipLinks = Array.prototype.slice.call(chips.querySelectorAll('a'));
+  var rows = Array.prototype.slice.call(document.querySelectorAll('section tbody tr'));
   var cards = Array.prototype.slice.call(document.querySelectorAll('.num'));
-  var sections = Array.prototype.slice.call(document.querySelectorAll('section'));
+  var sections = Array.prototype.slice.call(document.querySelectorAll('section[id]'));
 
-  function norm(s){ return (s||'').toLowerCase().replace(/ё/g,'е').replace(/[́]/g,''); }
+  // Нормализация: регистр, ё, ударения, апострофы, дефисы; у арабского — огласовки и формы алифа.
+  function norm(s){
+    return (s||'').toLowerCase()
+      .replace(/ё/g,'е')
+      .replace(/[́'’ʼ`\-]/g,'')
+      .replace(/[ً-ٰٟـ]/g,'')
+      .replace(/[أإآٱ]/g,'ا');
+  }
+  rows.forEach(function(r){ r._t = norm(r.textContent); });
+  cards.forEach(function(c){ c._t = norm(c.textContent); });
 
-  q.addEventListener('input', function(){
-    var term = norm(q.value.trim());
-    rows.forEach(function(r){
-      r.classList.toggle('hide', term !== '' && norm(r.textContent).indexOf(term) === -1);
-    });
-    cards.forEach(function(c){
-      var hit = term === '' || norm(c.textContent).indexOf(term) !== -1;
-      c.style.display = hit ? '' : 'none';
-    });
+  // Высота липкой панели — чтобы заголовок раздела не уезжал под неё.
+  function setStick(){ root.style.setProperty('--stick', (bar.offsetHeight + 12) + 'px'); }
+  setStick(); addEventListener('resize', setStick);
+
+  // Поиск
+  function plural(n){ var a=n%10,b=n%100; return (a===1&&b!==11)?'строка':(a>=2&&a<=4&&(b<12||b>14))?'строки':'строк'; }
+  function search(){
+    var term = norm(q.value.trim()), total = 0;
+    qClear.hidden = !q.value;
+    rows.forEach(function(r){ var hit = !term || r._t.indexOf(term) !== -1; r.classList.toggle('hide', !hit); if(hit) total++; });
+    cards.forEach(function(c){ var hit = !term || c._t.indexOf(term) !== -1; c.hidden = !hit; if(hit) total++; });
     sections.forEach(function(s){
       var items = s.querySelectorAll('tbody tr, .num');
-      if(!items.length){ return; }
-      var visible = Array.prototype.some.call(items, function(el){
-        return !el.classList.contains('hide') && el.style.display !== 'none';
-      });
-      s.hidden = !visible;
+      var vis = !items.length ? !term : Array.prototype.some.call(items, function(el){ return !el.classList.contains('hide') && !el.hidden; });
+      s.hidden = !vis;
+      var chip = chips.querySelector('a[href="#'+s.id+'"]');
+      if(chip){ if(term && !vis) chip.setAttribute('data-empty',''); else chip.removeAttribute('data-empty'); }
     });
-  });
+    found.hidden = !term;
+    if(term) found.textContent = total ? 'Найдено: ' + total + ' ' + plural(total) : '';
+    found.hidden = !term || !total;
+    empty.hidden = !term || total > 0;
+    setStick();
+  }
+  q.addEventListener('input', search);
+  qClear.addEventListener('click', function(){ q.value=''; search(); q.focus(); });
 
+  // Проверка себя
+  var testBtn = $('testBtn'), panel = $('testPanel'), dot = $('testDot');
+  testBtn.addEventListener('click', function(){
+    var open = panel.hidden; panel.hidden = !open;
+    testBtn.setAttribute('aria-expanded', open ? 'true' : 'false'); setStick();
+  });
+  function refreshDot(){
+    var n = ['no-ar','no-tr','no-ru'].filter(function(c){ return body.classList.contains(c); }).length;
+    dot.hidden = !n; dot.textContent = n; testBtn.classList.toggle('on', n > 0);
+    if(!n) Array.prototype.forEach.call(document.querySelectorAll('.peek'), function(el){ el.classList.remove('peek'); });
+  }
   function wire(btn, cls){
     btn.addEventListener('click', function(){
-      var on = btn.getAttribute('aria-pressed') === 'true';
-      btn.setAttribute('aria-pressed', on ? 'false' : 'true');
-      document.body.classList.toggle(cls, !on);
+      var on = btn.getAttribute('aria-pressed') !== 'true';
+      btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+      body.classList.toggle(cls, on);
+      if(!on) Array.prototype.forEach.call(document.querySelectorAll('.peek'), function(el){ el.classList.remove('peek'); });
+      refreshDot();
     });
   }
+  wire($('hideAr'), 'no-ar'); wire($('hideTr'), 'no-tr'); wire($('hideRu'), 'no-ru');
+  document.addEventListener('click', function(e){
+    var t = e.target.closest ? e.target.closest('tbody .ar, tbody .tr, tbody .ru, .num .word, .num .say') : null;
+    if(!t) return;
+    var cat = t.matches('.ar, .word') ? 'no-ar' : t.matches('.tr, .say') ? 'no-tr' : 'no-ru';
+    if(body.classList.contains(cat)) t.classList.toggle('peek');
+  });
 
-  wire(document.getElementById('hideAr'), 'no-ar');
-  wire(document.getElementById('hideTr'), 'no-tr');
-  wire(document.getElementById('hideRu'), 'no-ru');
+  // Шрифт
   (function(){
-    var b=document.getElementById('fontSw'), K='arabic-a1-font';
-    function apply(on){ document.body.classList.toggle('font-naskh',on); b.setAttribute('aria-pressed',on?'true':'false'); b.textContent=on?'Шрифт: простой':'Шрифт: классический'; }
-    var on=false; try{ on=localStorage.getItem(K)==='naskh'; }catch(e){}
+    var b = $('fontSw'), K = 'arabic-a1-font';
+    function apply(on){ body.classList.toggle('font-naskh', on); b.setAttribute('aria-pressed', on ? 'true' : 'false'); }
+    var on = false; try{ on = localStorage.getItem(K) === 'naskh'; }catch(e){}
     apply(on);
-    b.addEventListener('click',function(){ on=!on; apply(on); try{ localStorage.setItem(K,on?'naskh':'sans'); }catch(e){} });
+    b.addEventListener('click', function(){ on = !on; apply(on); try{ localStorage.setItem(K, on ? 'naskh' : 'sans'); }catch(e){} });
   })();
+
+  // Текущий раздел подсвечивается в ленте разделов
+  var current = null;
+  function markChip(id){
+    if(id === current) return; current = id;
+    chipLinks.forEach(function(a){
+      var on = a.getAttribute('href') === '#' + id; a.classList.toggle('active', on);
+      if(on){ var left = a.offsetLeft - (chips.clientWidth - a.offsetWidth) / 2; chips.scrollTo ? chips.scrollTo({left: left, behavior: 'smooth'}) : (chips.scrollLeft = left); }
+    });
+  }
+  function spy(){
+    var line = bar.getBoundingClientRect().bottom + 40, id = null;
+    for(var i = 0; i < sections.length; i++){
+      var s = sections[i]; if(s.hidden) continue;
+      if(s.getBoundingClientRect().top <= line) id = s.id; else break;
+    }
+    markChip(id);
+    totop.hidden = (window.pageYOffset || root.scrollTop) < 700;
+  }
+  var totop = document.createElement('button');
+  totop.className = 'totop'; totop.type = 'button'; totop.setAttribute('aria-label', 'Наверх'); totop.textContent = '↑'; totop.hidden = true;
+  totop.addEventListener('click', function(){ window.scrollTo({top: 0, behavior: 'smooth'}); });
+  body.appendChild(totop);
+  var ticking = false;
+  addEventListener('scroll', function(){ if(!ticking){ ticking = true; requestAnimationFrame(function(){ ticking = false; spy(); }); } }, {passive: true});
+  spy();
 })();
 </script>
 
