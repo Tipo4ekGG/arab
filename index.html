@@ -165,24 +165,6 @@
   .formula .ex{font-family:var(--arfont);font-size:20px;direction:rtl;display:inline-block;margin-inline-end:8px;}
 
 
-  .plan{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px;}
-  .day{
-    background:var(--surface);border:1px solid var(--line);border-radius:10px;
-    padding:14px 16px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:9px;
-  }
-  .day h3{
-    margin:0;font-family:"IBM Plex Serif",Georgia,serif;font-size:16px;font-weight:600;
-    display:flex;align-items:baseline;justify-content:space-between;gap:8px;
-  }
-  .day h3 span{font-family:"IBM Plex Sans",sans-serif;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--gold);font-weight:600;}
-  .day .load{color:var(--muted);font-size:12.5px;margin:-4px 0 0;}
-  .day ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:7px;}
-  .day li{display:flex;gap:9px;align-items:flex-start;font-size:13.5px;line-height:1.45;}
-  .day input[type="checkbox"]{margin-top:2px;width:15px;height:15px;accent-color:var(--accent);flex:none;}
-  .day input:focus-visible{outline:2px solid var(--accent);outline-offset:2px;}
-  .day label{cursor:pointer;}
-  .day a{color:var(--accent);}
-  .day li.done label{color:var(--muted);text-decoration:line-through;}
   .routine{
     margin-top:14px;background:var(--accent-soft);border-radius:10px;padding:14px 16px;font-size:14px;
   }
@@ -197,22 +179,7 @@
   .rtl th{text-align:right;}
 
   .rtl td.rule{direction:ltr;text-align:left;}
-  .dict-box{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px;box-shadow:var(--shadow);}
-  .dict-ctl{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px;}
-  .dict-card{min-height:170px;display:flex;flex-direction:column;justify-content:center;gap:10px;text-align:center;padding:12px 6px;}
-  .dict-count{font-size:12px;color:var(--muted);letter-spacing:.06em;text-transform:uppercase;}
-  .dict-q{font-size:21px;line-height:1.4;font-weight:500;}
   .dar{font-family:var(--arfont);font-size:32px;line-height:1.7;direction:rtl;color:var(--ink);}
-  .dict-a{border-top:1px dashed var(--line);padding-top:12px;margin-top:4px;}
-  .dict-a .t{color:var(--muted);font-size:14px;}
-  .dict-a .nt{color:var(--gold);font-size:13px;margin-top:6px;}
-  .dict-act{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:6px;}
-  .dict-act button{font:inherit;font-size:15px;padding:10px 20px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer;}
-  .dict-act button.main{background:var(--accent);border-color:var(--accent);color:#fff;}
-  .dict-act button.ok{border-color:#2E7D4F;color:#2E7D4F;}
-  .dict-act button.bad{border-color:#B3402F;color:#B3402F;}
-  .dict-miss{margin:10px 0 0;padding:0;list-style:none;text-align:start;}
-  .dict-miss li{padding:6px 0;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;}
   details.dict-all{margin-top:18px;}
   details.dict-all summary{cursor:pointer;color:var(--accent);font-weight:500;}
   .rtl td span{display:block;}
@@ -241,8 +208,6 @@
   </div>
 
   <nav class="jump" aria-label="Разделы">
-    <a href="#plan">План на 5 дней</a>
-    <a href="#dictation">Диктант №1</a>
     <a href="#verbs">Глаголы</a>
     <a href="#people">Люди</a>
     <a href="#jobs">Профессии</a>
@@ -261,214 +226,6 @@
     <a href="#phrases">Фразы</a>
     <a href="#numbers">Числа</a>
   </nav>
-
-  <section id="plan">
-    <h2>План на пять дней</h2>
-    <p class="count">289 единиц · примерно 58 новых в день плюс повторение</p>
-    <div class="plan">
-
-      <div class="day">
-        <h3>Числа, дни, география <span>день 1</span></h3>
-        <p class="load">49 единиц · <a href="#numbers">числа</a>, <a href="#days">дни</a>, <a href="#places">страны</a></p>
-        <ul>
-          <li><input type="checkbox" id="p2d1a"><label for="p2d1a">Числа 0–20 вслух подряд, три круга без подглядывания</label></li>
-          <li><input type="checkbox" id="p2d1b"><label for="p2d1b">Десятки и формула «единица + وَ + десяток», собрать 10 случайных чисел</label></li>
-          <li><input type="checkbox" id="p2d1e"><label for="p2d1e">Таблица согласования: 1–2, 3–10, 11–99, 100–1000 — по 3 своих примера на каждую строку</label></li>
-          <li><input type="checkbox" id="p2d1c"><label for="p2d1c">7 дней недели через связь с числами (ثلاثة → الثلاثاء)</label></li>
-          <li><input type="checkbox" id="p2d1d"><label for="p2d1d">Страны, города и нисбы: مِصْر → مِصْرِيّ</label></li>
-          <li><input type="checkbox" id="p2d1f"><label for="p2d1f">5 слов о родстве по браку (عَرُوسٌ، عَرِيسٌ، حَمٌ، حَمَاةٌ، ضَيْفٌ)</label></li>
-        </ul>
-      </div>
-
-      <div class="day">
-        <h3>Люди и принадлежность <span>день 2</span></h3>
-        <p class="load">56 единиц · <a href="#people">люди</a>, <a href="#jobs">профессии</a>, <a href="#pronouns">местоимения</a></p>
-        <ul>
-          <li><input type="checkbox" id="p2d2a"><label for="p2d2a">14 слов о людях — парами «он / она»</label></li>
-          <li><input type="checkbox" id="p2d2b"><label for="p2d2b">24 слова о работе и контактах</label></li>
-          <li><input type="checkbox" id="p2d2c"><label for="p2d2c">12 слитных местоимений + три шага склейки (танвин, ة→ت, окончание)</label></li>
-          <li><input type="checkbox" id="p2d2d"><label for="p2d2d">Проговорить 10 пар: «его адрес», «её работа», «твой номер»</label></li>
-          <li><input type="checkbox" id="p2d2f"><label for="p2d2f">Вопросительные слова: 6 новых (إِلَى أَيْنَ، مَتَى، كَمْ، لِمَاذَا، لِمَنْ، أَيُّ) и по вопросу с каждым из 13</label></li>
-          <li><input type="checkbox" id="p2d2e"><label for="p2d2e">Повтор дня 1, 10 минут</label></li>
-        </ul>
-      </div>
-
-      <div class="day">
-        <h3>Предметы <span>день 3</span></h3>
-        <p class="load">52 единицы · <a href="#things">предметы</a>, <a href="#verbs">глаголы</a></p>
-        <ul>
-          <li><input type="checkbox" id="p2d3a"><label for="p2d3a">Первые 22 слова, сразу с пометкой рода (есть ة или нет)</label></li>
-          <li><input type="checkbox" id="p2d3b"><label for="p2d3b">Оставшиеся 21</label></li>
-          <li><input type="checkbox" id="p2d3c"><label for="p2d3c">Назвать 15 предметов вокруг себя по-арабски</label></li>
-          <li><input type="checkbox" id="p2d3e"><label for="p2d3e">Дом и гости: طَرِيقٌ، طَعَامٌ، زِينَةٌ، صَالُونٌ، أَثَاثٌ и 4 глагола (يُعَلِّقُ، يَسْتَقْبِلُ، يُرَتِّبُ، يَطْبُخُ)</label></li>
-          <li><input type="checkbox" id="p2d3d"><label for="p2d3d">Повтор дней 1–2, 10 минут</label></li>
-        </ul>
-      </div>
-
-      <div class="day">
-        <h3>Признаки и связки <span>день 4</span></h3>
-        <p class="load">52 единицы · <a href="#colors">цвета</a>, <a href="#adj">прилагательные</a>, <a href="#grammar">служебные</a>, <a href="#have">иметь</a></p>
-        <ul>
-          <li><input type="checkbox" id="p2d4a"><label for="p2d4a">9 цветов + правило женского рода для обоих образцов</label></li>
-          <li><input type="checkbox" id="p2d4b"><label for="p2d4b">8 пар антонимов — только парами</label></li>
-          <li><input type="checkbox" id="p2d4c"><label for="p2d4c">32 служебных слова: указательные (هَذَا، هَذِهِ), вопросы, местоимения (все 12 личных), предлоги</label></li>
-          <li><input type="checkbox" id="p2d4d"><label for="p2d4d">15 предложений «предмет + цвет / признак» из вчерашних слов</label></li>
-          <li><input type="checkbox" id="p2d4f"><label for="p2d4f">«Иметь»: три предлога и суффиксы, по 5 фраз на каждый («у меня есть…», «у неё нет…»)</label></li>
-          <li><input type="checkbox" id="p2d4e"><label for="p2d4e">Повтор дня 2, 5 минут</label></li>
-        </ul>
-      </div>
-
-      <div class="day">
-        <h3>Глаголы, речь, прогон <span>день 5</span></h3>
-        <p class="load">57 единиц · <a href="#verbs">глаголы</a>, <a href="#phrases">фразы</a></p>
-        <ul>
-          <li><input type="checkbox" id="p2d5a"><label for="p2d5a">14 глаголов в двух временах + спряжение по лицам</label></li>
-          <li><input type="checkbox" id="p2d5f"><label for="p2d5f">6 указательных (ذَلِكَ، تِلْكَ، هَذَانِ، هَاتَانِ، هَؤُلَاءِ، أُولَئِكَ) и 3 слова о семье (فَرْدٌ، الْقَرَابَةُ، تَتَكَوَّنُ مِنْ)</label></li>
-          <li><input type="checkbox" id="p2d5b"><label for="p2d5b">33 фразы — приветствия парами «вопрос → ответ»</label></li>
-          <li><input type="checkbox" id="p2d5c"><label for="p2d5c">Разыграть знакомство целиком: салям → как дела → имя → откуда → кем работаешь → прощание</label></li>
-          <li><input type="checkbox" id="p2d5d"><label for="p2d5d">Полный прогон: скрыть перевод, пройти все разделы сверху вниз</label></li>
-          <li><input type="checkbox" id="p2d5g"><label for="p2d5g">Диктант №1: два круга — русский → арабский, потом арабский → русский; ошибки переписать от руки</label></li>
-          <li><input type="checkbox" id="p2d5e"><label for="p2d5e">Выписать на бумагу всё, что не далось, и переучить только это</label></li>
-        </ul>
-      </div>
-
-    </div>
-
-    <div class="routine">
-      <h3>Как проходит день — примерно 50 минут</h3>
-      <ol>
-        <li><b>25 минут — новый блок.</b> Включи «Скрыть перевод», иди по списку и называй значение вслух. Всё, на чём споткнулся, отмечай карандашом.</li>
-        <li><b>10 минут — вчерашний блок.</b> Теперь в обратную сторону: «Скрыть арабский», смотришь на русский и вспоминаешь арабское слово. Это сложнее и именно это проверяют на занятии.</li>
-        <li><b>10 минут — письмо.</b> От руки, с огласовками, 10 слов, которые не дались. Рука запоминает то, что не запоминают глаза.</li>
-        <li><b>5 минут — блок позавчерашнего дня,</b> бегло. Это то, что удерживает материал: без повтора на третий день половина осыпется.</li>
-      </ol>
-    </div>
-
-    <p class="note"><b>Обязательно вслух.</b> ح и خ и ه на бумаге — три разных буквы, а в голове превращаются в одно «х», если ты их ни разу не произнёс. То же с ص и س, ظ и ز, хамзой и айном. Молчаливое чтение глазами даёт узнавание, но не даёт воспроизведения.</p>
-    <p class="note"><b>Почему блоки стоят именно так.</b> День 1 — всё механическое и справочное. День 2 — люди и принадлежность вместе, потому что слитные местоимения удобнее всего отрабатывать на «его работа», «её адрес». День 3 — самый большой блок чистого зубрежа, поэтому стоит в середине. День 4 — всё, что цепляется к предметам из дня 3, и сразу строится во фразы. День 5 — глаголы и готовые реплики: из них собирается диалог, в котором всплывают слова всех предыдущих дней.</p>
-    <p class="note"><b>Если добавятся новые слова:</b> кидай их в день своей категории — предмет в день 3, признак в день 4, и так далее. Порог — примерно 45 новых единиц в день; если день перевалил за 50, переноси излишек на день 1, он самый лёгкий по содержанию. Пары (м/ж, антонимы, цвет в двух родах, глагол в двух временах) считай за одну единицу: они учатся вместе.</p>
-  </section>
-
-  <section id="dictation">
-    <h2>Диктант №1 · глава «Знакомство»</h2>
-    <p class="count">34 позиций · преподаватель говорит по-русски, ты пишешь по-арабски, и наоборот</p>
-    <div class="dict-box">
-      <div class="dict-ctl" id="dMode">
-        <button class="tgl" type="button" data-m="ru2ar" aria-pressed="true">Русский → арабский</button>
-        <button class="tgl" type="button" data-m="ar2ru" aria-pressed="false">Арабский → русский</button>
-        <button class="tgl" type="button" data-m="mix" aria-pressed="false">Вперемешку</button>
-        <button class="tgl" type="button" id="dMissed" aria-pressed="false">Только мои ошибки</button>
-      </div>
-      <div class="dict-card" id="dCard"></div>
-    </div>
-    <p class="note"><b>Как пользоваться.</b> Прочитай задание, <b>напиши ответ от руки</b> с огласовками и только потом открой ответ. Честно отметь «Знал» или «Ошибся»: ошибки собираются в конце, и их можно пройти отдельно. Они запоминаются в браузере до следующего раза.</p>
-    <p class="note">В списке несколько вариантов ответа через строку: достаточно любого одного, но лучше знать все. <b>Друг</b> в глоссарии дан формой женского рода (صَدِيقَةٌ / زَمِيلَةٌ); мужская: صَدِيقٌ / زَمِيلٌ.</p>
-    <details class="dict-all">
-      <summary>Весь список диктанта</summary>
-      <div class="tablebox">
-        <table class="rtl">
-          <thead><tr><th>№</th><th>Арабский</th><th>Вслух</th><th>Русский</th></tr></thead>
-          <tbody>
-          <tr><td class="pos">1</td><td class="ar">السَّلَامُ عَلَيْكُمْ</td><td class="tr">ас-саля́му 'але́йкум</td><td class="ru">Мир вам! (приветствие)</td></tr>
-          <tr><td class="pos">2</td><td class="ar">وَعَلَيْكُمُ السَّلَامُ</td><td class="tr">ва-'але́йкуму-с-саля́м</td><td class="ru">И вам мир! (ответ)</td></tr>
-          <tr><td class="pos">3</td><td class="ar">صَبَاحُ الْخَيْرِ</td><td class="tr">саба́ху-ль-хайр</td><td class="ru">Доброе утро! (приветствие)</td></tr>
-          <tr><td class="pos">4</td><td class="ar">صَبَاحُ النُّورِ</td><td class="tr">саба́ху-н-нур</td><td class="ru">Доброе утро! (ответ)</td></tr>
-          <tr><td class="pos">5</td><td class="ar">كَيْفَ حَالُكَ؟<br>كَيْفَ الْحَالُ؟</td><td class="tr">ке́йфа ха́лук<br>ке́йфа-ль-халь</td><td class="ru">Как дела?</td></tr>
-          <tr><td class="pos">6</td><td class="ar">بِخَيْرٍ وَالْحَمْدُ لِلَّهِ<br>بِخَيْرٍ</td><td class="tr">би-хайр ва-ль-ха́мду ли-лля́х<br>би-хайр</td><td class="ru">Слава Аллаху, хорошо.</td></tr>
-          <tr><td class="pos">7</td><td class="ar">أَهْلًا وَسَهْلًا<br>مَرْحَبًا</td><td class="tr">а́хлян ва-са́хлян<br>ма́рхабан</td><td class="ru">Добро пожаловать! Здравствуйте!</td></tr>
-          <tr><td class="pos">8</td><td class="ar">أَهْلًا بِكَ<br>مَرْحَبًا بِكَ</td><td class="tr">а́хлян бик<br>ма́рхабан бик</td><td class="ru">Рады видеть Вас в добром здравии! (ответ хозяину дома) Здравствуйте!</td></tr>
-          <tr><td class="pos">9</td><td class="ar">مَا اسْمُكَ؟</td><td class="tr">ма-сму́к</td><td class="ru">Как тебя зовут?</td></tr>
-          <tr><td class="pos">10</td><td class="ar">اِسْمِي ...</td><td class="tr">и́сми</td><td class="ru">Меня зовут ...</td></tr>
-          <tr><td class="pos">11</td><td class="ar">مَا جِنْسِيَّتُكَ؟<br>مِنْ أَيْنَ أَنْتَ؟</td><td class="tr">ма джинси́йятук<br>мин а́йна анта</td><td class="ru">Кто вы по национальности? / Откуда вы?</td></tr>
-          <tr><td class="pos">12</td><td class="ar">أَنَا مِصْرِيٌّ<br>أَنَا مِنْ مِصْرَ</td><td class="tr">ана ми́сри<br>ана мин миср</td><td class="ru">Я египтянин. / Я из Египта.</td></tr>
-          <tr><td class="pos">13</td><td class="ar">مَسَاءُ الْخَيْرِ</td><td class="tr">маса́'у-ль-хайр</td><td class="ru">Добрый вечер! (приветствие)</td></tr>
-          <tr><td class="pos">14</td><td class="ar">مَسَاءُ النُّورِ</td><td class="tr">маса́'у-н-нур</td><td class="ru">Добрый вечер! (ответ)</td></tr>
-          <tr><td class="pos">15</td><td class="ar">تَشَرَّفْنَا<br>فُرْصَةٌ طَيِّبَةٌ</td><td class="tr">ташарра́фна<br>фу́рса тайи́ба</td><td class="ru">Рад знакомству</td></tr>
-          <tr><td class="pos">16</td><td class="ar">تَشَرَّفْنَا بِكَ<br>فُرْصَةٌ سَعِيدَةٌ</td><td class="tr">ташарра́фна бик<br>фу́рса са'и́да</td><td class="ru">Приятно познакомиться.</td></tr>
-          <tr><td class="pos">17</td><td class="ar">مَعَ السَّلَامَةِ<br>فِي أَمَانِ اللهِ<br>سَلَّمَكَ اللهُ</td><td class="tr">ма'а-с-саля́ма<br>фи 'ама́ни-ллах<br>салла́мака-ллах</td><td class="ru">Прощайте! С Богом!</td></tr>
-          <tr><td class="pos">18</td><td class="ar">إِلَى اللِّقَاءِ<br>مَعَ السَّلَامَةِ</td><td class="tr">иля-ль-лика́'<br>ма'а-с-саля́ма</td><td class="ru">До свидания! До встречи!</td></tr>
-          <tr><td class="pos">19</td><td class="ar">وَظِيفَةٌ<br>مِهْنَةٌ<br>عَمَلٌ</td><td class="tr">вазы́фа<br>ми́хна<br>'а́маль</td><td class="ru">Работа / должность / профессия</td></tr>
-          <tr><td class="pos">20</td><td class="ar">مُتَرْجِمٌ</td><td class="tr">мута́рджим</td><td class="ru">Переводчик</td></tr>
-          <tr><td class="pos">21</td><td class="ar">عَامِلٌ</td><td class="tr">'а́миль</td><td class="ru">Рабочий</td></tr>
-          <tr><td class="pos">22</td><td class="ar">طَالِبٌ<br>تِلْمِيذٌ</td><td class="tr">та́либ<br>тильми́з</td><td class="ru">Студент / ученик</td></tr>
-          <tr><td class="pos">23</td><td class="ar">مُعَلِّمٌ<br>مُدَرِّسٌ<br>أُسْتَاذٌ</td><td class="tr">му'а́ллим<br>муда́ррис<br>уста́з</td><td class="ru">Учитель / преподаватель</td></tr>
-          <tr><td class="pos">24</td><td class="ar">صَدِيقَةٌ<br>زَمِيلَةٌ</td><td class="tr">сады́ка<br>зами́ля</td><td class="ru">Друг</td></tr>
-          <tr><td class="pos">25</td><td class="ar">نَجَّارٌ</td><td class="tr">надджа́р</td><td class="ru">Плотник</td></tr>
-          <tr><td class="pos">26</td><td class="ar">مُتَقَاعِدٌ</td><td class="tr">мутака́'ид</td><td class="ru">Пенсионер</td></tr>
-          <tr><td class="pos">27</td><td class="ar">صَحَفِيٌّ</td><td class="tr">саха́фи</td><td class="ru">Журналист</td></tr>
-          <tr><td class="pos">28</td><td class="ar">هَاتِفٌ مَحْمُولٌ</td><td class="tr">ха́тиф махму́ль</td><td class="ru">Мобильный телефон</td></tr>
-          <tr><td class="pos">29</td><td class="ar">مُحَاسِبٌ</td><td class="tr">муха́сиб</td><td class="ru">Бухгалтер</td></tr>
-          <tr><td class="pos">30</td><td class="ar">بَرِيدٌ إِلِكْتْرُونِيٌّ</td><td class="tr">бари́д иликтру́ни</td><td class="ru">Электронная почта</td></tr>
-          <tr><td class="pos">31</td><td class="ar">هَاتِفٌ ثَابِتٌ<br>هَاتِفٌ أَرْضِيٌّ</td><td class="tr">ха́тиф са́бит<br>ха́тиф 'ардий</td><td class="ru">Домашний телефон</td></tr>
-          <tr><td class="pos">32</td><td class="ar">عُنْوَانٌ</td><td class="tr">'унва́н</td><td class="ru">Адрес</td></tr>
-          <tr><td class="pos">33</td><td class="ar">عَاطِلٌ</td><td class="tr">'а́тыль</td><td class="ru">Безработный</td></tr>
-          <tr><td class="pos">34</td><td class="ar">يَعْمَلُ</td><td class="tr">я́'малу</td><td class="ru">(Он) работает, трудится</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </details>
-    <script>
-    (function(){
-      var D=[{"ru": "Мир вам! (приветствие)", "ar": ["السَّلَامُ عَلَيْكُمْ"], "tr": ["ас-саля́му 'але́йкум"]}, {"ru": "И вам мир! (ответ)", "ar": ["وَعَلَيْكُمُ السَّلَامُ"], "tr": ["ва-'але́йкуму-с-саля́м"]}, {"ru": "Доброе утро! (приветствие)", "ar": ["صَبَاحُ الْخَيْرِ"], "tr": ["саба́ху-ль-хайр"]}, {"ru": "Доброе утро! (ответ)", "ar": ["صَبَاحُ النُّورِ"], "tr": ["саба́ху-н-нур"]}, {"ru": "Как дела?", "ar": ["كَيْفَ حَالُكَ؟", "كَيْفَ الْحَالُ؟"], "tr": ["ке́йфа ха́лук", "ке́йфа-ль-халь"]}, {"ru": "Слава Аллаху, хорошо.", "ar": ["بِخَيْرٍ وَالْحَمْدُ لِلَّهِ", "بِخَيْرٍ"], "tr": ["би-хайр ва-ль-ха́мду ли-лля́х", "би-хайр"]}, {"ru": "Добро пожаловать! Здравствуйте!", "ar": ["أَهْلًا وَسَهْلًا", "مَرْحَبًا"], "tr": ["а́хлян ва-са́хлян", "ма́рхабан"]}, {"ru": "Рады видеть Вас в добром здравии! (ответ хозяину дома) Здравствуйте!", "ar": ["أَهْلًا بِكَ", "مَرْحَبًا بِكَ"], "tr": ["а́хлян бик", "ма́рхабан бик"]}, {"ru": "Как тебя зовут?", "ar": ["مَا اسْمُكَ؟"], "tr": ["ма-сму́к"]}, {"ru": "Меня зовут ...", "ar": ["اِسْمِي ..."], "tr": ["и́сми"]}, {"ru": "Кто вы по национальности? / Откуда вы?", "ar": ["مَا جِنْسِيَّتُكَ؟", "مِنْ أَيْنَ أَنْتَ؟"], "tr": ["ма джинси́йятук", "мин а́йна анта"]}, {"ru": "Я египтянин. / Я из Египта.", "ar": ["أَنَا مِصْرِيٌّ", "أَنَا مِنْ مِصْرَ"], "tr": ["ана ми́сри", "ана мин миср"]}, {"ru": "Добрый вечер! (приветствие)", "ar": ["مَسَاءُ الْخَيْرِ"], "tr": ["маса́'у-ль-хайр"]}, {"ru": "Добрый вечер! (ответ)", "ar": ["مَسَاءُ النُّورِ"], "tr": ["маса́'у-н-нур"]}, {"ru": "Рад знакомству", "ar": ["تَشَرَّفْنَا", "فُرْصَةٌ طَيِّبَةٌ"], "tr": ["ташарра́фна", "фу́рса тайи́ба"]}, {"ru": "Приятно познакомиться.", "ar": ["تَشَرَّفْنَا بِكَ", "فُرْصَةٌ سَعِيدَةٌ"], "tr": ["ташарра́фна бик", "фу́рса са'и́да"]}, {"ru": "Прощайте! С Богом!", "ar": ["مَعَ السَّلَامَةِ", "فِي أَمَانِ اللهِ", "سَلَّمَكَ اللهُ"], "tr": ["ма'а-с-саля́ма", "фи 'ама́ни-ллах", "салла́мака-ллах"]}, {"ru": "До свидания! До встречи!", "ar": ["إِلَى اللِّقَاءِ", "مَعَ السَّلَامَةِ"], "tr": ["иля-ль-лика́'", "ма'а-с-саля́ма"]}, {"ru": "Работа / должность / профессия", "ar": ["وَظِيفَةٌ", "مِهْنَةٌ", "عَمَلٌ"], "tr": ["вазы́фа", "ми́хна", "'а́маль"]}, {"ru": "Переводчик", "ar": ["مُتَرْجِمٌ"], "tr": ["мута́рджим"]}, {"ru": "Рабочий", "ar": ["عَامِلٌ"], "tr": ["'а́миль"]}, {"ru": "Студент / ученик", "ar": ["طَالِبٌ", "تِلْمِيذٌ"], "tr": ["та́либ", "тильми́з"]}, {"ru": "Учитель / преподаватель", "ar": ["مُعَلِّمٌ", "مُدَرِّسٌ", "أُسْتَاذٌ"], "tr": ["му'а́ллим", "муда́ррис", "уста́з"]}, {"ru": "Друг", "ar": ["صَدِيقَةٌ", "زَمِيلَةٌ"], "tr": ["сады́ка", "зами́ля"]}, {"ru": "Плотник", "ar": ["نَجَّارٌ"], "tr": ["надджа́р"]}, {"ru": "Пенсионер", "ar": ["مُتَقَاعِدٌ"], "tr": ["мутака́'ид"]}, {"ru": "Журналист", "ar": ["صَحَفِيٌّ"], "tr": ["саха́фи"]}, {"ru": "Мобильный телефон", "ar": ["هَاتِفٌ مَحْمُولٌ"], "tr": ["ха́тиф махму́ль"]}, {"ru": "Бухгалтер", "ar": ["مُحَاسِبٌ"], "tr": ["муха́сиб"]}, {"ru": "Электронная почта", "ar": ["بَرِيدٌ إِلِكْتْرُونِيٌّ"], "tr": ["бари́д иликтру́ни"]}, {"ru": "Домашний телефон", "ar": ["هَاتِفٌ ثَابِتٌ", "هَاتِفٌ أَرْضِيٌّ"], "tr": ["ха́тиф са́бит", "ха́тиф 'ардий"]}, {"ru": "Адрес", "ar": ["عُنْوَانٌ"], "tr": ["'унва́н"]}, {"ru": "Безработный", "ar": ["عَاطِلٌ"], "tr": ["'а́тыль"]}, {"ru": "(Он) работает, трудится", "ar": ["يَعْمَلُ"], "tr": ["я́'малу"]}];
-      var KEY='arabic-a1-dict1-missed';
-      var mode='ru2ar', queue=[], pos=0, shown=false, missed=[], onlyMissed=false;
-      var card=document.getElementById('dCard');
-      function saved(){ try{ return JSON.parse(localStorage.getItem(KEY)||'[]')||[]; }catch(e){ return []; } }
-      function save(a){ try{ localStorage.setItem(KEY,JSON.stringify(a)); }catch(e){} }
-      function shuffle(a){ for(var i=a.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var t=a[i]; a[i]=a[j]; a[j]=t; } return a; }
-      function ar(lines){ return lines.map(function(l){ return '<div class="dar">'+l+'</div>'; }).join(''); }
-      function tr(lines){ return '<div class="t">'+lines.join(' · ')+'</div>'; }
-      function start(){
-        var idx=[]; var src=onlyMissed?saved():null;
-        D.forEach(function(d,i){ if(!onlyMissed || src.indexOf(i)!==-1){ idx.push(i); } });
-        queue=shuffle(idx).map(function(i){ return {i:i, dir: mode==='mix'?(Math.random()<.5?'ru2ar':'ar2ru'):mode}; });
-        pos=0; shown=false; missed=[]; render();
-      }
-      function render(){
-        if(!queue.length){ card.innerHTML='<div class="dict-q">Ошибок пока нет.</div><div class="t">Пройди круг, и то, что не далось, соберётся здесь.</div>'; return; }
-        if(pos>=queue.length){
-          var all=saved(); var ok=queue.length-missed.length;
-          var html='<div class="dict-count">круг пройден</div><div class="dict-q">Знал '+ok+' из '+queue.length+'</div>';
-          if(missed.length){
-            html+='<ul class="dict-miss">'+missed.map(function(q){ var d=D[q.i]; return '<li><span>'+d.ru+'</span><span class="dar" style="font-size:22px">'+d.ar.join(' / ')+'</span></li>'; }).join('')+'</ul>';
-          }
-          html+='<div class="dict-act"><button class="main" type="button" id="dAgain">Ещё круг</button>'+(missed.length?'<button type="button" id="dRetry">Только ошибки</button>':'')+'</div>';
-          card.innerHTML=html;
-          document.getElementById('dAgain').onclick=start;
-          var r=document.getElementById('dRetry');
-          if(r){ r.onclick=function(){ var m=missed.slice(); queue=shuffle(m.map(function(q){ return {i:q.i,dir:q.dir}; })); pos=0; shown=false; missed=[]; render(); }; }
-          return;
-        }
-        var q=queue[pos], d=D[q.i];
-        var head='<div class="dict-count">'+(pos+1)+' / '+queue.length+'</div>';
-        var prompt = q.dir==='ru2ar' ? '<div class="dict-q">'+d.ru+'</div>' : ar(d.ar);
-        var html=head+prompt;
-        if(!shown){
-          html+='<div class="dict-act"><button class="main" type="button" id="dShow">Показать ответ</button></div>';
-        } else {
-          var ans = q.dir==='ru2ar' ? ar(d.ar)+tr(d.tr) : '<div class="dict-q">'+d.ru+'</div>'+tr(d.tr);
-          html+='<div class="dict-a">'+ans+'</div><div class="dict-act"><button class="ok" type="button" id="dOk">Знал</button><button class="bad" type="button" id="dBad">Ошибся</button></div>';
-        }
-        card.innerHTML=html;
-        var sh=document.getElementById('dShow'); if(sh){ sh.onclick=function(){ shown=true; render(); }; }
-        var ok=document.getElementById('dOk'); if(ok){ ok.onclick=function(){ var a=saved(); var k=a.indexOf(q.i); if(k!==-1){ a.splice(k,1); save(a);} pos++; shown=false; render(); }; }
-        var bad=document.getElementById('dBad'); if(bad){ bad.onclick=function(){ var a=saved(); if(a.indexOf(q.i)===-1){ a.push(q.i); save(a);} missed.push(q); pos++; shown=false; render(); }; }
-      }
-      var btns=document.querySelectorAll('#dMode [data-m]');
-      Array.prototype.forEach.call(btns,function(b){
-        b.addEventListener('click',function(){
-          mode=b.getAttribute('data-m');
-          Array.prototype.forEach.call(btns,function(x){ x.setAttribute('aria-pressed', x===b?'true':'false'); });
-          start();
-        });
-      });
-      document.getElementById('dMissed').addEventListener('click',function(){
-        onlyMissed=!onlyMissed; this.setAttribute('aria-pressed', onlyMissed?'true':'false'); start();
-      });
-      start();
-    })();
-    </script>
-  </section>
 
   <section id="verbs">
     <h2>Глаголы</h2>
@@ -1189,21 +946,6 @@
       document.body.classList.toggle(cls, !on);
     });
   }
-
-  var boxes = Array.prototype.slice.call(document.querySelectorAll('.day input[type="checkbox"]'));
-  var KEY = 'arabic-a1-plan';
-  var saved = {};
-  try { saved = JSON.parse(localStorage.getItem(KEY) || '{}') || {}; } catch(e) { saved = {}; }
-  function paint(b){ b.parentNode.classList.toggle('done', b.checked); }
-  boxes.forEach(function(b){
-    if(saved[b.id]){ b.checked = true; }
-    paint(b);
-    b.addEventListener('change', function(){
-      paint(b);
-      saved[b.id] = b.checked;
-      try { localStorage.setItem(KEY, JSON.stringify(saved)); } catch(e) {}
-    });
-  });
 
   wire(document.getElementById('hideAr'), 'no-ar');
   wire(document.getElementById('hideTr'), 'no-tr');
