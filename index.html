@@ -59,6 +59,9 @@
   .digits small{font-family:var(--ui);font-size:10px;color:var(--band-muted);}
 
   /* Липкая панель */
+  .trainrow{margin:6px 0 0;}
+  .trainlink{display:inline-block;padding:7px 14px;border:1px solid var(--band-muted);border-radius:999px;color:var(--band-ink);font-size:14px;font-weight:500;text-decoration:none;}
+  .trainlink:focus-visible{outline:2px solid var(--band-ink);outline-offset:2px;}
   .bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:30;background:var(--bg);border-bottom:1px solid var(--line);}
   .bar .inner{padding-block:10px 0;display:grid;gap:8px;}
   .bar-row{display:flex;gap:8px;align-items:center;}
@@ -147,6 +150,7 @@
     <p class="eyebrow">Ат-Такаллюм · уровень A1</p>
     <h1>Арабский словарь А1</h1>
     <p class="lede">Всё, что прошли с начала курса: глаголы, существительные, прилагательные, цвета, дни недели, фразы для знакомства, служебные слова и числа до ста. Транскрипция дана в паузальной форме — так, как слово звучит вслух, без падежных окончаний.</p>
+    <p class="trainrow"><a class="trainlink" href="trainer.html">Тренажёр: проверить себя →</a></p>
     <p class="digits" aria-label="Арабские цифры от 0 до 9">
       <span>٠<small>0</small></span><span>١<small>1</small></span><span>٢<small>2</small></span><span>٣<small>3</small></span><span>٤<small>4</small></span><span>٥<small>5</small></span><span>٦<small>6</small></span><span>٧<small>7</small></span><span>٨<small>8</small></span><span>٩<small>9</small></span>
     </p>

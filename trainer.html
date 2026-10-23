@@ -1,0 +1,480 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Тренажёр · Арабский словарь А1</title>
+<link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
+<link rel="icon" type="image/png" sizes="48x48" href="icons/favicon-48.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#0e5a4c">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Арабский">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@400;500;600&family=Noto+Naskh+Arabic:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Serif:wght@600&display=swap">
+<style>
+  :root{
+    color-scheme:light;
+    --bg:#F4F1E9;--surface:#FFFDF8;--surface-2:#EEE8DA;--ink:#13231F;--muted:#5B6A64;--line:#DED6C4;
+    --accent:#0E5A4C;--accent-ink:#FBF1D6;--accent-soft:#DDEBE4;--gold:#94680F;
+    --band:#0E5A4C;--band-ink:#FBF1D6;--band-muted:rgba(251,241,214,.78);
+    --bad:#B3261E;--bad-soft:#F7E1DE;
+    --shadow:0 1px 2px rgba(19,35,31,.06),0 4px 14px rgba(19,35,31,.04);
+    --arfont:"Noto Sans Arabic","Noto Naskh Arabic","Segoe UI","Geeza Pro",Tahoma,sans-serif;
+    --ui:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+    --display:"IBM Plex Serif",Georgia,serif;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      color-scheme:dark;
+      --bg:#0B1613;--surface:#12211D;--surface-2:#192C27;--ink:#E7F0EC;--muted:#93A79F;--line:#233631;
+      --accent:#63C3A7;--accent-ink:#0B1613;--accent-soft:#16302A;--gold:#DDAA4C;
+      --band:#0F2C25;--band-ink:#F3E8CC;--band-muted:rgba(243,232,204,.72);
+      --bad:#F2837A;--bad-soft:#3A1F1C;--shadow:0 1px 2px rgba(0,0,0,.35);
+    }
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{background:var(--bg);color:var(--ink);font-family:var(--ui);font-size:15px;line-height:1.5;-webkit-tap-highlight-color:transparent}
+  body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:31;background:var(--band)}
+  body.font-naskh{--arfont:"Noto Naskh Arabic","Noto Sans Arabic","Geeza Pro",serif}
+  [hidden]{display:none!important}
+  .inner{max-width:720px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+
+  .masthead{background:var(--band);color:var(--band-ink);padding-top:env(safe-area-inset-top,0px)}
+  .masthead .inner{padding-block:22px 20px;display:grid;gap:8px;justify-items:start}
+  .eyebrow{margin:0;font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;color:var(--band-muted)}
+  h1{margin:0;font-family:var(--display);font-weight:600;font-size:clamp(28px,6.5vw,40px);line-height:1.08}
+  h1 .h1ar{display:block;font-family:var(--arfont);font-weight:500;font-size:.62em;line-height:1.5;direction:rtl;text-align:left;opacity:.9}
+  .backlink{display:inline-block;margin-top:4px;padding:6px 14px;border:1px solid rgba(251,241,214,.4);border-radius:999px;color:var(--band-ink);font-size:13.5px;text-decoration:none}
+  .backlink:focus-visible,.btn:focus-visible,.tgl:focus-visible,.opt:focus-visible,.mode:focus-visible,input:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+  .wrap{max-width:720px;margin:0 auto;padding:20px max(16px,env(safe-area-inset-left,0px)) calc(56px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}
+  .note{color:var(--muted);font-size:14px;margin:12px 0}
+  .err{padding:16px;border:1px dashed var(--line);border-radius:14px;color:var(--ink);background:var(--surface)}
+  .err a{color:var(--accent)}
+
+  .box{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px;margin-bottom:12px;box-shadow:var(--shadow)}
+  .box h2{margin:0 0 10px;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:600;font-family:var(--ui)}
+  .modes{display:grid;gap:8px}
+  .mode{display:block;width:100%;text-align:left;font:inherit;color:var(--ink);background:var(--surface-2);border:1px solid transparent;border-radius:12px;padding:10px 12px;cursor:pointer}
+  .mode b{display:block;font-weight:600}
+  .mode span{display:block;font-size:13px;color:var(--muted)}
+  .mode[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink)}
+  .mode[aria-pressed="true"] span{color:var(--accent-ink);opacity:.85}
+  .wraprow{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+  .tgl{background:var(--surface-2);color:var(--ink);border:1px solid transparent;border-radius:999px;padding:7px 13px;font:inherit;font-size:14px;cursor:pointer}
+  .tgl small{color:var(--muted);margin-left:4px;font-size:12px}
+  .tgl[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink)}
+  .tgl[aria-pressed="true"] small{color:var(--accent-ink);opacity:.8}
+  .tgl.ghost{background:transparent;border-color:var(--line);color:var(--muted)}
+  .avail{margin:10px 0 0;font-size:13px;color:var(--muted)}
+
+  .btn{font:inherit;font-size:15px;font-weight:500;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:11px 16px;cursor:pointer}
+  .btn.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+  .btn.good{background:var(--accent-soft);border-color:var(--accent);color:var(--ink)}
+  .btn.badb{background:var(--bad-soft);border-color:var(--bad);color:var(--ink)}
+  .btn[disabled]{opacity:.45;cursor:default}
+  .btn.wide{width:100%}
+  .btn.link{border:0;background:none;padding:6px 0;color:var(--accent)}
+
+  .playbar{display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:13px;color:var(--muted);margin-bottom:8px}
+  .prog{height:6px;border-radius:3px;background:var(--surface-2);overflow:hidden;margin-bottom:12px}
+  .prog i{display:block;height:100%;width:0;background:var(--accent);transition:width .2s}
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:22px 16px;text-align:center;box-shadow:var(--shadow)}
+  .tag{font-size:12px;color:var(--muted);letter-spacing:.04em}
+  .qar{font-family:var(--arfont);font-weight:500;direction:rtl;line-height:1.5;margin:6px 0 2px;font-size:60px;overflow-wrap:anywhere}
+  .qar.m{font-size:42px}.qar.s{font-size:30px}
+  .qtr{min-height:22px;color:var(--accent);font-size:16px;margin-bottom:12px}
+  .row{display:flex;gap:8px}
+  input[type=text]{flex:1;min-width:0;font:inherit;font-size:16px;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:11px 12px}
+  .sub{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:10px}
+  .opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:8px;text-align:left}
+  .opt{font:inherit;font-size:16px;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px;cursor:pointer;text-align:left}
+  .opt.good{border-color:var(--accent);background:var(--accent-soft)}
+  .opt.wrong{border-color:var(--bad);background:var(--bad-soft)}
+  .fb{margin-top:14px;text-align:left;font-size:15px}
+  .fb .res{font-weight:600}
+  .fb .res.ok{color:var(--accent)}.fb .res.bad{color:var(--bad)}
+  .fb .ans{font-size:19px;font-weight:600;margin:2px 0}
+  .fb .ex{color:var(--muted);font-size:13.5px}
+  .fb .ex .arx{font-family:var(--arfont);font-size:18px;color:var(--ink);direction:rtl;unicode-bidi:isolate}
+  .fb .sub{justify-content:flex-start}
+  .reveal{min-height:56px}
+  .big{font-size:22px;font-weight:600;font-family:var(--display);margin:6px 0 4px}
+  .missed{list-style:none;margin:12px 0 0;padding:0;text-align:left;display:grid;gap:6px}
+  .missed li{display:flex;justify-content:space-between;gap:12px;align-items:center;background:var(--surface-2);border-radius:10px;padding:8px 12px}
+  .missed .arx{font-family:var(--arfont);font-size:22px;direction:rtl;unicode-bidi:isolate}
+  .missed .ruw{color:var(--muted);font-size:14px;text-align:right}
+</style>
+</head>
+<body>
+<header class="masthead">
+  <div class="inner">
+    <p class="eyebrow">Ат-Такаллюм · уровень A1</p>
+    <h1>Тренажёр<span class="h1ar">تَدْرِيبٌ</span></h1>
+    <a class="backlink" href="./">← Словарь</a>
+  </div>
+</header>
+
+<main class="wrap">
+  <p class="note" id="loading">Загружаю слова из словаря…</p>
+  <div class="err" id="err" hidden></div>
+
+  <div id="setup" hidden>
+    <section class="box">
+      <h2>Режим</h2>
+      <div class="modes" id="modes"></div>
+    </section>
+    <section class="box">
+      <h2>Разделы</h2>
+      <div class="wraprow" id="secs"></div>
+      <div class="wraprow" style="margin-top:10px"><button class="tgl ghost" id="allsecs" type="button"></button></div>
+      <p class="avail" id="avail"></p>
+    </section>
+    <section class="box">
+      <h2>Сколько слов за раз</h2>
+      <div class="wraprow" id="counts"></div>
+    </section>
+    <section class="box">
+      <h2>Ещё</h2>
+      <div class="wraprow">
+        <button class="tgl" id="autotr" type="button" aria-pressed="false">Транскрипция сразу</button>
+        <button class="tgl" id="fontsw" type="button" aria-pressed="false">Шрифт: классический</button>
+      </div>
+    </section>
+    <button class="btn primary wide" id="start" type="button">Начать</button>
+  </div>
+
+  <div id="play" hidden></div>
+</main>
+
+<script>
+(function(){
+  'use strict';
+  var $ = function(id){ return document.getElementById(id); };
+  var KEY = 'arab-trainer-v1', FONTKEY = 'arabic-a1-font';
+  var MODES = [
+    {id:'type',   t:'Ввести перевод', d:'Видишь арабское слово, пишешь перевод сам'},
+    {id:'choice', t:'Выбрать из 4',    d:'Видишь слово, выбираешь верный перевод из четырёх'},
+    {id:'flash',  t:'Карточки',        d:'Вспоминаешь сам, открываешь ответ и отмечаешь «знал / не знал»'}
+  ];
+  var COUNTS = [10, 20, 50, 0];
+  var NUMW = {'0':'ноль','1':'один','2':'два','3':'три','4':'четыре','5':'пять','6':'шесть','7':'семь','8':'восемь','9':'девять','10':'десять','11':'одиннадцать','12':'двенадцать','13':'тринадцать','14':'четырнадцать','15':'пятнадцать','16':'шестнадцать','17':'семнадцать','18':'восемнадцать','19':'девятнадцать','20':'двадцать','30':'тридцать','40':'сорок','50':'пятьдесят','60':'шестьдесят','70':'семьдесят','80':'восемьдесят','90':'девяносто','100':'сто'};
+
+  var ALL = [], SECS = [];
+  var S = {mode:'type', secs:null, count:20, autoTr:false};
+  var Q = [], idx = 0, ok = 0, missed = [], answered = false, revealed = false;
+
+  function esc(s){ return String(s).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+  function clean(s){ return (s || '').replace(/\s+/g, ' ').trim(); }
+  function nk(s){ return (s || '').toLowerCase().replace(/ё/g, 'е').replace(/[^a-zа-я0-9 ]+/g, ' ').replace(/\s+/g, ' ').trim(); }
+  function shuffle(a){ a = a.slice(); for(var i = a.length - 1; i > 0; i--){ var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+  function lev(a, b){
+    var p = [], i, j;
+    for(j = 0; j <= b.length; j++) p[j] = j;
+    for(i = 1; i <= a.length; i++){
+      var prev = p[0]; p[0] = i;
+      for(j = 1; j <= b.length; j++){
+        var tmp = p[j];
+        p[j] = Math.min(p[j] + 1, p[j - 1] + 1, prev + (a[i - 1] === b[j - 1] ? 0 : 1));
+        prev = tmp;
+      }
+    }
+    return p[b.length];
+  }
+  function variantsOf(ru){
+    var seen = {}, out = [];
+    function add(s){ s = nk(s); if(s && !seen[s]){ seen[s] = 1; out.push(s); } }
+    var bare = ru.replace(/\([^)]*\)/g, '');
+    add(ru); add(bare);
+    bare.split(/[,;\/]/).forEach(add);
+    return out;
+  }
+  function load(){ try{ return JSON.parse(localStorage.getItem(KEY) || 'null'); }catch(e){ return null; } }
+  function save(){ try{ localStorage.setItem(KEY, JSON.stringify({mode:S.mode, secs:S.secs, count:S.count, autoTr:S.autoTr})); }catch(e){} }
+
+  function mk(sec, label, ar, tr, ru, extra, tag){
+    return {sec:sec, secLabel:label, ar:ar, tr:tr, ru:ru, label:ru, variants:variantsOf(ru), extra:extra || [], tag:tag || label};
+  }
+
+  function parse(doc){
+    var chips = {};
+    [].forEach.call(doc.querySelectorAll('#chips a'), function(a){ chips[(a.getAttribute('href') || '').slice(1)] = clean(a.textContent); });
+    var items = [], secs = [];
+    [].forEach.call(doc.querySelectorAll('section[id]'), function(sec){
+      var id = sec.id, h2 = sec.querySelector('h2');
+      var label = chips[id] || clean(h2 ? h2.textContent : id);
+      var before = items.length;
+      [].forEach.call(sec.querySelectorAll('table'), function(tb){
+        var heads = [].map.call(tb.querySelectorAll('thead th'), function(th){ return clean(th.textContent); });
+        var h0 = heads[0] || '', kind = null;
+        if(h0 === 'Прошедшее') kind = 'verb';
+        else if(h0 === 'Перевод' && heads[1] === 'Мужской род') kind = 'color';
+        else if(h0 === 'Перевод' && heads[1] === 'Слово') kind = 'day';
+        else if(/^(Слово|Фраза|Команда)$/.test(h0) && heads[1] === 'Вслух' && heads.length >= 3) kind = 'plain';
+        if(!kind) return;
+        [].forEach.call(tb.querySelectorAll('tbody tr'), function(tr){
+          var c = [].map.call(tr.children, function(td){ return clean(td.textContent); });
+          if(c.length < 3) return;
+          if(kind === 'verb' && c.length >= 5){
+            if(c[0] && c[4]) items.push(mk(id, label, c[0], c[1], c[4], c[2] ? [{k:'Настоящее', v:c[2], t:c[3]}] : [], 'Глагол · прошедшее время, «он»'));
+          }else if(kind === 'color' && c.length >= 3){
+            if(c[0] && c[1]) items.push(mk(id, label, c[1], c[2], c[0], c[3] ? [{k:'Женский род', v:c[3], t:c[4]}] : []));
+          }else if(kind === 'day' && c.length >= 3){
+            if(c[0] && c[1]) items.push(mk(id, label, c[1], c[2], c[0], c[3] ? [{k:'От числа', v:c[3]}] : []));
+          }else if(kind === 'plain'){
+            var extra = [];
+            if(heads[3] === 'Род' && c[3]) extra.push({k:'Род', v:c[3]});
+            if(heads[3] === 'Мн. число' && c[3]) extra.push({k:'Мн. число', v:c[3]});
+            if(c[0] && c[2]) items.push(mk(id, label, c[0], c[1], c[2], extra));
+            if(heads[3] === 'Антоним' && c.length >= 6 && c[3] && c[5]) items.push(mk(id, label, c[3], c[4], c[5], [], label + ' · антоним'));
+          }
+        });
+      });
+      [].forEach.call(sec.querySelectorAll('.num'), function(n){
+        var figEl = n.querySelector('.fig'), wEl = n.querySelector('.word');
+        if(!figEl || !wEl) return;
+        var fig = clean(figEl.textContent).replace(/[٠-٩]/g, function(d){ return String(d.charCodeAt(0) - 0x0660); });
+        var clone = wEl.cloneNode(true), sayEl = clone.querySelector('.say');
+        var say = sayEl ? clean(sayEl.textContent) : '';
+        if(sayEl) sayEl.parentNode.removeChild(sayEl);
+        var ar = clean(clone.textContent);
+        if(!ar || !fig) return;
+        var w = NUMW[fig], it = mk(id, label, ar, say, w ? fig + ' · ' + w : fig, [], 'Число');
+        it.variants = [fig]; if(w) it.variants.push(nk(w));
+        items.push(it);
+      });
+      var n = items.length - before;
+      if(n > 0) secs.push({id:id, label:label, n:n});
+    });
+    return {items:items, secs:secs};
+  }
+
+  function show(view){ ['loading','setup','play'].forEach(function(v){ $(v).hidden = (v !== view); }); window.scrollTo(0, 0); }
+
+  function pool(){ return ALL.filter(function(w){ return S.secs[w.sec]; }); }
+  function plural(n, a, b, c){ var x = n % 10, y = n % 100; return (x === 1 && y !== 11) ? a : (x >= 2 && x <= 4 && (y < 12 || y > 14)) ? b : c; }
+
+  function renderSetup(){
+    $('modes').innerHTML = MODES.map(function(m){
+      return '<button type="button" class="mode" data-m="' + m.id + '" aria-pressed="' + (S.mode === m.id) + '"><b>' + m.t + '</b><span>' + m.d + '</span></button>';
+    }).join('');
+    $('secs').innerHTML = SECS.map(function(s){
+      return '<button type="button" class="tgl" data-s="' + s.id + '" aria-pressed="' + !!S.secs[s.id] + '">' + esc(s.label) + '<small>' + s.n + '</small></button>';
+    }).join('');
+    $('counts').innerHTML = COUNTS.map(function(c){
+      return '<button type="button" class="tgl" data-c="' + c + '" aria-pressed="' + (S.count === c) + '">' + (c ? c : 'Все') + '</button>';
+    }).join('');
+    $('autotr').setAttribute('aria-pressed', S.autoTr ? 'true' : 'false');
+    var naskh = document.body.classList.contains('font-naskh');
+    $('fontsw').setAttribute('aria-pressed', naskh ? 'true' : 'false');
+    $('fontsw').textContent = 'Шрифт: ' + (naskh ? 'классический' : 'обычный');
+    refreshAvail();
+  }
+  function refreshAvail(){
+    var n = pool().length, take = S.count ? Math.min(S.count, n) : n;
+    var all = SECS.every(function(s){ return S.secs[s.id]; });
+    $('allsecs').textContent = all ? 'Снять все' : 'Выбрать все';
+    $('avail').textContent = n ? ('В выбранных разделах ' + n + ' ' + plural(n, 'слово', 'слова', 'слов') + '. В упражнении будет ' + take + '.') : 'Выбери хотя бы один раздел.';
+    $('start').disabled = !n;
+    $('start').textContent = n ? ('Начать · ' + take) : 'Начать';
+  }
+
+  $('modes').addEventListener('click', function(e){ var b = e.target.closest('[data-m]'); if(!b) return; S.mode = b.getAttribute('data-m'); save(); renderSetup(); });
+  $('secs').addEventListener('click', function(e){ var b = e.target.closest('[data-s]'); if(!b) return; var id = b.getAttribute('data-s'); S.secs[id] = !S.secs[id]; save(); renderSetup(); });
+  $('counts').addEventListener('click', function(e){ var b = e.target.closest('[data-c]'); if(!b) return; S.count = +b.getAttribute('data-c'); save(); renderSetup(); });
+  $('allsecs').addEventListener('click', function(){
+    var all = SECS.every(function(s){ return S.secs[s.id]; });
+    SECS.forEach(function(s){ S.secs[s.id] = !all; }); save(); renderSetup();
+  });
+  $('autotr').addEventListener('click', function(){ S.autoTr = !S.autoTr; save(); renderSetup(); });
+  $('fontsw').addEventListener('click', function(){
+    var on = !document.body.classList.contains('font-naskh');
+    document.body.classList.toggle('font-naskh', on);
+    try{ localStorage.setItem(FONTKEY, on ? 'naskh' : 'sans'); }catch(e){}
+    renderSetup();
+  });
+  $('start').addEventListener('click', function(){
+    var p = shuffle(pool()); if(!p.length) return;
+    begin(S.count ? p.slice(0, S.count) : p);
+  });
+
+  function begin(list){
+    Q = list; idx = 0; ok = 0; missed = []; renderQ();
+  }
+
+  function distractors(w){
+    var out = [], seen = {}; seen[nk(w.label)] = 1;
+    function clash(x){ return x.variants.some(function(v){ return w.variants.indexOf(v) >= 0; }); }
+    function take(list){
+      for(var i = 0; i < list.length && out.length < 3; i++){
+        var x = list[i], k = nk(x.label);
+        if(!seen[k] && !clash(x)){ seen[k] = 1; out.push(x.label); }
+      }
+    }
+    take(shuffle(ALL.filter(function(x){ return x !== w && x.sec === w.sec; })));
+    if(out.length < 3) take(shuffle(ALL.filter(function(x){ return x !== w; })));
+    return out;
+  }
+
+  function arClass(s){ return s.length > 26 ? 's' : s.length > 12 ? 'm' : ''; }
+
+  function details(w){
+    var h = '<div class="ans">' + esc(w.label) + '</div>';
+    h += '<div class="ex">' + esc(w.tr) + '</div>';
+    w.extra.forEach(function(x){
+      h += '<div class="ex">' + esc(x.k) + ': ' + (/[؀-ۿ]/.test(x.v) ? '<span class="arx">' + esc(x.v) + '</span>' : esc(x.v)) + (x.t ? ' · ' + esc(x.t) : '') + '</div>';
+    });
+    return h;
+  }
+
+  function renderQ(){
+    answered = false; revealed = false;
+    show('play');
+    if(idx >= Q.length){ return renderDone(); }
+    var w = Q[idx], pct = Math.round(idx / Q.length * 100);
+    var h = '<div class="playbar"><button class="btn link" id="toset" type="button">← Настройки</button><span>Слово ' + (idx + 1) + ' из ' + Q.length + '</span><span>' + (S.mode === 'flash' ? 'Знал' : 'Верно') + ': ' + ok + '</span></div>';
+    h += '<div class="prog"><i style="width:' + pct + '%"></i></div>';
+    h += '<div class="card"><div class="tag">' + esc(w.tag) + '</div><div class="qar ' + arClass(w.ar) + '">' + esc(w.ar) + '</div><div class="qtr" id="qtr">' + (S.autoTr ? esc(w.tr) : '') + '</div>';
+    if(S.mode === 'type'){
+      h += '<div class="row"><input id="inp" type="text" placeholder="Перевод на русский" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" aria-label="Перевод"><button class="btn primary" id="go" type="button">Проверить</button></div>';
+      h += '<div class="sub"><button class="btn" id="hint" type="button">Подсказка: как читается</button><button class="btn" id="skip" type="button">Не знаю</button></div>';
+    }else if(S.mode === 'choice'){
+      var opts = shuffle(distractors(w).concat([w.label]));
+      h += '<div class="opts">' + opts.map(function(o, i){ return '<button class="opt" type="button" data-v="' + esc(o) + '">' + esc(o) + '</button>'; }).join('') + '</div>';
+      h += '<div class="sub"><button class="btn" id="hint" type="button">Подсказка: как читается</button></div>';
+    }else{
+      h += '<div class="reveal" id="rev"><div class="sub"><button class="btn primary" id="show" type="button">Показать ответ</button></div></div>';
+    }
+    h += '<div class="fb" id="fb"></div></div>';
+    $('play').innerHTML = h;
+    $('toset').addEventListener('click', function(){ renderSetup(); show('setup'); });
+    if($('hint')) $('hint').addEventListener('click', function(){ $('qtr').textContent = w.tr; });
+    if(S.mode === 'type'){
+      $('go').addEventListener('click', function(){ checkType(w, false); });
+      $('skip').addEventListener('click', function(){ if(!answered) checkType(w, true); });
+      $('inp').addEventListener('keydown', function(e){ if(e.key === 'Enter'){ e.preventDefault(); checkType(w, false); } });
+      $('inp').focus();
+    }else if(S.mode === 'choice'){
+      [].forEach.call(document.querySelectorAll('.opt'), function(b){ b.addEventListener('click', function(){ pick(w, b); }); });
+    }else{
+      $('show').addEventListener('click', function(){ flashReveal(w); });
+    }
+  }
+
+  function nextBtn(){ return '<div class="sub"><button class="btn primary" id="nx" type="button">Дальше</button></div>'; }
+  function wireNext(){ var b = $('nx'); if(b){ b.addEventListener('click', next); b.focus(); } }
+  function next(){ idx++; renderQ(); }
+  function markResult(w, good){ if(good) ok++; else missed.push(w); }
+
+  function checkType(w, skip){
+    if(answered){ return next(); }
+    var inp = $('inp'), v = nk(inp.value), status = 'bad';
+    if(!skip){
+      if(!v) return;
+      if(w.variants.indexOf(v) >= 0) status = 'ok';
+      else if(w.variants.some(function(u){ return u.length >= 5 && lev(u, v) <= 1; })) status = 'typo';
+    }
+    answered = true; inp.disabled = true;
+    $('qtr').textContent = w.tr;
+    var good = status !== 'bad';
+    markResult(w, good);
+    var head = skip ? 'Ответ:' : status === 'ok' ? 'Верно!' : status === 'typo' ? 'Верно (опечатка не страшна)' : 'Не совсем.';
+    $('fb').innerHTML = '<div class="res ' + (good ? 'ok' : 'bad') + '">' + head + '</div>' + details(w) + nextBtn();
+    $('go').textContent = 'Дальше'; $('go').onclick = next;
+    wireNext();
+  }
+
+  function pick(w, btn){
+    if(answered) return; answered = true;
+    var v = btn.getAttribute('data-v'), good = (v === w.label);
+    [].forEach.call(document.querySelectorAll('.opt'), function(b){
+      if(b.getAttribute('data-v') === w.label) b.classList.add('good');
+      b.disabled = true;
+    });
+    if(!good) btn.classList.add('wrong');
+    $('qtr').textContent = w.tr;
+    markResult(w, good);
+    $('fb').innerHTML = '<div class="res ' + (good ? 'ok' : 'bad') + '">' + (good ? 'Верно!' : 'Не то.') + '</div>' + details(w) + nextBtn();
+    wireNext();
+  }
+
+  function flashReveal(w){
+    if(revealed) return; revealed = true;
+    $('qtr').textContent = w.tr;
+    $('rev').innerHTML = '<div class="fb">' + details(w) + '<div class="ex" style="margin-top:6px">Сам оцени, знал ли ты это слово</div><div class="sub"><button class="btn badb" id="no" type="button">Не знал</button><button class="btn good" id="yes" type="button">Знал</button></div></div>';
+    $('yes').addEventListener('click', function(){ markResult(w, true); next(); });
+    $('no').addEventListener('click', function(){ markResult(w, false); next(); });
+  }
+
+  function renderDone(){
+    var n = Q.length, pct = n ? Math.round(ok / n * 100) : 0;
+    var h = '<div class="card"><div class="tag">Готово</div><div class="big">' + (S.mode === 'flash' ? 'Знал ' : 'Верно ') + ok + ' из ' + n + ' · ' + pct + '%</div>';
+    if(missed.length){
+      h += '<div class="tag" style="margin-top:12px">Над чем поработать</div><ul class="missed">' + missed.map(function(w){
+        return '<li><span class="arx">' + esc(w.ar) + '</span><span class="ruw">' + esc(w.label) + '</span></li>';
+      }).join('') + '</ul>';
+    }else{
+      h += '<p class="note">Ошибок нет. Можно взять другой раздел или режим.</p>';
+    }
+    h += '<div class="sub" style="margin-top:16px"><button class="btn primary" id="again" type="button">Ещё раз</button>';
+    if(missed.length) h += '<button class="btn" id="rep" type="button">Повторить ошибки (' + missed.length + ')</button>';
+    h += '<button class="btn" id="toset2" type="button">Настройки</button></div></div>';
+    $('play').innerHTML = h;
+    $('again').addEventListener('click', function(){
+      var p = shuffle(pool()); if(!p.length) return; begin(S.count ? p.slice(0, S.count) : p);
+    });
+    if($('rep')) $('rep').addEventListener('click', function(){ begin(shuffle(missed)); });
+    $('toset2').addEventListener('click', function(){ renderSetup(); show('setup'); });
+  }
+
+  document.addEventListener('keydown', function(e){
+    if($('play').hidden || idx >= Q.length) return;
+    var tg = e.target && e.target.tagName;
+    if(S.mode === 'choice'){
+      if(!answered && /^[1-4]$/.test(e.key)){
+        var b = document.querySelectorAll('.opt')[+e.key - 1]; if(b){ e.preventDefault(); pick(Q[idx], b); }
+      }else if(answered && e.key === 'Enter' && tg !== 'BUTTON'){ e.preventDefault(); next(); }
+    }else if(S.mode === 'type'){
+      if(answered && e.key === 'Enter' && tg !== 'BUTTON'){ e.preventDefault(); next(); }
+    }else if(S.mode === 'flash'){
+      if(!revealed && (e.key === 'Enter' || e.key === ' ') && tg !== 'BUTTON'){ e.preventDefault(); flashReveal(Q[idx]); }
+      else if(revealed && e.key === '1'){ markResult(Q[idx], false); next(); }
+      else if(revealed && e.key === '2'){ markResult(Q[idx], true); next(); }
+    }
+  });
+
+  function fail(msg){
+    $('loading').hidden = true;
+    $('err').hidden = false;
+    $('err').innerHTML = msg;
+  }
+
+  try{ if(localStorage.getItem(FONTKEY) === 'naskh') document.body.classList.add('font-naskh'); }catch(e){}
+
+  fetch('index.html', {cache:'no-cache'}).then(function(r){
+    if(!r.ok) throw new Error('HTTP ' + r.status);
+    return r.text();
+  }).then(function(html){
+    var res = parse(new DOMParser().parseFromString(html, 'text/html'));
+    ALL = res.items; SECS = res.secs;
+    if(!ALL.length) throw new Error('empty');
+    var saved = load() || {};
+    if(saved.mode && MODES.some(function(m){ return m.id === saved.mode; })) S.mode = saved.mode;
+    if(COUNTS.indexOf(saved.count) >= 0) S.count = saved.count;
+    S.autoTr = !!saved.autoTr;
+    S.secs = {};
+    var any = false;
+    SECS.forEach(function(s){ var on = saved.secs ? !!saved.secs[s.id] : true; S.secs[s.id] = on; if(on) any = true; });
+    if(!any) SECS.forEach(function(s){ S.secs[s.id] = true; });
+    renderSetup(); show('setup');
+  }).catch(function(){
+    fail('Не получилось загрузить слова из словаря. Тренажёр читает их со страницы <a href="./">словаря</a>, поэтому открывай его с сайта, а не как отдельный файл, и проверь интернет.');
+  });
+})();
+</script>
+</body>
+</html>
