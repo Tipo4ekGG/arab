@@ -108,6 +108,16 @@
   .missed li{display:flex;justify-content:space-between;gap:12px;align-items:center;background:var(--surface-2);border-radius:10px;padding:8px 12px}
   .missed .arx{font-family:var(--arfont);font-size:22px;direction:rtl;unicode-bidi:isolate}
   .missed .ruw{color:var(--muted);font-size:14px;text-align:right}
+  .qru{font-family:var(--display);font-weight:600;font-size:30px;line-height:1.3;margin:10px 0 4px;overflow-wrap:anywhere}
+  .qru.m{font-size:24px}
+  .arx{font-family:var(--arfont);font-weight:500;direction:rtl;unicode-bidi:isolate}
+  .qru .arx{font-size:1.15em}
+  .opt.ar{font-family:var(--arfont);font-size:24px;line-height:1.5;direction:rtl;text-align:right}
+  .fb .ans.arans{font-family:var(--arfont);font-size:30px;font-weight:500;direction:rtl;text-align:left;unicode-bidi:plaintext}
+  .stat{margin:10px 0 0;font-size:13px;color:var(--muted)}
+  .stat b{color:var(--ink);font-weight:600}
+  .tgl.warn{background:var(--bad-soft);color:var(--ink)}
+  input.arin{font-family:var(--arfont);font-size:20px}
 </style>
 </head>
 <body>
@@ -125,6 +135,10 @@
 
   <div id="setup" hidden>
     <section class="box">
+      <h2>Что тренируем</h2>
+      <div class="modes" id="tracks"></div>
+    </section>
+    <section class="box">
       <h2>Режим</h2>
       <div class="modes" id="modes"></div>
     </section>
@@ -133,6 +147,7 @@
       <div class="wraprow" id="secs"></div>
       <div class="wraprow" style="margin-top:10px"><button class="tgl ghost" id="allsecs" type="button"></button></div>
       <p class="avail" id="avail"></p>
+      <p class="stat" id="stat"></p>
     </section>
     <section class="box">
       <h2>Сколько слов за раз</h2>
@@ -141,9 +156,12 @@
     <section class="box">
       <h2>Ещё</h2>
       <div class="wraprow">
+        <button class="tgl" id="smart" type="button" aria-pressed="true">Чаще трудные</button>
+        <button class="tgl" id="onlyhard" type="button" aria-pressed="false">Только трудные</button>
         <button class="tgl" id="autotr" type="button" aria-pressed="false">Транскрипция сразу</button>
         <button class="tgl" id="fontsw" type="button" aria-pressed="false">Шрифт: классический</button>
       </div>
+      <div class="wraprow" style="margin-top:10px"><button class="tgl ghost" id="reset" type="button">Сбросить прогресс</button></div>
     </section>
     <button class="btn primary wide" id="start" type="button">Начать</button>
   </div>
@@ -155,22 +173,33 @@
 (function(){
   'use strict';
   var $ = function(id){ return document.getElementById(id); };
-  var KEY = 'arab-trainer-v1', FONTKEY = 'arabic-a1-font';
+  var KEY = 'arab-trainer-v2', OLDKEY = 'arab-trainer-v1', FONTKEY = 'arabic-a1-font', STKEY = 'arab-trainer-stats-v1';
+  var TRACKS = [
+    {id:'ar',   t:'Слова: арабский → русский', d:'Видишь арабское слово, вспоминаешь перевод'},
+    {id:'ru',   t:'Слова: русский → арабский', d:'Как на диктанте: видишь перевод, вспоминаешь арабское слово'},
+    {id:'form', t:'Грамматика: собрать форму', d:'Предлоги с окончаниями, «у меня есть», местоимения, «мой дом»'}
+  ];
   var MODES = [
-    {id:'type',   t:'Ввести перевод', d:'Видишь арабское слово, пишешь перевод сам'},
-    {id:'choice', t:'Выбрать из 4',    d:'Видишь слово, выбираешь верный перевод из четырёх'},
-    {id:'flash',  t:'Карточки',        d:'Вспоминаешь сам, открываешь ответ и отмечаешь «знал / не знал»'}
+    {id:'type',   t:'Ввести ответ',  d:{ar:'Пишешь перевод сам', ru:'Пишешь по-арабски или транскрипцией', form:'Пишешь форму по-арабски или транскрипцией'}},
+    {id:'choice', t:'Выбрать из 4',   d:{ar:'Выбираешь верный перевод из четырёх', ru:'Выбираешь верное арабское слово из четырёх', form:'Выбираешь верную форму из четырёх'}},
+    {id:'flash',  t:'Карточки',       d:{ar:'Вспоминаешь сам, открываешь ответ и отмечаешь «знал / не знал»', ru:'Вспоминаешь арабское слово, открываешь и отмечаешь «знал / не знал»', form:'Вспоминаешь форму, открываешь и отмечаешь «знал / не знал»'}}
   ];
   var COUNTS = [10, 20, 50, 0];
   var NUMW = {'0':'ноль','1':'один','2':'два','3':'три','4':'четыре','5':'пять','6':'шесть','7':'семь','8':'восемь','9':'девять','10':'десять','11':'одиннадцать','12':'двенадцать','13':'тринадцать','14':'четырнадцать','15':'пятнадцать','16':'шестнадцать','17':'семнадцать','18':'восемнадцать','19':'девятнадцать','20':'двадцать','30':'тридцать','40':'сорок','50':'пятьдесят','60':'шестьдесят','70':'семьдесят','80':'восемьдесят','90':'девяносто','100':'сто'};
+  var FLABEL = {prep:'Предлоги + окончания', have:'Иметь: عِنْدَ / لَدَى / لِـ', exist:'Есть / нет / был', pron:'Местоимения и окончания', poss:'Мой дом, твой дом…', demo:'Указательные: этот, тот'};
+  var AR = /[؀-ۿ]/;
 
-  var ALL = [], SECS = [];
-  var S = {mode:'type', secs:null, count:20, autoTr:false};
-  var Q = [], idx = 0, ok = 0, missed = [], answered = false, revealed = false;
+  var WORDS = [], WSECS = [], FORMS = [], FSECS = [];
+  var S = {track:'ar', mode:'type', wsecs:{}, fsecs:{}, count:20, autoTr:false, smart:true, onlyHard:false};
+  var ST = {};
+  var Q = [], idx = 0, ok = 0, missed = [], answered = false, revealed = false, resetArmed = false;
 
   function esc(s){ return String(s).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
   function clean(s){ return (s || '').replace(/\s+/g, ' ').trim(); }
   function nk(s){ return (s || '').toLowerCase().replace(/ё/g, 'е').replace(/[^a-zа-я0-9 ]+/g, ' ').replace(/\s+/g, ' ').trim(); }
+  function nar(s){ return (s || '').replace(/[ً-ٰٟـۡ]/g, '').replace(/[؟?!.,،…]/g, '').replace(/\s+/g, ' ').trim(); }
+  function narLoose(s){ return nar(s).replace(/[أإآٱ]/g, 'ا').replace(/ى/g, 'ي').replace(/ة/g, 'ه').replace(/ؤ/g, 'و').replace(/ئ/g, 'ي').replace(/ء/g, '').replace(/\s+/g, ''); }
+  function ntr(s){ return (s || '').toLowerCase().replace(/ё/g, 'е').replace(/[́'’ʼ`‘\-\s?.,!…]/g, ''); }
   function shuffle(a){ a = a.slice(); for(var i = a.length - 1; i > 0; i--){ var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
   function lev(a, b){
     var p = [], i, j;
@@ -193,36 +222,142 @@
     bare.split(/[,;\/]/).forEach(add);
     return out;
   }
-  function load(){ try{ return JSON.parse(localStorage.getItem(KEY) || 'null'); }catch(e){ return null; } }
-  function save(){ try{ localStorage.setItem(KEY, JSON.stringify({mode:S.mode, secs:S.secs, count:S.count, autoTr:S.autoTr})); }catch(e){} }
+  function bidi(s){ return esc(s).replace(/[؀-ۿ][؀-ۿ\s]*/g, function(m){ var t = m.replace(/\s+$/, ''); return '<span class="arx">' + t + '</span>' + m.slice(t.length); }); }
+  function arAlts(w){ var a = w.ar.replace(/\.\.\.|…/g, ''); var out = [a]; if(/\//.test(a)) out = out.concat(a.split(/\s*\/\s*/)); return out; }
+  function trAlts(w){ var t = (w.tr || '').replace(/\([^)]*\)/g, ''); var out = [t]; if(/\//.test(t)) out = out.concat(t.split(/\s*\/\s*/)); return out.filter(function(x){ return ntr(x); }); }
 
+  function lsGet(k){ try{ return JSON.parse(localStorage.getItem(k) || 'null'); }catch(e){ return null; } }
+  function lsSet(k, v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} }
+  function save(){ lsSet(KEY, {track:S.track, mode:S.mode, wsecs:S.wsecs, fsecs:S.fsecs, count:S.count, autoTr:S.autoTr, smart:S.smart, onlyHard:S.onlyHard}); }
+  function saveStats(){ lsSet(STKEY, ST); }
+
+  /* ---------- прогресс ---------- */
+  function sk(w){ return (w.form ? 'form' : S.track) + '|' + w.id; }
+  function stOf(w){ return ST[sk(w)] || null; }
+  function isHard(w){ var s = stOf(w); return !!s && s.w > 0 && s.b < 2; }
+  function isLearned(w){ var s = stOf(w); return !!s && s.b >= 3; }
+  function weight(w){ var s = stOf(w); if(!s) return 3; return [6, 3, 2, 1, 0.5, 0.25][Math.min(s.b, 5)]; }
+  function record(w, good){
+    var k = sk(w), s = ST[k] || {b:0, r:0, w:0};
+    if(good){ s.r++; s.b = Math.min(5, s.b + 1); } else { s.w++; s.b = 0; }
+    s.t = Date.now(); ST[k] = s; saveStats();
+  }
+
+  /* ---------- разбор словаря ---------- */
   function mk(sec, label, ar, tr, ru, extra, tag){
-    return {sec:sec, secLabel:label, ar:ar, tr:tr, ru:ru, label:ru, variants:variantsOf(ru), extra:extra || [], tag:tag || label};
+    return {id:sec + '|' + ar + '|' + (tag || ''), sec:sec, secLabel:label, ar:ar, tr:tr, ru:ru, label:ru, variants:variantsOf(ru), extra:extra || [], tag:tag || label};
+  }
+  function mkF(kind, ar, tr, label, tag, row, col){
+    return {id:'f-' + kind + '|' + ar + '|' + label + '|' + tag, sec:'f-' + kind, secLabel:FLABEL[kind], ar:ar, tr:tr, ru:label, label:label, variants:[], extra:[], tag:tag, form:true, row:row, col:col};
+  }
+  function arFirst(s){
+    var m = s.search(/[A-Za-zА-Яа-яЁё'’ʼ(\-]/);
+    if(m < 0) return {ar:clean(s), rest:''};
+    return {ar:clean(s.slice(0, m)), rest:clean(s.slice(m))};
+  }
+  function ruFirst(s){
+    var m = s.search(AR);
+    if(m < 0) return {ru:clean(s), ar:''};
+    return {ru:clean(s.slice(0, m)), ar:clean(s.slice(m))};
+  }
+
+  function parseForms(tb, heads, rows, F){
+    var h0 = heads[0] || '';
+    function cells(tr){ return [].map.call(tr.children, function(td){ return clean(td.textContent); }); }
+    if(h0 === 'Лицо' && heads.length >= 6){
+      var preps = heads.slice(1).map(arFirst);
+      rows.forEach(function(tr){
+        var c = cells(tr); if(c.length < 2) return;
+        var person = ruFirst(c[0]).ru;
+        for(var j = 1; j < c.length && j <= preps.length; j++){
+          var x = arFirst(c[j]); if(!x.ar) continue;
+          F.push(mkF('prep', x.ar, x.rest, preps[j - 1].ar + ' + ' + person, 'Предлог «' + preps[j - 1].rest + '» + местоимение', person, preps[j - 1].ar));
+        }
+      });
+      return true;
+    }
+    if(h0 === 'Значение' && heads.length === 4 && AR.test(heads[1])){
+      rows.forEach(function(tr){
+        var c = cells(tr); if(c.length < 4) return;
+        for(var j = 1; j < 4; j++){
+          var x = arFirst(c[j]); if(!x.ar) continue;
+          F.push(mkF('have', x.ar, x.rest, c[0] + ' · через ' + heads[j], 'Иметь, «у меня есть»', c[0], heads[j]));
+        }
+      });
+      return true;
+    }
+    if(h0 === 'Значение' && heads.length === 3 && heads[1] === 'Мужской род' && heads[2] === 'Женский род'){
+      rows.forEach(function(tr){
+        var c = cells(tr); if(c.length < 3) return;
+        [[1, 'м. р.'], [2, 'ж. р.']].forEach(function(g){
+          var x = arFirst(c[g[0]]); if(x.ar) F.push(mkF('exist', x.ar, x.rest, c[0] + ' (' + g[1] + ')', 'Есть / нет / был', c[0], g[1]));
+        });
+      });
+      return true;
+    }
+    if(h0 === 'Лицо' && /^Отдельное/.test(heads[1] || '')){
+      rows.forEach(function(tr){
+        var c = cells(tr); if(c.length < 3) return;
+        var a = arFirst(c[1]), b = arFirst(c[2]);
+        if(a.ar) F.push(mkF('pron', a.ar, a.rest, c[0], 'Отдельное местоимение', c[0], 'sep'));
+        if(b.ar) F.push(mkF('pron', b.ar, b.rest, c[0], 'Слитное окончание («мой, твой…»)', c[0], 'suf'));
+      });
+      return true;
+    }
+    if(h0 === 'Чьё'){
+      rows.forEach(function(tr){
+        var c = cells(tr); if(c.length < 4 || !c[2]) return;
+        F.push(mkF('poss', c[2], c[3], c[0] + ' дом', 'بَيْتٌ + окончание', c[0], 'poss'));
+      });
+      return true;
+    }
+    if(h0 === 'Значение' && heads[1] === 'Мн. число'){
+      var seen = {};
+      rows.forEach(function(tr){
+        var c = cells(tr); if(c.length < 5) return;
+        var g = /^ж/.test(c[4]) ? 'ж' : 'м';
+        var names = c[0].split(/\s*\/\s*/);
+        function add(cell, labels, num){
+          var x = arFirst(cell), ars = x.ar.split(/\s*\/\s*/), trs = x.rest.replace(/\([^)]*\)/g, '').split(/\s*\/\s*/);
+          ars.forEach(function(a, i){
+            if(!a || seen[a]) return; seen[a] = 1;
+            F.push(mkF('demo', a, clean(trs[i] || ''), labels[i] || labels[0], 'Указательные · ' + num, num, g));
+          });
+        }
+        add(c[3], names.map(function(n){ return n + ' (' + g + ')'; }), 'ед. число');
+        add(c[2], ['эти двое (' + g + ')'], 'дв. число');
+        add(c[1], ['эти (о людях)', 'те (о людях)'], 'мн. число');
+      });
+      return true;
+    }
+    return false;
   }
 
   function parse(doc){
     var chips = {};
     [].forEach.call(doc.querySelectorAll('#chips a'), function(a){ chips[(a.getAttribute('href') || '').slice(1)] = clean(a.textContent); });
-    var items = [], secs = [];
+    var items = [], secs = [], F = [];
     [].forEach.call(doc.querySelectorAll('section[id]'), function(sec){
       var id = sec.id, h2 = sec.querySelector('h2');
       var label = chips[id] || clean(h2 ? h2.textContent : id);
       var before = items.length;
       [].forEach.call(sec.querySelectorAll('table'), function(tb){
         var heads = [].map.call(tb.querySelectorAll('thead th'), function(th){ return clean(th.textContent); });
+        var rows = [].slice.call(tb.querySelectorAll('tbody tr'));
         var h0 = heads[0] || '', kind = null;
         if(h0 === 'Прошедшее') kind = 'verb';
         else if(h0 === 'Перевод' && heads[1] === 'Мужской род') kind = 'color';
         else if(h0 === 'Перевод' && heads[1] === 'Слово') kind = 'day';
         else if(/^(Слово|Фраза|Команда)$/.test(h0) && heads[1] === 'Вслух' && heads.length >= 3) kind = 'plain';
-        if(!kind) return;
-        [].forEach.call(tb.querySelectorAll('tbody tr'), function(tr){
+        if(!kind){ parseForms(tb, heads, rows, F); return; }
+        rows.forEach(function(tr){
           var c = [].map.call(tr.children, function(td){ return clean(td.textContent); });
           if(c.length < 3) return;
           if(kind === 'verb' && c.length >= 5){
             if(c[0] && c[4]) items.push(mk(id, label, c[0], c[1], c[4], c[2] ? [{k:'Настоящее', v:c[2], t:c[3]}] : [], 'Глагол · прошедшее время, «он»'));
+            if(c[2] && c[4]) items.push(mk(id, label, c[2], c[3], c[4], c[0] ? [{k:'Прошедшее', v:c[0], t:c[1]}] : [], 'Глагол · настоящее время, «он»'));
           }else if(kind === 'color' && c.length >= 3){
-            if(c[0] && c[1]) items.push(mk(id, label, c[1], c[2], c[0], c[3] ? [{k:'Женский род', v:c[3], t:c[4]}] : []));
+            if(c[0] && c[1]) items.push(mk(id, label, c[1], c[2], c[0], c[3] ? [{k:'Женский род', v:c[3], t:c[4]}] : [], label + ' · мужской род'));
           }else if(kind === 'day' && c.length >= 3){
             if(c[0] && c[1]) items.push(mk(id, label, c[1], c[2], c[0], c[3] ? [{k:'От числа', v:c[3]}] : []));
           }else if(kind === 'plain'){
@@ -250,63 +385,106 @@
       var n = items.length - before;
       if(n > 0) secs.push({id:id, label:label, n:n});
     });
-    return {items:items, secs:secs};
+    var fsecs = [];
+    Object.keys(FLABEL).forEach(function(k){
+      var n = F.filter(function(x){ return x.sec === 'f-' + k; }).length;
+      if(n) fsecs.push({id:'f-' + k, label:FLABEL[k], n:n});
+    });
+    return {items:items, secs:secs, forms:F, fsecs:fsecs};
   }
 
+  /* ---------- настройки ---------- */
   function show(view){ ['loading','setup','play'].forEach(function(v){ $(v).hidden = (v !== view); }); window.scrollTo(0, 0); }
-
-  function pool(){ return ALL.filter(function(w){ return S.secs[w.sec]; }); }
+  function isForm(){ return S.track === 'form'; }
+  function base(){ return isForm() ? FORMS : WORDS; }
+  function secList(){ return isForm() ? FSECS : WSECS; }
+  function secMap(){ return isForm() ? S.fsecs : S.wsecs; }
+  function inSecs(){ var m = secMap(); return base().filter(function(w){ return m[w.sec]; }); }
+  function pool(){ var p = inSecs(); return S.onlyHard ? p.filter(isHard) : p; }
   function plural(n, a, b, c){ var x = n % 10, y = n % 100; return (x === 1 && y !== 11) ? a : (x >= 2 && x <= 4 && (y < 12 || y > 14)) ? b : c; }
+  function unit(n){ return isForm() ? plural(n, 'форма', 'формы', 'форм') : plural(n, 'слово', 'слова', 'слов'); }
 
   function renderSetup(){
-    $('modes').innerHTML = MODES.map(function(m){
-      return '<button type="button" class="mode" data-m="' + m.id + '" aria-pressed="' + (S.mode === m.id) + '"><b>' + m.t + '</b><span>' + m.d + '</span></button>';
+    resetArmed = false;
+    $('tracks').innerHTML = TRACKS.map(function(m){
+      return '<button type="button" class="mode" data-t="' + m.id + '" aria-pressed="' + (S.track === m.id) + '"><b>' + bidi(m.t) + '</b><span>' + m.d + '</span></button>';
     }).join('');
-    $('secs').innerHTML = SECS.map(function(s){
-      return '<button type="button" class="tgl" data-s="' + s.id + '" aria-pressed="' + !!S.secs[s.id] + '">' + esc(s.label) + '<small>' + s.n + '</small></button>';
+    $('modes').innerHTML = MODES.map(function(m){
+      return '<button type="button" class="mode" data-m="' + m.id + '" aria-pressed="' + (S.mode === m.id) + '"><b>' + m.t + '</b><span>' + m.d[S.track] + '</span></button>';
+    }).join('');
+    var m = secMap();
+    $('secs').innerHTML = secList().map(function(s){
+      return '<button type="button" class="tgl" data-s="' + s.id + '" aria-pressed="' + !!m[s.id] + '">' + bidi(s.label) + '<small>' + s.n + '</small></button>';
     }).join('');
     $('counts').innerHTML = COUNTS.map(function(c){
       return '<button type="button" class="tgl" data-c="' + c + '" aria-pressed="' + (S.count === c) + '">' + (c ? c : 'Все') + '</button>';
     }).join('');
+    $('autotr').hidden = S.track !== 'ar';
     $('autotr').setAttribute('aria-pressed', S.autoTr ? 'true' : 'false');
+    $('smart').setAttribute('aria-pressed', S.smart ? 'true' : 'false');
+    $('onlyhard').setAttribute('aria-pressed', S.onlyHard ? 'true' : 'false');
     var naskh = document.body.classList.contains('font-naskh');
     $('fontsw').setAttribute('aria-pressed', naskh ? 'true' : 'false');
     $('fontsw').textContent = 'Шрифт: ' + (naskh ? 'классический' : 'обычный');
+    $('reset').textContent = 'Сбросить прогресс';
+    $('reset').classList.remove('warn');
     refreshAvail();
   }
   function refreshAvail(){
     var n = pool().length, take = S.count ? Math.min(S.count, n) : n;
-    var all = SECS.every(function(s){ return S.secs[s.id]; });
+    var all = secList().every(function(s){ return secMap()[s.id]; });
     $('allsecs').textContent = all ? 'Снять все' : 'Выбрать все';
-    $('avail').textContent = n ? ('В выбранных разделах ' + n + ' ' + plural(n, 'слово', 'слова', 'слов') + '. В упражнении будет ' + take + '.') : 'Выбери хотя бы один раздел.';
+    var msg;
+    if(n) msg = 'В выбранных разделах ' + n + ' ' + unit(n) + (S.onlyHard ? ' (только трудные)' : '') + '. В упражнении будет ' + take + '.';
+    else if(S.onlyHard && inSecs().length) msg = 'Трудных пока нет: в этих разделах ты ещё не ошибался или уже всё исправил.';
+    else msg = 'Выбери хотя бы один раздел.';
+    $('avail').textContent = msg;
+    var p = inSecs(), learned = p.filter(isLearned).length, hard = p.filter(isHard).length, seen = p.filter(stOf).length;
+    $('stat').innerHTML = p.length ? ('Прогресс в этом направлении: выучено <b>' + learned + '</b> из ' + p.length + ' · трудных <b>' + hard + '</b> · ещё не встречались ' + (p.length - seen) + '.') : '';
     $('start').disabled = !n;
     $('start').textContent = n ? ('Начать · ' + take) : 'Начать';
   }
 
+  $('tracks').addEventListener('click', function(e){ var b = e.target.closest('[data-t]'); if(!b) return; S.track = b.getAttribute('data-t'); save(); renderSetup(); });
   $('modes').addEventListener('click', function(e){ var b = e.target.closest('[data-m]'); if(!b) return; S.mode = b.getAttribute('data-m'); save(); renderSetup(); });
-  $('secs').addEventListener('click', function(e){ var b = e.target.closest('[data-s]'); if(!b) return; var id = b.getAttribute('data-s'); S.secs[id] = !S.secs[id]; save(); renderSetup(); });
+  $('secs').addEventListener('click', function(e){ var b = e.target.closest('[data-s]'); if(!b) return; var id = b.getAttribute('data-s'), m = secMap(); m[id] = !m[id]; save(); renderSetup(); });
   $('counts').addEventListener('click', function(e){ var b = e.target.closest('[data-c]'); if(!b) return; S.count = +b.getAttribute('data-c'); save(); renderSetup(); });
   $('allsecs').addEventListener('click', function(){
-    var all = SECS.every(function(s){ return S.secs[s.id]; });
-    SECS.forEach(function(s){ S.secs[s.id] = !all; }); save(); renderSetup();
+    var m = secMap(), all = secList().every(function(s){ return m[s.id]; });
+    secList().forEach(function(s){ m[s.id] = !all; }); save(); renderSetup();
   });
   $('autotr').addEventListener('click', function(){ S.autoTr = !S.autoTr; save(); renderSetup(); });
+  $('smart').addEventListener('click', function(){ S.smart = !S.smart; save(); renderSetup(); });
+  $('onlyhard').addEventListener('click', function(){ S.onlyHard = !S.onlyHard; save(); renderSetup(); });
   $('fontsw').addEventListener('click', function(){
     var on = !document.body.classList.contains('font-naskh');
     document.body.classList.toggle('font-naskh', on);
     try{ localStorage.setItem(FONTKEY, on ? 'naskh' : 'sans'); }catch(e){}
     renderSetup();
   });
-  $('start').addEventListener('click', function(){
-    var p = shuffle(pool()); if(!p.length) return;
-    begin(S.count ? p.slice(0, S.count) : p);
+  $('reset').addEventListener('click', function(){
+    var b = $('reset');
+    if(!resetArmed){ resetArmed = true; b.textContent = 'Точно сбросить для «' + TRACKS.filter(function(t){ return t.id === S.track; })[0].t + '»? Нажми ещё раз'; b.classList.add('warn'); return; }
+    var pre = S.track + '|';
+    Object.keys(ST).forEach(function(k){ if(k.indexOf(pre) === 0) delete ST[k]; });
+    saveStats(); renderSetup();
   });
+  $('start').addEventListener('click', function(){ var p = pool(); if(p.length) begin(draw(p)); });
 
-  function begin(list){
-    Q = list; idx = 0; ok = 0; missed = []; renderQ();
+  function draw(p){
+    var n = S.count ? Math.min(S.count, p.length) : p.length;
+    if(!S.smart) return shuffle(p).slice(0, n);
+    var keyed = p.map(function(w){ return {w:w, k:Math.pow(Math.random(), 1 / weight(w))}; });
+    keyed.sort(function(a, b){ return b.k - a.k; });
+    return shuffle(keyed.slice(0, n).map(function(x){ return x.w; }));
   }
 
-  function distractors(w){
+  function begin(list){ Q = list; idx = 0; ok = 0; missed = []; renderQ(); }
+
+  /* ---------- вопросы ---------- */
+  function same(w){ return base().filter(function(x){ return nk(x.label) === nk(w.label) && x.tag === w.tag; }); }
+
+  function distractorsRu(w){
     var out = [], seen = {}; seen[nk(w.label)] = 1;
     function clash(x){ return x.variants.some(function(v){ return w.variants.indexOf(v) >= 0; }); }
     function take(list){
@@ -315,48 +493,79 @@
         if(!seen[k] && !clash(x)){ seen[k] = 1; out.push(x.label); }
       }
     }
-    take(shuffle(ALL.filter(function(x){ return x !== w && x.sec === w.sec; })));
-    if(out.length < 3) take(shuffle(ALL.filter(function(x){ return x !== w; })));
+    take(shuffle(WORDS.filter(function(x){ return x !== w && x.sec === w.sec; })));
+    if(out.length < 3) take(shuffle(WORDS.filter(function(x){ return x !== w; })));
+    return out;
+  }
+  function distractorsAr(w){
+    var good = {}; same(w).forEach(function(x){ good[nar(x.ar)] = 1; });
+    var out = [], seen = {}; seen[nar(w.ar)] = 1;
+    function take(list){
+      for(var i = 0; i < list.length && out.length < 3; i++){
+        var k = nar(list[i].ar);
+        if(!seen[k] && !good[k]){ seen[k] = 1; out.push(list[i].ar); }
+      }
+    }
+    var B = base();
+    if(w.form){
+      take(shuffle(B.filter(function(x){ return x.sec === w.sec && x.col === w.col && x.row !== w.row; })));
+      take(shuffle(B.filter(function(x){ return x.sec === w.sec && x.row === w.row && x.col !== w.col; })));
+    }
+    take(shuffle(B.filter(function(x){ return x !== w && x.sec === w.sec; })));
+    take(shuffle(B.filter(function(x){ return x !== w; })));
     return out;
   }
 
   function arClass(s){ return s.length > 26 ? 's' : s.length > 12 ? 'm' : ''; }
+  function arField(v){ return AR.test(v) ? '<span class="arx">' + esc(v) + '</span>' : esc(v); }
 
   function details(w){
-    var h = '<div class="ans">' + esc(w.label) + '</div>';
-    h += '<div class="ex">' + esc(w.tr) + '</div>';
-    w.extra.forEach(function(x){
-      h += '<div class="ex">' + esc(x.k) + ': ' + (/[؀-ۿ]/.test(x.v) ? '<span class="arx">' + esc(x.v) + '</span>' : esc(x.v)) + (x.t ? ' · ' + esc(x.t) : '') + '</div>';
-    });
+    var h;
+    if(S.track === 'ar'){
+      h = '<div class="ans">' + esc(w.label) + '</div><div class="ex">' + esc(w.tr) + '</div>';
+    }else{
+      h = '<div class="ans arans">' + esc(w.ar) + '</div><div class="ex">' + esc(w.tr) + ' · ' + bidi(w.label) + '</div>';
+      var others = same(w).filter(function(x){ return nar(x.ar) !== nar(w.ar); });
+      if(others.length) h += '<div class="ex">Тоже подходит: ' + others.map(function(x){ return '<span class="arx">' + esc(x.ar) + '</span>'; }).join(', ') + '</div>';
+    }
+    w.extra.forEach(function(x){ h += '<div class="ex">' + esc(x.k) + ': ' + arField(x.v) + (x.t ? ' · ' + esc(x.t) : '') + '</div>'; });
     return h;
+  }
+
+  function hintText(w){
+    if(S.track === 'ar') return w.tr;
+    var a = nar(arAlts(w)[0]).replace(/ـ/g, ''), letters = a.replace(/\s/g, '');
+    return 'Начинается на «' + letters.charAt(0) + '» · букв: ' + letters.length;
   }
 
   function renderQ(){
     answered = false; revealed = false;
     show('play');
     if(idx >= Q.length){ return renderDone(); }
-    var w = Q[idx], pct = Math.round(idx / Q.length * 100);
-    var h = '<div class="playbar"><button class="btn link" id="toset" type="button">← Настройки</button><span>Слово ' + (idx + 1) + ' из ' + Q.length + '</span><span>' + (S.mode === 'flash' ? 'Знал' : 'Верно') + ': ' + ok + '</span></div>';
+    var w = Q[idx], pct = Math.round(idx / Q.length * 100), toAr = S.track !== 'ar';
+    var h = '<div class="playbar"><button class="btn link" id="toset" type="button">← Настройки</button><span>' + (idx + 1) + ' из ' + Q.length + '</span><span>' + (S.mode === 'flash' ? 'Знал' : 'Верно') + ': ' + ok + '</span></div>';
     h += '<div class="prog"><i style="width:' + pct + '%"></i></div>';
-    h += '<div class="card"><div class="tag">' + esc(w.tag) + '</div><div class="qar ' + arClass(w.ar) + '">' + esc(w.ar) + '</div><div class="qtr" id="qtr">' + (S.autoTr ? esc(w.tr) : '') + '</div>';
+    h += '<div class="card"><div class="tag">' + bidi(w.tag) + (isHard(w) ? ' · трудное' : '') + '</div>';
+    if(toAr) h += '<div class="qru' + (w.label.length > 22 ? ' m' : '') + '">' + bidi(w.label) + '</div><div class="qtr" id="qtr"></div>';
+    else h += '<div class="qar ' + arClass(w.ar) + '">' + esc(w.ar) + '</div><div class="qtr" id="qtr">' + (S.autoTr ? esc(w.tr) : '') + '</div>';
     if(S.mode === 'type'){
-      h += '<div class="row"><input id="inp" type="text" placeholder="Перевод на русский" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" aria-label="Перевод"><button class="btn primary" id="go" type="button">Проверить</button></div>';
-      h += '<div class="sub"><button class="btn" id="hint" type="button">Подсказка: как читается</button><button class="btn" id="skip" type="button">Не знаю</button></div>';
+      h += '<div class="row"><input id="inp" type="text" dir="auto"' + (toAr ? ' class="arin" placeholder="По-арабски или транскрипцией"' : ' placeholder="Перевод на русский"') + ' autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" aria-label="Ответ"><button class="btn primary" id="go" type="button">Проверить</button></div>';
+      h += '<div class="sub"><button class="btn" id="hint" type="button">' + (toAr ? 'Подсказка' : 'Подсказка: как читается') + '</button><button class="btn" id="skip" type="button">Не знаю</button></div>';
     }else if(S.mode === 'choice'){
-      var opts = shuffle(distractors(w).concat([w.label]));
-      h += '<div class="opts">' + opts.map(function(o, i){ return '<button class="opt" type="button" data-v="' + esc(o) + '">' + esc(o) + '</button>'; }).join('') + '</div>';
-      h += '<div class="sub"><button class="btn" id="hint" type="button">Подсказка: как читается</button></div>';
+      var opts = toAr ? shuffle(distractorsAr(w).concat([w.ar])) : shuffle(distractorsRu(w).concat([w.label]));
+      h += '<div class="opts">' + opts.map(function(o){ return '<button class="opt' + (toAr ? ' ar' : '') + '" type="button" data-v="' + esc(o) + '">' + esc(o) + '</button>'; }).join('') + '</div>';
+      h += '<div class="sub"><button class="btn" id="hint" type="button">' + (toAr ? 'Подсказка' : 'Подсказка: как читается') + '</button></div>';
     }else{
       h += '<div class="reveal" id="rev"><div class="sub"><button class="btn primary" id="show" type="button">Показать ответ</button></div></div>';
     }
     h += '<div class="fb" id="fb"></div></div>';
     $('play').innerHTML = h;
     $('toset').addEventListener('click', function(){ renderSetup(); show('setup'); });
-    if($('hint')) $('hint').addEventListener('click', function(){ $('qtr').textContent = w.tr; });
+    if($('hint')) $('hint').addEventListener('click', function(){ $('qtr').textContent = hintText(w); });
     if(S.mode === 'type'){
       $('go').addEventListener('click', function(){ checkType(w, false); });
       $('skip').addEventListener('click', function(){ if(!answered) checkType(w, true); });
-      $('inp').addEventListener('keydown', function(e){ if(e.key === 'Enter'){ e.preventDefault(); checkType(w, false); } });
+      $('inp').addEventListener('keydown', function(e){ if(e.key === 'Enter'){ e.preventDefault(); e.stopPropagation(); checkType(w, false); } });
       $('inp').focus();
     }else if(S.mode === 'choice'){
       [].forEach.call(document.querySelectorAll('.opt'), function(b){ b.addEventListener('click', function(){ pick(w, b); }); });
@@ -368,21 +577,45 @@
   function nextBtn(){ return '<div class="sub"><button class="btn primary" id="nx" type="button">Дальше</button></div>'; }
   function wireNext(){ var b = $('nx'); if(b){ b.addEventListener('click', next); b.focus(); } }
   function next(){ idx++; renderQ(); }
-  function markResult(w, good){ if(good) ok++; else missed.push(w); }
+  function markResult(w, good){ if(good) ok++; else missed.push(w); record(w, good); }
+
+  function judgeRu(w, raw){
+    var v = nk(raw);
+    if(w.variants.indexOf(v) >= 0) return 'ok';
+    if(w.variants.some(function(u){ return u.length >= 5 && lev(u, v) <= 1; })) return 'typo';
+    return 'bad';
+  }
+  function judgeAr(w, raw){
+    var cands = same(w), best = 'bad';
+    if(AR.test(raw)){
+      var a = nar(raw).replace(/ـ/g, ''), l = narLoose(raw);
+      cands.forEach(function(x){ arAlts(x).forEach(function(alt){
+        if(nar(alt).replace(/ـ/g, '') === a) best = 'ok';
+        else if(best === 'bad' && narLoose(alt) === l) best = 'loose';
+      }); });
+    }else{
+      var t = ntr(raw);
+      cands.forEach(function(x){ trAlts(x).forEach(function(alt){
+        var u = ntr(alt);
+        if(u === t) best = 'ok';
+        else if(best === 'bad' && u.length >= 4 && lev(u, t) <= 1) best = 'typo';
+      }); });
+    }
+    return best;
+  }
 
   function checkType(w, skip){
     if(answered){ return next(); }
-    var inp = $('inp'), v = nk(inp.value), status = 'bad';
+    var inp = $('inp'), raw = inp.value.trim(), status = 'bad';
     if(!skip){
-      if(!v) return;
-      if(w.variants.indexOf(v) >= 0) status = 'ok';
-      else if(w.variants.some(function(u){ return u.length >= 5 && lev(u, v) <= 1; })) status = 'typo';
+      if(!raw) return;
+      status = S.track === 'ar' ? judgeRu(w, raw) : judgeAr(w, raw);
     }
     answered = true; inp.disabled = true;
     $('qtr').textContent = w.tr;
     var good = status !== 'bad';
     markResult(w, good);
-    var head = skip ? 'Ответ:' : status === 'ok' ? 'Верно!' : status === 'typo' ? 'Верно (опечатка не страшна)' : 'Не совсем.';
+    var head = skip ? 'Ответ:' : status === 'ok' ? 'Верно!' : status === 'typo' ? 'Верно (опечатка не страшна)' : status === 'loose' ? 'Верно, но проверь хамзу, ة или ى' : 'Не совсем.';
     $('fb').innerHTML = '<div class="res ' + (good ? 'ok' : 'bad') + '">' + head + '</div>' + details(w) + nextBtn();
     $('go').textContent = 'Дальше'; $('go').onclick = next;
     wireNext();
@@ -390,9 +623,10 @@
 
   function pick(w, btn){
     if(answered) return; answered = true;
-    var v = btn.getAttribute('data-v'), good = (v === w.label);
+    var right = S.track === 'ar' ? w.label : w.ar;
+    var v = btn.getAttribute('data-v'), good = (v === right);
     [].forEach.call(document.querySelectorAll('.opt'), function(b){
-      if(b.getAttribute('data-v') === w.label) b.classList.add('good');
+      if(b.getAttribute('data-v') === right) b.classList.add('good');
       b.disabled = true;
     });
     if(!good) btn.classList.add('wrong');
@@ -404,8 +638,8 @@
 
   function flashReveal(w){
     if(revealed) return; revealed = true;
-    $('qtr').textContent = w.tr;
-    $('rev').innerHTML = '<div class="fb">' + details(w) + '<div class="ex" style="margin-top:6px">Сам оцени, знал ли ты это слово</div><div class="sub"><button class="btn badb" id="no" type="button">Не знал</button><button class="btn good" id="yes" type="button">Знал</button></div></div>';
+    $('qtr').textContent = S.track === 'ar' ? w.tr : '';
+    $('rev').innerHTML = '<div class="fb">' + details(w) + '<div class="ex" style="margin-top:6px">Сам оцени, знал ли ты это</div><div class="sub"><button class="btn badb" id="no" type="button">Не знал</button><button class="btn good" id="yes" type="button">Знал</button></div></div>';
     $('yes').addEventListener('click', function(){ markResult(w, true); next(); });
     $('no').addEventListener('click', function(){ markResult(w, false); next(); });
   }
@@ -414,8 +648,8 @@
     var n = Q.length, pct = n ? Math.round(ok / n * 100) : 0;
     var h = '<div class="card"><div class="tag">Готово</div><div class="big">' + (S.mode === 'flash' ? 'Знал ' : 'Верно ') + ok + ' из ' + n + ' · ' + pct + '%</div>';
     if(missed.length){
-      h += '<div class="tag" style="margin-top:12px">Над чем поработать</div><ul class="missed">' + missed.map(function(w){
-        return '<li><span class="arx">' + esc(w.ar) + '</span><span class="ruw">' + esc(w.label) + '</span></li>';
+      h += '<div class="tag" style="margin-top:12px">Над чем поработать · эти слова будут попадаться чаще</div><ul class="missed">' + missed.map(function(w){
+        return '<li><span class="arx">' + esc(w.ar) + '</span><span class="ruw">' + bidi(w.label) + '</span></li>';
       }).join('') + '</ul>';
     }else{
       h += '<p class="note">Ошибок нет. Можно взять другой раздел или режим.</p>';
@@ -424,9 +658,7 @@
     if(missed.length) h += '<button class="btn" id="rep" type="button">Повторить ошибки (' + missed.length + ')</button>';
     h += '<button class="btn" id="toset2" type="button">Настройки</button></div></div>';
     $('play').innerHTML = h;
-    $('again').addEventListener('click', function(){
-      var p = shuffle(pool()); if(!p.length) return; begin(S.count ? p.slice(0, S.count) : p);
-    });
+    $('again').addEventListener('click', function(){ var p = pool(); if(p.length) begin(draw(p)); else { renderSetup(); show('setup'); } });
     if($('rep')) $('rep').addEventListener('click', function(){ begin(shuffle(missed)); });
     $('toset2').addEventListener('click', function(){ renderSetup(); show('setup'); });
   }
@@ -460,18 +692,30 @@
     return r.text();
   }).then(function(html){
     var res = parse(new DOMParser().parseFromString(html, 'text/html'));
-    ALL = res.items; SECS = res.secs;
-    if(!ALL.length) throw new Error('empty');
-    var saved = load() || {};
+    WORDS = res.items; WSECS = res.secs; FORMS = res.forms; FSECS = res.fsecs;
+    if(!WORDS.length) throw new Error('empty');
+    ST = lsGet(STKEY) || {};
+    var saved = lsGet(KEY), old = saved ? null : lsGet(OLDKEY);
+    saved = saved || {};
+    if(old){ saved.mode = old.mode; saved.count = old.count; saved.autoTr = old.autoTr; saved.wsecs = old.secs; }
+    if(TRACKS.some(function(t){ return t.id === saved.track; })) S.track = saved.track;
     if(saved.mode && MODES.some(function(m){ return m.id === saved.mode; })) S.mode = saved.mode;
     if(COUNTS.indexOf(saved.count) >= 0) S.count = saved.count;
     S.autoTr = !!saved.autoTr;
-    S.secs = {};
-    var any = false;
-    SECS.forEach(function(s){ var on = saved.secs ? !!saved.secs[s.id] : true; S.secs[s.id] = on; if(on) any = true; });
-    if(!any) SECS.forEach(function(s){ S.secs[s.id] = true; });
+    if(typeof saved.smart === 'boolean') S.smart = saved.smart;
+    S.onlyHard = !!saved.onlyHard;
+    function initSecs(list, sv){
+      var m = {}, any = false;
+      list.forEach(function(s){ var on = sv ? (s.id in sv ? !!sv[s.id] : true) : true; m[s.id] = on; if(on) any = true; });
+      if(!any) list.forEach(function(s){ m[s.id] = true; });
+      return m;
+    }
+    S.wsecs = initSecs(WSECS, saved.wsecs);
+    S.fsecs = initSecs(FSECS, saved.fsecs);
+    if(S.track === 'form' && !FORMS.length) S.track = 'ar';
     renderSetup(); show('setup');
-  }).catch(function(){
+  }).catch(function(err){
+    if(window.console) console.error(err);
     fail('Не получилось загрузить слова из словаря. Тренажёр читает их со страницы <a href="./">словаря</a>, поэтому открывай его с сайта, а не как отдельный файл, и проверь интернет.');
   });
 })();
