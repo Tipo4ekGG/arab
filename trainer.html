@@ -188,6 +188,7 @@
   var NUMW = {'0':'ноль','1':'один','2':'два','3':'три','4':'четыре','5':'пять','6':'шесть','7':'семь','8':'восемь','9':'девять','10':'десять','11':'одиннадцать','12':'двенадцать','13':'тринадцать','14':'четырнадцать','15':'пятнадцать','16':'шестнадцать','17':'семнадцать','18':'восемнадцать','19':'девятнадцать','20':'двадцать','30':'тридцать','40':'сорок','50':'пятьдесят','60':'шестьдесят','70':'семьдесят','80':'восемьдесят','90':'девяносто','100':'сто'};
   var FLABEL = {prep:'Предлоги + окончания', have:'Иметь: عِنْدَ / لَدَى / لِـ', exist:'Есть / нет / был', pron:'Местоимения и окончания', poss:'Мой дом, твой дом…', demo:'Указательные: этот, тот'};
   var AR = /[؀-ۿ]/;
+  var PRON_SEC = 'pron-words';
 
   var WORDS = [], WSECS = [], FORMS = [], FSECS = [];
   var S = {track:'ar', mode:'type', wsecs:{}, fsecs:{}, count:20, autoTr:false, smart:true, onlyHard:false};
@@ -364,7 +365,12 @@
             var extra = [];
             if(heads[3] === 'Род' && c[3]) extra.push({k:'Род', v:c[3]});
             if(heads[3] === 'Мн. число' && c[3]) extra.push({k:'Мн. число', v:c[3]});
-            if(c[0] && c[2]) items.push(mk(id, label, c[0], c[1], c[2], extra));
+            if(heads[3] === 'Группа' && /^местоимени/i.test(c[3]) && c[0] && c[2]){
+              // местоимения — отдельным разделом; id прежний, чтобы не терялся прогресс
+              var pw = mk(PRON_SEC, 'Местоимения', c[0], c[1], c[2], [], 'Местоимение');
+              pw.id = id + '|' + c[0] + '|';
+              items.push(pw);
+            }else if(c[0] && c[2]) items.push(mk(id, label, c[0], c[1], c[2], extra));
             if(heads[3] === 'Антоним' && c.length >= 6 && c[3] && c[5]) items.push(mk(id, label, c[3], c[4], c[5], [], label + ' · антоним'));
           }
         });
@@ -382,8 +388,10 @@
         it.variants = [fig]; if(w) it.variants.push(nk(w));
         items.push(it);
       });
-      var n = items.length - before;
+      var n = items.slice(before).filter(function(x){ return x.sec === id; }).length;
       if(n > 0) secs.push({id:id, label:label, n:n});
+      var np = items.slice(before).filter(function(x){ return x.sec === PRON_SEC; }).length;
+      if(np > 0) secs.push({id:PRON_SEC, label:'Местоимения', n:np});
     });
     var fsecs = [];
     Object.keys(FLABEL).forEach(function(k){
