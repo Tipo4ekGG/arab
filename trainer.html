@@ -87,6 +87,7 @@
   .tag{font-size:12px;color:var(--muted);letter-spacing:.04em}
   .qar{font-family:var(--arfont);font-weight:500;direction:rtl;line-height:1.5;margin:6px 0 2px;font-size:60px;overflow-wrap:anywhere}
   .qar.m{font-size:42px}.qar.s{font-size:30px}
+  .qbase{font-family:var(--arfont);font-size:26px;direction:rtl;line-height:1.7;margin:10px 0;overflow-wrap:anywhere}
   .qtr{min-height:22px;color:var(--accent);font-size:16px;margin-bottom:12px}
   .row{display:flex;gap:8px}
   input[type=text]{flex:1;min-width:0;font:inherit;font-size:16px;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:11px 12px}
@@ -142,20 +143,21 @@
     <section class="box">
       <h2>Что тренируем</h2>
       <div class="modes" id="tracks"></div>
+      <p class="note" id="conj-help" hidden>Выбери глагол и время ниже. Задание показывает форму «он» и местоимение — поставь глагол в нужную форму. После ответа появятся транскрипция и объяснение. При вводе можно писать без огласовок; указанные огласовки проверяются.</p>
     </section>
     <section class="box">
       <h2>Режим</h2>
       <div class="modes" id="modes"></div>
     </section>
     <section class="box">
-      <h2>Разделы</h2>
+      <h2 id="sections-title">Разделы</h2>
       <div class="wraprow" id="secs"></div>
       <div class="wraprow" style="margin-top:10px"><button class="tgl ghost" id="allsecs" type="button"></button></div>
       <p class="avail" id="avail"></p>
       <p class="stat" id="stat"></p>
     </section>
     <section class="box">
-      <h2>Сколько слов за раз</h2>
+      <h2>Сколько заданий за раз</h2>
       <div class="wraprow" id="counts"></div>
     </section>
     <section class="box">
@@ -182,12 +184,13 @@
   var TRACKS = [
     {id:'ar',   t:'Слова: арабский → русский', d:'Видишь арабское слово, вспоминаешь перевод'},
     {id:'ru',   t:'Слова: русский → арабский', d:'Как на диктанте: видишь перевод, вспоминаешь арабское слово'},
-    {id:'form', t:'Грамматика: собрать форму', d:'Предлоги с окончаниями, «у меня есть», местоимения, «мой дом»'}
+    {id:'form', t:'Грамматика: собрать форму', d:'Предлоги с окончаниями, «у меня есть», местоимения, «мой дом»'},
+    {id:'conj', t:'Спряжение глаголов', d:'Выбираешь глагол и ставишь его в форму «я», «ты», «они» — с объяснением после ответа'}
   ];
   var MODES = [
-    {id:'type',   t:'Ввести ответ',  d:{ar:'Пишешь перевод сам', ru:'Пишешь по-арабски или транскрипцией', form:'Пишешь форму по-арабски или транскрипцией'}},
-    {id:'choice', t:'Выбрать из 4',   d:{ar:'Выбираешь верный перевод из четырёх', ru:'Выбираешь верное арабское слово из четырёх', form:'Выбираешь верную форму из четырёх'}},
-    {id:'flash',  t:'Карточки',       d:{ar:'Вспоминаешь сам, открываешь ответ и отмечаешь «знал / не знал»', ru:'Вспоминаешь арабское слово, открываешь и отмечаешь «знал / не знал»', form:'Вспоминаешь форму, открываешь и отмечаешь «знал / не знал»'}}
+    {id:'type',   t:'Ввести ответ',  d:{ar:'Пишешь перевод сам', ru:'Пишешь по-арабски или транскрипцией', form:'Пишешь форму по-арабски или транскрипцией', conj:'Пишешь нужную форму по-арабски или транскрипцией'}},
+    {id:'choice', t:'Выбрать из 4',   d:{ar:'Выбираешь верный перевод из четырёх', ru:'Выбираешь верное арабское слово из четырёх', form:'Выбираешь верную форму из четырёх', conj:'Выбираешь нужную форму глагола из четырёх'}},
+    {id:'flash',  t:'Карточки',       d:{ar:'Вспоминаешь сам, открываешь ответ и отмечаешь «знал / не знал»', ru:'Вспоминаешь арабское слово, открываешь и отмечаешь «знал / не знал»', form:'Вспоминаешь форму, открываешь и отмечаешь «знал / не знал»', conj:'Вспоминаешь спряжение, открываешь ответ и объяснение'}}
   ];
   var COUNTS = [10, 20, 50, 0];
   var NUMW = {'0':'ноль','1':'один','2':'два','3':'три','4':'четыре','5':'пять','6':'шесть','7':'семь','8':'восемь','9':'девять','10':'десять','11':'одиннадцать','12':'двенадцать','13':'тринадцать','14':'четырнадцать','15':'пятнадцать','16':'шестнадцать','17':'семнадцать','18':'восемнадцать','19':'девятнадцать','20':'двадцать','30':'тридцать','40':'сорок','50':'пятьдесят','60':'шестьдесят','70':'семьдесят','80':'восемьдесят','90':'девяносто','100':'сто'};
@@ -195,8 +198,8 @@
   var AR = /[؀-ۿ]/;
   var PRON_SEC = 'pron-words';
 
-  var WORDS = [], WSECS = [], FORMS = [], FSECS = [];
-  var S = {track:'ar', mode:'type', wsecs:{}, fsecs:{}, count:20, autoTr:false, smart:true, onlyHard:false};
+  var WORDS = [], WSECS = [], FORMS = [], FSECS = [], CONJ = [], CSECS = [];
+  var S = {track:'ar', mode:'type', wsecs:{}, fsecs:{}, csecs:{}, count:20, autoTr:false, smart:true, onlyHard:false};
   var ST = {};
   var Q = [], idx = 0, ok = 0, missed = [], answered = false, revealed = false, resetArmed = false;
 
@@ -234,11 +237,11 @@
 
   function lsGet(k){ try{ return JSON.parse(localStorage.getItem(k) || 'null'); }catch(e){ return null; } }
   function lsSet(k, v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} }
-  function save(){ lsSet(KEY, {track:S.track, mode:S.mode, wsecs:S.wsecs, fsecs:S.fsecs, count:S.count, autoTr:S.autoTr, smart:S.smart, onlyHard:S.onlyHard}); }
+  function save(){ lsSet(KEY, {track:S.track, mode:S.mode, wsecs:S.wsecs, fsecs:S.fsecs, csecs:S.csecs, count:S.count, autoTr:S.autoTr, smart:S.smart, onlyHard:S.onlyHard}); }
   function saveStats(){ lsSet(STKEY, ST); }
 
   /* ---------- прогресс ---------- */
-  function sk(w){ return (w.form ? 'form' : S.track) + '|' + w.id; }
+  function sk(w){ return (w.conj ? 'conj' : w.form ? 'form' : S.track) + '|' + w.id; }
   function stOf(w){ return ST[sk(w)] || null; }
   function isHard(w){ var s = stOf(w); return !!s && s.w > 0 && s.b < 2; }
   function isLearned(w){ var s = stOf(w); return !!s && s.b >= 3; }
@@ -406,19 +409,109 @@
     return {items:items, secs:secs, forms:F, fsecs:fsecs};
   }
 
+  /* Спряжения: формы проверены отдельно; окончания не выводятся из инфинитива. */
+  var PERSONS = [
+    ['أَنَا', 'я'], ['أَنْتَ', 'ты (м.)'], ['أَنْتِ', 'ты (ж.)'],
+    ['هُوَ', 'он'], ['هِيَ', 'она'], ['أَنْتُمَا', 'вы оба / обе'],
+    ['هُمَا', 'они оба'], ['هُمَا', 'они обе'], ['نَحْنُ', 'мы'],
+    ['أَنْتُمْ', 'вы (м.)'], ['أَنْتُنَّ', 'вы (ж.)'], ['هُمْ', 'они (м.)'], ['هُنَّ', 'они (ж.)']
+  ];
+  var CONJ_VERBS = [
+    {id:'write', ru:'писать', ar:'يَكْتُبُ', tr:'я́ктубу', stem:'كْتُب', v:'a',
+      trs:["'а́ктубу",'та́ктубу','тактуби́на','я́ктубу','та́ктубу','тактуба́ни','яктуба́ни','тактуба́ни','на́ктубу','тактубу́на','такту́бна','яктубу́на','якту́бна']},
+    {id:'breakfast', ru:'завтракать', ar:'يُفْطِرُ', tr:'ю́фтиру', stem:'فْطِر', v:'u',
+      trs:["'у́фтиру",'ту́фтиру','туфтири́на','ю́фтиру','ту́фтиру','туфтира́ни','юфтира́ни','туфтира́ни','ну́фтиру','туфтиру́на','туфти́рна','юфтиру́на','юфти́рна']},
+    {id:'prefer', ru:'предпочитать', ar:'يُفَضِّلُ', tr:'юфа́ддилю', stem:'فَضِّل', v:'u',
+      trs:["'уфа́ддилю",'туфа́ддилю','туфаддили́на','юфа́ддилю','туфа́ддилю','туфаддиля́ни','юфаддиля́ни','туфаддиля́ни','нуфа́ддилю','туфаддилю́на','туфа́ддильна','юфаддилю́на','юфа́ддильна']},
+    {id:'eat-meal', ru:'принимать пищу', ar:'يَتَنَاوَلُ', tr:'ятана́валю', stem:'تَنَاوَل', v:'a',
+      trs:["'атана́валю",'татана́валю','татанавали́на','ятана́валю','татана́валю','татанаваля́ни','ятанаваля́ни','татанаваля́ни','натана́валю','татанавалю́на','татана́вальна','ятанавалю́на','ятана́вальна'],
+      note:'Буквы تَنَاوَل сохраняются. В تَتَنَاوَلُ первая ت — приставка лица, вторая входит в основу.'},
+    {id:'return', ru:'возвращаться', ar:'يَرْجِعُ', tr:"я́рджи'у", stem:'رْجِع', v:'a',
+      trs:["'а́рджи'у","та́рджи'у","тарджи'и́на","я́рджи'у","та́рджи'у","тарджи'а́ни","ярджи'а́ни","тарджи'а́ни","на́рджи'у","тарджи'у́на","тарджи́'на","ярджи'у́на","ярджи́'на"]},
+    {id:'cook', ru:'готовить еду', ar:'يَطْبُخُ', tr:'я́тбуху', stem:'طْبُخ', v:'a',
+      trs:["'а́тбуху",'та́тбуху','татбухи́на','я́тбуху','та́тбуху','татбуха́ни','ятбуха́ни','татбуха́ни','на́тбуху','татбуху́на','татбу́хна','ятбуху́на','ятбу́хна']},
+    {id:'watch', ru:'смотреть', ar:'يُشَاهِدُ', tr:'юша́хиду', stem:'شَاهِد', v:'u',
+      trs:["'уша́хиду",'туша́хиду','тушахиди́на','юша́хиду','туша́хиду','тушахида́ни','юшахида́ни','тушахида́ни','нуша́хиду','тушахиду́на','туша́хидна','юшахиду́на','юша́хидна']},
+    {id:'wake', ru:'просыпаться', ar:'يَسْتَيْقِظُ', tr:'яста́йкизу', stem:'سْتَيْقِظ', v:'a',
+      trs:["'аста́йкизу",'таста́йкизу','тастайкизи́на','яста́йкизу','таста́йкизу','тастайкиза́ни','ястайкиза́ни','тастайкиза́ни','наста́йкизу','тастайкизу́на','таста́йкизна','ястайкизу́на','яста́йкизна'],
+      note:'В настоящем времени основа سْتَيْقِظ сохраняется: йа не выпадает.'},
+    {id:'sleep', ru:'спать', ar:'يَنَامُ', tr:'яна́му', stem:'نَام', shortStem:'نَم', v:'a',
+      trs:["'ана́му",'тана́му','танами́на','яна́му','тана́му','танама́ни','янама́ни','танама́ни','нана́му','танаму́на','тана́мна','янаму́на','яна́мна'],
+      change:'Перед نَ женского множественного числа алиф выпадает: نَام → نَم. Долгое «а» становится коротким.'},
+    {id:'rest', ru:'отдыхать', ar:'يَسْتَرِيحُ', tr:'ястари́ху', stem:'سْتَرِيح', shortStem:'سْتَرِح', v:'a',
+      trs:["'астари́ху",'тастари́ху','тастарихи́на','ястари́ху','тастари́ху','тастариха́ни','ястариха́ни','тастариха́ни','настари́ху','тастариху́на','таста́рихна','ястариху́на','яста́рихна'],
+      change:'Перед نَ женского множественного числа йа выпадает: سْتَرِيح → سْتَرِح. Долгое «и» становится коротким.'},
+    {id:'eat', ru:'есть', ar:'يَأْكُلُ', tr:"я́'кулю", stem:'أْكُل', v:'a', first:'آكُلُ',
+      trs:["'а́кулю","та́'кулю","та'кули́на","я́'кулю","та́'кулю","та'куля́ни","я'куля́ни","та'куля́ни","на́'кулю","та'кулю́на","та'ку́льна","я'кулю́на","я'ку́льна"],
+      change:'В форме «я ем» две хамзы сливаются в آ: آكُلُ. В остальных формах сохраняется أْكُل.'},
+    {id:'dinner', ru:'ужинать', ar:'يَتَعَشَّى', tr:"ята'а́шша",
+      ars:['أَتَعَشَّى','تَتَعَشَّى','تَتَعَشَّيْنَ','يَتَعَشَّى','تَتَعَشَّى','تَتَعَشَّيَانِ','يَتَعَشَّيَانِ','تَتَعَشَّيَانِ','نَتَعَشَّى','تَتَعَشَّوْنَ','تَتَعَشَّيْنَ','يَتَعَشَّوْنَ','يَتَعَشَّيْنَ'],
+      trs:["'ата'а́шша","тата'а́шша","тата'ашша́йна","ята'а́шша","тата'а́шша","тата'ашшая́ни","ята'ашшая́ни","тата'ашшая́ни","ната'а́шша","тата'ашша́уна","тата'ашша́йна","ята'ашша́уна","ята'ашша́йна"],
+      change:'В коротких формах сохраняется ى. Перед окончаниями появляются ي или و: تَتَعَشَّيْنَ, يَتَعَشَّوْنَ.'}
+  ];
+  function buildConjugations(){
+    var items = [], secs = [];
+    var prefixes = ['أ','ت','ت','ي','ت','ت','ي','ت','ن','ت','ت','ي','ي'];
+    var endings = ['ُ','ُ','ِينَ','ُ','ُ','َانِ','َانِ','َانِ','ُ','ُونَ','ْنَ','ُونَ','ْنَ'];
+    CONJ_VERBS.forEach(function(v){
+      var sec = 'conj-' + v.id, label = v.ru + ' · настоящее';
+      PERSONS.forEach(function(p, i){
+        var femalePlural = i === 10 || i === 12;
+        var pre = prefixes[i] + (v.v === 'u' ? 'ُ' : 'َ');
+        var stem = femalePlural && v.shortStem ? v.shortStem : v.stem;
+        var ar = v.ars ? v.ars[i] : i === 0 && v.first ? v.first : pre + stem + endings[i];
+        var rule = v.change && (v.ars || femalePlural || (v.first && i === 0)) ? v.change :
+          'Приставка ' + pre + 'ـ указывает на лицо; окончание ـ' + endings[i] + ' соответствует «' + p[1] + '». Буквы основы сохраняются.';
+        items.push({id:sec+'|'+i, sec:sec, secLabel:label, conj:true, form:true,
+          ar:ar, tr:v.trs[i], ru:p[1]+' · '+v.ru, label:p[1]+' · «'+v.ru+'»',
+          tag:'Спряжение · настоящее время', variants:[], row:i, col:v.id,
+          promptAr:v.ar+' ← '+p[0], extra:[{k:'Форма «он»',v:v.ar,t:v.tr},{k:'Как получилось',v:rule}].concat(v.note ? [{k:'Запомни',v:v.note}] : [])});
+      });
+      secs.push({id:sec,label:label,n:13});
+    });
+    var pastAr=['كَتَبْتُ','كَتَبْتَ','كَتَبْتِ','كَتَبَ','كَتَبَتْ','كَتَبْتُمَا','كَتَبَا','كَتَبَتَا','كَتَبْنَا','كَتَبْتُمْ','كَتَبْتُنَّ','كَتَبُوا','كَتَبْنَ'];
+    var pastTr=['ката́бту','ката́бта','ката́бти','ка́таба','ка́табат','катабтума́','ка́таба','катаба́та','ката́бна','ката́бтум','катабту́нна','ка́табу','ката́бна'];
+    PERSONS.forEach(function(p,i){
+      items.push({id:'conj-write-past|'+i,sec:'conj-write-past',secLabel:'писать · прошедшее',conj:true,form:true,
+        ar:pastAr[i],tr:pastTr[i],ru:p[1]+' · писать',label:p[1]+' · «писать»',tag:'Спряжение · прошедшее время',
+        variants:[],row:i,col:'write-past',promptAr:'كَتَبَ ← '+p[0],extra:[{k:'Форма «он»',v:'كَتَبَ',t:'ка́таба'},
+          {k:'Как получилось',v:i===8?'Окончание ـنَا — «мы», с долгим «а».':i===12?'Окончание ـنَ — «они», женский род, с коротким «а».':'В прошедшем времени лицо показывают окончания: найди форму для «'+p[1]+'».'}]});
+    });
+    secs.push({id:'conj-write-past',label:'писать · прошедшее',n:13});
+    return {items:items,secs:secs};
+  }
+  function markedMatch(raw, expected){
+    var marks = /[\u064B-\u065F\u0670]/;
+    function parts(s){
+      var out=[];
+      clean(s).normalize('NFD').split('').forEach(function(c){
+        if(marks.test(c) && out.length) out[out.length-1].marks.push(c);
+        else out.push({letter:c,marks:[]});
+      });
+      return out;
+    }
+    var a=parts(raw), b=parts(expected);
+    return a.length===b.length && a.every(function(p,i){
+      return p.letter===b[i].letter && p.marks.every(function(m){return b[i].marks.indexOf(m)>=0;});
+    });
+  }
+
   /* ---------- настройки ---------- */
   function show(view){ ['loading','setup','play'].forEach(function(v){ $(v).hidden = (v !== view); }); window.scrollTo(0, 0); }
   function isForm(){ return S.track === 'form'; }
-  function base(){ return isForm() ? FORMS : WORDS; }
-  function secList(){ return isForm() ? FSECS : WSECS; }
-  function secMap(){ return isForm() ? S.fsecs : S.wsecs; }
+  function isConj(){ return S.track === 'conj'; }
+  function base(){ return isConj() ? CONJ : isForm() ? FORMS : WORDS; }
+  function secList(){ return isConj() ? CSECS : isForm() ? FSECS : WSECS; }
+  function secMap(){ return isConj() ? S.csecs : isForm() ? S.fsecs : S.wsecs; }
   function inSecs(){ var m = secMap(); return base().filter(function(w){ return m[w.sec]; }); }
   function pool(){ var p = inSecs(); return S.onlyHard ? p.filter(isHard) : p; }
   function plural(n, a, b, c){ var x = n % 10, y = n % 100; return (x === 1 && y !== 11) ? a : (x >= 2 && x <= 4 && (y < 12 || y > 14)) ? b : c; }
-  function unit(n){ return isForm() ? plural(n, 'форма', 'формы', 'форм') : plural(n, 'слово', 'слова', 'слов'); }
+  function unit(n){ return (isForm() || isConj()) ? plural(n, 'форма', 'формы', 'форм') : plural(n, 'слово', 'слова', 'слов'); }
 
   function renderSetup(){
     resetArmed = false;
+    $('conj-help').hidden = !isConj();
+    $('sections-title').textContent = isConj() ? 'Глаголы и время' : 'Разделы';
     $('tracks').innerHTML = TRACKS.map(function(m){
       return '<button type="button" class="mode" data-t="' + m.id + '" aria-pressed="' + (S.track === m.id) + '"><b>' + bidi(m.t) + '</b><span>' + m.d + '</span></button>';
     }).join('');
@@ -458,7 +551,7 @@
     $('start').textContent = n ? ('Начать · ' + take) : 'Начать';
   }
 
-  $('tracks').addEventListener('click', function(e){ var b = e.target.closest('[data-t]'); if(!b) return; S.track = b.getAttribute('data-t'); save(); renderSetup(); });
+  $('tracks').addEventListener('click', function(e){ var b = e.target.closest('[data-t]'); if(!b) return; var target = b.getAttribute('data-t'); if(target === 'conj' && S.track !== target) S.mode = 'choice'; S.track = target; save(); renderSetup(); });
   $('modes').addEventListener('click', function(e){ var b = e.target.closest('[data-m]'); if(!b) return; S.mode = b.getAttribute('data-m'); save(); renderSetup(); });
   $('secs').addEventListener('click', function(e){ var b = e.target.closest('[data-s]'); if(!b) return; var id = b.getAttribute('data-s'), m = secMap(); m[id] = !m[id]; save(); renderSetup(); });
   $('counts').addEventListener('click', function(e){ var b = e.target.closest('[data-c]'); if(!b) return; S.count = +b.getAttribute('data-c'); save(); renderSetup(); });
@@ -495,7 +588,8 @@
   function begin(list){ Q = list; idx = 0; ok = 0; missed = []; renderQ(); }
 
   /* ---------- вопросы ---------- */
-  function same(w){ return base().filter(function(x){ return nk(x.label) === nk(w.label) && x.tag === w.tag; }); }
+  function same(w){ return base().filter(function(x){ return w.conj ? x.id === w.id : nk(x.label) === nk(w.label) && x.tag === w.tag; }); }
+  function answerKey(w, ar){ return w.conj ? clean(ar).normalize('NFC') : nar(ar); }
 
   function distractorsRu(w){
     var out = [], seen = {}; seen[nk(w.label)] = 1;
@@ -511,11 +605,11 @@
     return out;
   }
   function distractorsAr(w){
-    var good = {}; same(w).forEach(function(x){ good[nar(x.ar)] = 1; });
-    var out = [], seen = {}; seen[nar(w.ar)] = 1;
+    var good = {}; same(w).forEach(function(x){ good[answerKey(w, x.ar)] = 1; });
+    var out = [], seen = {}; seen[answerKey(w, w.ar)] = 1;
     function take(list){
       for(var i = 0; i < list.length && out.length < 3; i++){
-        var k = nar(list[i].ar);
+        var k = answerKey(w, list[i].ar);
         if(!seen[k] && !good[k]){ seen[k] = 1; out.push(list[i].ar); }
       }
     }
@@ -541,7 +635,7 @@
       var others = same(w).filter(function(x){ return nar(x.ar) !== nar(w.ar); });
       if(others.length) h += '<div class="ex">Тоже подходит: ' + others.map(function(x){ return '<span class="arx">' + esc(x.ar) + '</span>'; }).join(', ') + '</div>';
     }
-    w.extra.forEach(function(x){ h += '<div class="ex">' + esc(x.k) + ': ' + arField(x.v) + (x.t ? ' · ' + esc(x.t) : '') + '</div>'; });
+    w.extra.forEach(function(x){ h += '<div class="ex">' + esc(x.k) + ': ' + (w.conj ? bidi(x.v) : arField(x.v)) + (x.t ? ' · ' + esc(x.t) : '') + '</div>'; });
     return h;
   }
 
@@ -559,6 +653,7 @@
     var h = '<div class="playbar"><button class="btn link" id="toset" type="button">← Настройки</button><span>' + (idx + 1) + ' из ' + Q.length + '</span><span>' + (S.mode === 'flash' ? 'Знал' : 'Верно') + ': ' + ok + '</span></div>';
     h += '<div class="prog"><i style="width:' + pct + '%"></i></div>';
     h += '<div class="card"><div class="tag">' + bidi(w.tag) + (isHard(w) ? ' · трудное' : '') + '</div>';
+    if(w.conj) h += '<div class="qbase" dir="rtl">' + esc(w.promptAr) + '</div>';
     if(toAr) h += '<div class="qru' + (w.label.length > 22 ? ' m' : '') + '">' + bidi(w.label) + '</div><div class="qtr" id="qtr"></div>';
     else h += '<div class="qar ' + arClass(w.ar) + '">' + esc(w.ar) + '</div><div class="qtr" id="qtr">' + (S.autoTr ? esc(w.tr) : '') + '</div>';
     if(S.mode === 'type'){
@@ -599,6 +694,13 @@
     return 'bad';
   }
   function judgeAr(w, raw){
+    if(w.conj){
+      if(AR.test(raw)){
+        if(nar(raw) !== nar(w.ar) || !markedMatch(raw,w.ar)) return 'bad';
+        return clean(raw).normalize('NFC') === clean(w.ar).normalize('NFC') ? 'ok' : 'unvocalized';
+      }
+      return ntr(raw) && ntr(raw) === ntr(w.tr) ? 'ok' : 'bad';
+    }
     var cands = same(w), best = 'bad';
     if(AR.test(raw)){
       var a = nar(raw).replace(/ـ/g, ''), l = narLoose(raw);
@@ -628,7 +730,7 @@
     $('qtr').textContent = w.tr;
     var good = status !== 'bad';
     markResult(w, good);
-    var head = skip ? 'Ответ:' : status === 'ok' ? 'Верно!' : status === 'typo' ? 'Верно (опечатка не страшна)' : status === 'loose' ? 'Верно, но проверь хамзу, ة или ى' : 'Не совсем.';
+    var head = skip ? 'Ответ:' : status === 'ok' ? 'Верно!' : status === 'typo' ? 'Верно (опечатка не страшна)' : status === 'unvocalized' ? 'Верно по буквам. Сверь огласовки и окончания:' : status === 'loose' ? 'Верно, но проверь хамзу, ة или ى' : 'Не совсем.';
     $('fb').innerHTML = '<div class="res ' + (good ? 'ok' : 'bad') + '">' + head + '</div>' + details(w) + nextBtn();
     $('go').textContent = 'Дальше'; $('go').onclick = next;
     wireNext();
@@ -706,6 +808,7 @@
   }).then(function(html){
     var res = parse(new DOMParser().parseFromString(html, 'text/html'));
     WORDS = res.items; WSECS = res.secs; FORMS = res.forms; FSECS = res.fsecs;
+    var conjugations = buildConjugations(); CONJ = conjugations.items; CSECS = conjugations.secs;
     if(!WORDS.length) throw new Error('empty');
     ST = lsGet(STKEY) || {};
     var saved = lsGet(KEY), old = saved ? null : lsGet(OLDKEY);
@@ -725,6 +828,7 @@
     }
     S.wsecs = initSecs(WSECS, saved.wsecs);
     S.fsecs = initSecs(FSECS, saved.fsecs);
+    S.csecs = initSecs(CSECS, saved.csecs);
     if(S.track === 'form' && !FORMS.length) S.track = 'ar';
     renderSetup(); show('setup');
   }).catch(function(err){
