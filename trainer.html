@@ -732,7 +732,7 @@
     markResult(w, good);
     var head = skip ? 'Ответ:' : status === 'ok' ? 'Верно!' : status === 'typo' ? 'Верно (опечатка не страшна)' : status === 'unvocalized' ? 'Верно по буквам. Сверь огласовки и окончания:' : status === 'loose' ? 'Верно, но проверь хамзу, ة или ى' : 'Не совсем.';
     $('fb').innerHTML = '<div class="res ' + (good ? 'ok' : 'bad') + '">' + head + '</div>' + details(w) + nextBtn();
-    $('go').textContent = 'Дальше'; $('go').onclick = next;
+    $('go').textContent = 'Дальше';
     wireNext();
   }
 
