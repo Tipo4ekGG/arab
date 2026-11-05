@@ -138,6 +138,10 @@
     .masthead .inner{padding-block:14px}
   }
   @media(prefers-reduced-motion:reduce){.prog i{transition:none}}
+  #single-topic{width:100%;padding:9px 10px;color:var(--ink);background:var(--surface-2);border:1px solid var(--line);border-radius:9px;font:inherit;font-size:16px}
+  .multi{margin-top:7px}
+  .multi summary{cursor:pointer;color:var(--accent);padding-block:5px}
+  .multi[open] summary{margin-bottom:6px}
 </style>
 </head>
 <body>
@@ -165,9 +169,13 @@
     </section>
     <section class="box">
       <h2 id="sections-title">Разделы</h2>
+      <select id="single-topic" aria-label="Выбор темы"></select>
+      <details class="multi"><summary>Выбрать несколько тем</summary>
       <div class="wraprow" id="secs"></div>
       <div class="wraprow" style="margin-top:10px"><button class="tgl ghost" id="allsecs" type="button"></button></div>
-      <p class="avail" id="avail"></p>
+      </details>
+      <p class="avail" id="avail" role="status"></p>
+      <button class="btn link" id="show-all-items" type="button" hidden>Тренировать все выбранные</button>
       <p class="stat" id="stat"></p>
     </section>
     <section class="box">
@@ -557,6 +565,16 @@
       return '<button type="button" class="mode" data-m="' + m.id + '" aria-pressed="' + (S.mode === m.id) + '"><b>' + m.t + '</b><span>' + m.d[S.track] + '</span></button>';
     }).join('');
     var m = secMap();
+    var topics = secList(), selected = topics.filter(function(s){return m[s.id];});
+    var picker = $('single-topic');
+    picker.replaceChildren(new Option('Все темы','*'));
+    topics.forEach(function(s){picker.add(new Option(s.label,s.id));});
+    if(selected.length === topics.length) picker.value = '*';
+    else if(selected.length === 1) picker.value = selected[0].id;
+    else {
+      picker.add(new Option(selected.length ? 'Выбрано тем: ' + selected.length : 'Выбери тему',''));
+      picker.value = '';
+    }
     $('secs').innerHTML = secList().map(function(s){
       return '<button type="button" class="tgl" data-s="' + s.id + '" aria-pressed="' + !!m[s.id] + '">' + bidi(s.label) + '<small>' + s.n + '</small></button>';
     }).join('');
@@ -583,6 +601,7 @@
     else if(S.onlyHard && inSecs().length) msg = 'Трудных пока нет: в этих разделах ты ещё не ошибался или уже всё исправил.';
     else msg = 'Выбери хотя бы один раздел.';
     $('avail').textContent = msg;
+    $('show-all-items').hidden = !(S.onlyHard && !n && inSecs().length);
     var p = inSecs(), learned = p.filter(isLearned).length, hard = p.filter(isHard).length, seen = p.filter(stOf).length;
     $('stat').innerHTML = p.length ? ('Прогресс в этом направлении: выучено <b>' + learned + '</b> из ' + p.length + ' · трудных <b>' + hard + '</b> · ещё не встречались ' + (p.length - seen) + '.') : '';
     $('start').disabled = !n;
@@ -593,6 +612,14 @@
   $('modes').addEventListener('click', function(e){ var b = e.target.closest('[data-m]'); if(!b) return; S.mode = b.getAttribute('data-m'); save(); renderSetup(); });
   $('secs').addEventListener('click', function(e){ var b = e.target.closest('[data-s]'); if(!b) return; var id = b.getAttribute('data-s'), m = secMap(); m[id] = !m[id]; save(); renderSetup(); });
   $('counts').addEventListener('click', function(e){ var b = e.target.closest('[data-c]'); if(!b) return; S.count = +b.getAttribute('data-c'); save(); renderSetup(); });
+  $('single-topic').addEventListener('change', function(){
+    var id = this.value;
+    if(!id) return;
+    var selected = secMap();
+    secList().forEach(function(s){selected[s.id] = id === '*' || s.id === id;});
+    save(); renderSetup();
+  });
+  $('show-all-items').addEventListener('click', function(){S.onlyHard=false; save(); renderSetup();});
   $('allsecs').addEventListener('click', function(){
     var m = secMap(), all = secList().every(function(s){ return m[s.id]; });
     secList().forEach(function(s){ m[s.id] = !all; }); save(); renderSetup();

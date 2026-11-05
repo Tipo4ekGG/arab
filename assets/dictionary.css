@@ -193,3 +193,5 @@ body.no-ar tbody .ar:not(.peek) .conj-affix{color:transparent}
   .rtl[data-layout=verb] td:nth-child(3),.rtl[data-layout=verb] td:nth-child(4){grid-column:2}
   .bar .panel{max-height:34dvh;overflow:auto}
 }
+
+@media(max-width:640px){.rtl[data-layout] td .ar,.rtl[data-layout] td .tr{white-space:normal;overflow-wrap:anywhere}}

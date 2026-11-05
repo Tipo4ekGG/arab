@@ -14,6 +14,7 @@ const server = http.createServer((req, res) => {
   fs.createReadStream(file).pipe(res);
 });
 async function run(page, origin, width) {
+  page.setDefaultTimeout(7000);
   const errors=[];
   page.on('pageerror',e=>errors.push(e.message));
   await page.route(/https:\/\/fonts\./, route=>route.abort());
@@ -25,7 +26,7 @@ async function run(page, origin, width) {
   const lunch=section.locator('tr').filter({has:page.getByText('обед',{exact:true})});
   assert.equal(await lunch.count(),1);
   await page.locator('#topic').selectOption('food');
-  await page.waitForURL('**/#food');
+  await page.waitForURL(url=>url.hash==='#food');
   for(const term of ['الغداء','аль-гада’','еда обед']) {
     await q.fill(term);
     assert.ok(await lunch.isVisible(),term);
@@ -55,6 +56,11 @@ async function run(page, origin, width) {
   assert.ok(await page.locator('#secs [aria-pressed=true]').count()===1);
   assert.equal(await page.locator('body').evaluate(e=>e.classList.contains('font-naskh')),true);
   // Finish a short session with intentional errors, then repeat only errors.
+  assert.equal(await page.locator('#single-topic').inputValue(),'food');
+  await page.locator('#single-topic').selectOption('study');
+  assert.equal(await page.locator('#secs [aria-pressed=true]').count(),1);
+  await page.locator('#single-topic').selectOption('food');
+  console.log('Dictionary, user preferences and topic selection passed at',width);
   await page.locator('#start').click();
   let missed=0;
   for(let i=0;i<10;i++){
