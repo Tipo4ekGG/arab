@@ -16,11 +16,11 @@ const server = http.createServer((req, res) => {
 async function run(page, origin, width) {
   const errors=[];
   page.on('pageerror',e=>errors.push(e.message));
-  await page.route('https://fonts.**/*', route=>route.abort());
+  await page.route(/https:\/\/fonts\./, route=>route.abort());
   await page.goto(origin+'/index.html');
   const section=page.locator('#food'), q=page.locator('#q');
   await page.locator('#topic').waitFor();
-  assert.equal(await page.locator('main section').count(),22);
+  assert.equal(await page.locator('main section').count(),23);
   assert.equal(await section.locator('tbody tr').count(),37);
   const lunch=section.locator('tr').filter({has:page.getByText('обед',{exact:true})});
   assert.equal(await lunch.count(),1);

@@ -73,6 +73,11 @@
       else if(headers[0]==='Перевод' && headers[1]==='Слово') table.dataset.layout='day';
       const rows=Array.from(table.tBodies).flatMap(body=>Array.from(body.rows,r=>({el:r,text:indexRow(r)})));
       const box=table.closest('.tablebox');
+      if(!table.dataset.layout){
+        box.tabIndex=0;
+        box.setAttribute('role','region');
+        box.setAttribute('aria-label',name+' — таблица');
+      }
       const heading=box.previousElementSibling;
       return {box,rows,heading:heading && heading.tagName==='H3' ? heading : null};
     });
@@ -82,8 +87,15 @@
   $('topic-tools').hidden=false;
   chips.hidden=true;
 
+  const topButton=document.createElement('button');
+  topButton.type='button'; topButton.className='totop'; topButton.hidden=true;
+  topButton.setAttribute('aria-label','Наверх'); topButton.textContent='↑';
+  topButton.addEventListener('click',()=>window.scrollTo({top:0}));
+  document.body.append(topButton);
+
   let positions=[], positionFrame=0, current='', lastSearch=null;
   function activeTopic() {
+    topButton.hidden=window.scrollY<700;
     const line=window.scrollY+bar.offsetHeight+18;
     let id='';
     for(const pos of positions) { if(pos.top>line) break; id=pos.id; }
@@ -121,7 +133,7 @@
       let count=0;
       function show(item) {
         const match=tokens.every(token=>item.text.includes(token) || group.title.includes(token));
-        item.el.hidden=!match;
+        if(item.el.hidden===match) item.el.hidden=!match;
         if(match) count++;
       }
       for(const table of group.tables) {
@@ -141,7 +153,12 @@
     measure();
   }
   function clearSearch() {q.value='';search();}
-  q.addEventListener('input',search);
+  q.addEventListener('input',()=>{
+    const headHeight=document.querySelector('.masthead').offsetHeight;
+    const wasDeep=window.scrollY>headHeight+24;
+    search();
+    if(wasDeep) window.scrollTo({top:headHeight,behavior:'instant'});
+  });
   q.addEventListener('keydown',e=>{if(e.key==='Escape'){e.preventDefault();clearSearch();}});
   qClear.addEventListener('click',()=>{clearSearch();q.focus();});
   empty.querySelector('button').addEventListener('click',()=>{clearSearch();q.focus();});
