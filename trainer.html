@@ -119,11 +119,25 @@
   .stat b{color:var(--ink);font-weight:600}
   .tgl.warn{background:var(--bad-soft);color:var(--ink)}
   input.arin{font-family:var(--arfont);font-size:20px}
-  #ptr{position:fixed;left:0;right:0;top:0;z-index:9999;display:flex;justify-content:center;pointer-events:none;transform:translateY(-70px);opacity:0;padding-top:env(safe-area-inset-top,0px)}
-  #ptr span{margin-top:10px;background:#0e5a4c;color:#fbf1d6;font:500 13px -apple-system,BlinkMacSystemFont,sans-serif;padding:8px 16px;border-radius:999px;box-shadow:0 2px 10px rgba(0,0,0,.25)}
-  #ptr.go span::before{content:"";display:inline-block;width:11px;height:11px;margin-right:8px;vertical-align:-1px;border:2px solid #fbf1d6;border-top-color:transparent;border-radius:50%;animation:ptrspin .7s linear infinite}
-  @keyframes ptrspin{to{transform:rotate(360deg)}}
   html,body{overscroll-behavior-y:contain}
+  .startbar{position:sticky;bottom:0;padding:8px 0 max(8px,env(safe-area-inset-bottom));background:var(--bg);z-index:2}
+  .preferences summary{cursor:pointer;font-weight:600;padding:3px 0}
+  .preferences[open] summary{margin-bottom:12px}
+  .tgl small{display:inline-block;padding:0 4px}
+  .qbase,.qar,.opt.ar,.fb .ans.arans{line-height:1.8}
+  @media(min-width:720px){
+    #tracks,#modes{grid-template-columns:repeat(2,minmax(0,1fr))}
+    #modes{grid-template-columns:repeat(3,minmax(0,1fr))}
+  }
+  @media(max-width:430px){
+    .wrap{padding-inline:max(12px,env(safe-area-inset-left))}
+    .card{padding:16px 12px}
+    .tgl{min-height:40px}
+    .opts{grid-template-columns:minmax(0,1fr)}
+    .playbar{flex-wrap:wrap}
+    .masthead .inner{padding-block:14px}
+  }
+  @media(prefers-reduced-motion:reduce){.prog i{transition:none}}
 </style>
 </head>
 <body>
@@ -160,8 +174,8 @@
       <h2>Сколько заданий за раз</h2>
       <div class="wraprow" id="counts"></div>
     </section>
-    <section class="box">
-      <h2>Ещё</h2>
+    <details class="box preferences">
+      <summary>Настройки и прогресс</summary>
       <div class="wraprow">
         <button class="tgl" id="smart" type="button" aria-pressed="true">Чаще трудные</button>
         <button class="tgl" id="onlyhard" type="button" aria-pressed="false">Только трудные</button>
@@ -169,8 +183,8 @@
         <button class="tgl" id="fontsw" type="button" aria-pressed="false">Шрифт: классический</button>
       </div>
       <div class="wraprow" style="margin-top:10px"><button class="tgl ghost" id="reset" type="button">Сбросить прогресс</button></div>
-    </section>
-    <button class="btn primary wide" id="start" type="button">Начать</button>
+    </details>
+    <div class="startbar"><button class="btn primary wide" id="start" type="button">Начать</button></div>
   </div>
 
   <div id="play" hidden></div>
@@ -378,7 +392,11 @@
               var pw = mk(PRON_SEC, 'Местоимения', c[0], c[1], c[2], [], 'Местоимение');
               pw.id = id + '|' + c[0] + '|';
               items.push(pw);
-            }else if(c[0] && c[2]) items.push(mk(id, label, c[0], c[1], c[2], extra));
+            }else if(c[0] && c[2]){
+              var word = mk(id, label, c[0], c[1], c[2], extra);
+              word.alsoIn = tr.getAttribute('data-also-in');
+              items.push(word);
+            }
             if(heads[3] === 'Антоним' && c.length >= 6 && c[3] && c[5]) items.push(mk(id, label, c[3], c[4], c[5], [], label + ' · антоним'));
           }
         });
@@ -400,6 +418,9 @@
       if(n > 0) secs.push({id:id, label:label, n:n});
       var np = items.slice(before).filter(function(x){ return x.sec === PRON_SEC; }).length;
       if(np > 0) secs.push({id:PRON_SEC, label:'Местоимения', n:np});
+    });
+    secs.forEach(function(sec){
+      sec.n += items.filter(function(word){ return word.alsoIn === sec.id; }).length;
     });
     var fsecs = [];
     Object.keys(FLABEL).forEach(function(k){
@@ -502,8 +523,25 @@
   function isConj(){ return S.track === 'conj'; }
   function base(){ return isConj() ? CONJ : isForm() ? FORMS : WORDS; }
   function secList(){ return isConj() ? CSECS : isForm() ? FSECS : WSECS; }
-  function secMap(){ return isConj() ? S.csecs : isForm() ? S.fsecs : S.wsecs; }
-  function inSecs(){ var m = secMap(); return base().filter(function(w){ return m[w.sec]; }); }
+  var lesson = null;
+  function secMap(){
+    if(lesson && S.track === lesson.track) return lesson.selected;
+    return isConj() ? S.csecs : isForm() ? S.fsecs : S.wsecs;
+  }
+  function openLesson(){
+    var params = new URLSearchParams(location.search);
+    var track = params.get('track'), topic = params.get('topic');
+    if(!TRACKS.some(function(t){return t.id === track;})) return;
+    var list = track === 'form' ? FSECS : track === 'conj' ? CSECS : WSECS;
+    if(topic && !list.some(function(s){return s.id === topic;})) return;
+    S.track = track;
+    if(topic){
+      var selected = {};
+      list.forEach(function(s){selected[s.id] = s.id === topic;});
+      lesson = {track:track, selected:selected};
+    }
+  }
+  function inSecs(){ var m = secMap(); return base().filter(function(w){ return m[w.sec] || (w.alsoIn && m[w.alsoIn]); }); }
   function pool(){ var p = inSecs(); return S.onlyHard ? p.filter(isHard) : p; }
   function plural(n, a, b, c){ var x = n % 10, y = n % 100; return (x === 1 && y !== 11) ? a : (x >= 2 && x <= 4 && (y < 12 || y > 14)) ? b : c; }
   function unit(n){ return (isForm() || isConj()) ? plural(n, 'форма', 'формы', 'форм') : plural(n, 'слово', 'слова', 'слов'); }
@@ -532,7 +570,7 @@
     var naskh = document.body.classList.contains('font-naskh');
     $('fontsw').setAttribute('aria-pressed', naskh ? 'true' : 'false');
     $('fontsw').textContent = 'Шрифт: ' + (naskh ? 'классический' : 'обычный');
-    $('reset').textContent = 'Сбросить прогресс';
+    $('reset').textContent = 'Сбросить прогресс этого направления';
     $('reset').classList.remove('warn');
     refreshAvail();
   }
@@ -588,7 +626,7 @@
   function begin(list){ Q = list; idx = 0; ok = 0; missed = []; renderQ(); }
 
   /* ---------- вопросы ---------- */
-  function same(w){ return base().filter(function(x){ return w.conj ? x.id === w.id : nk(x.label) === nk(w.label) && x.tag === w.tag; }); }
+  function same(w){ return base().filter(function(x){ return w.conj ? x.id === w.id : (w.form ? x.label === w.label : nk(x.label) === nk(w.label)) && x.tag === w.tag; }); }
   function answerKey(w, ar){ return w.conj ? clean(ar).normalize('NFC') : nar(ar); }
 
   function distractorsRu(w){
@@ -650,7 +688,7 @@
     show('play');
     if(idx >= Q.length){ return renderDone(); }
     var w = Q[idx], pct = Math.round(idx / Q.length * 100), toAr = S.track !== 'ar';
-    var h = '<div class="playbar"><button class="btn link" id="toset" type="button">← Настройки</button><span>' + (idx + 1) + ' из ' + Q.length + '</span><span>' + (S.mode === 'flash' ? 'Знал' : 'Верно') + ': ' + ok + '</span></div>';
+    var h = '<div class="playbar"><button class="btn link" id="toset" type="button">← Настройки</button><span>' + (idx + 1) + ' из ' + Q.length + '</span><span id="score" aria-live="polite">' + (S.mode === 'flash' ? 'Знал' : 'Верно') + ': ' + ok + '</span></div>';
     h += '<div class="prog"><i style="width:' + pct + '%"></i></div>';
     h += '<div class="card"><div class="tag">' + bidi(w.tag) + (isHard(w) ? ' · трудное' : '') + '</div>';
     if(w.conj) h += '<div class="qbase" dir="rtl">' + esc(w.promptAr) + '</div>';
@@ -666,9 +704,9 @@
     }else{
       h += '<div class="reveal" id="rev"><div class="sub"><button class="btn primary" id="show" type="button">Показать ответ</button></div></div>';
     }
-    h += '<div class="fb" id="fb"></div></div>';
+    h += '<div class="fb" id="fb" aria-live="polite"></div></div>';
     $('play').innerHTML = h;
-    $('toset').addEventListener('click', function(){ renderSetup(); show('setup'); });
+    $('toset').addEventListener('click', function(){ renderSetup(); show('setup'); $('start').focus(); });
     if($('hint')) $('hint').addEventListener('click', function(){ $('qtr').textContent = hintText(w); });
     if(S.mode === 'type'){
       $('go').addEventListener('click', function(){ checkType(w, false); });
@@ -685,7 +723,12 @@
   function nextBtn(){ return '<div class="sub"><button class="btn primary" id="nx" type="button">Дальше</button></div>'; }
   function wireNext(){ var b = $('nx'); if(b){ b.addEventListener('click', next); b.focus(); } }
   function next(){ idx++; renderQ(); }
-  function markResult(w, good){ if(good) ok++; else missed.push(w); record(w, good); }
+  function markResult(w, good){
+    if(good) ok++; else missed.push(w);
+    record(w, good);
+    $('score').textContent = (S.mode === 'flash' ? 'Знал: ' : 'Верно: ') + ok;
+    document.querySelector('.prog i').style.width = ((idx + 1) / Q.length * 100) + '%';
+  }
 
   function judgeRu(w, raw){
     var v = nk(raw);
@@ -732,7 +775,9 @@
     markResult(w, good);
     var head = skip ? 'Ответ:' : status === 'ok' ? 'Верно!' : status === 'typo' ? 'Верно (опечатка не страшна)' : status === 'unvocalized' ? 'Верно по буквам. Сверь огласовки и окончания:' : status === 'loose' ? 'Верно, но проверь хамзу, ة или ى' : 'Не совсем.';
     $('fb').innerHTML = '<div class="res ' + (good ? 'ok' : 'bad') + '">' + head + '</div>' + details(w) + nextBtn();
-    $('go').textContent = 'Дальше';
+    $('go').hidden = true;
+    $('skip').hidden = true;
+    $('hint').hidden = true;
     wireNext();
   }
 
@@ -745,6 +790,7 @@
       b.disabled = true;
     });
     if(!good) btn.classList.add('wrong');
+    $('hint').hidden = true;
     $('qtr').textContent = w.tr;
     markResult(w, good);
     $('fb').innerHTML = '<div class="res ' + (good ? 'ok' : 'bad') + '">' + (good ? 'Верно!' : 'Не то.') + '</div>' + details(w) + nextBtn();
@@ -763,7 +809,7 @@
     var n = Q.length, pct = n ? Math.round(ok / n * 100) : 0;
     var h = '<div class="card"><div class="tag">Готово</div><div class="big">' + (S.mode === 'flash' ? 'Знал ' : 'Верно ') + ok + ' из ' + n + ' · ' + pct + '%</div>';
     if(missed.length){
-      h += '<div class="tag" style="margin-top:12px">Над чем поработать · эти слова будут попадаться чаще</div><ul class="missed">' + missed.map(function(w){
+      h += '<div class="tag" style="margin-top:12px">Над чем поработать · можно повторить сразу</div><ul class="missed">' + missed.map(function(w){
         return '<li><span class="arx">' + esc(w.ar) + '</span><span class="ruw">' + bidi(w.label) + '</span></li>';
       }).join('') + '</ul>';
     }else{
@@ -802,7 +848,7 @@
 
   try{ if(localStorage.getItem(FONTKEY) === 'naskh') document.body.classList.add('font-naskh'); }catch(e){}
 
-  fetch('index.html', {cache:'no-cache'}).then(function(r){
+  fetch('index.html').then(function(r){
     if(!r.ok) throw new Error('HTTP ' + r.status);
     return r.text();
   }).then(function(html){
@@ -821,54 +867,21 @@
     if(typeof saved.smart === 'boolean') S.smart = saved.smart;
     S.onlyHard = !!saved.onlyHard;
     function initSecs(list, sv){
-      var m = {}, any = false;
-      list.forEach(function(s){ var on = sv ? (s.id in sv ? !!sv[s.id] : true) : true; m[s.id] = on; if(on) any = true; });
-      if(!any) list.forEach(function(s){ m[s.id] = true; });
+      var m = {};
+      list.forEach(function(s){ var on = sv ? (s.id in sv ? !!sv[s.id] : true) : true; m[s.id] = on; });
+
       return m;
     }
     S.wsecs = initSecs(WSECS, saved.wsecs);
     S.fsecs = initSecs(FSECS, saved.fsecs);
     S.csecs = initSecs(CSECS, saved.csecs);
     if(S.track === 'form' && !FORMS.length) S.track = 'ar';
+    openLesson();
     renderSetup(); show('setup');
   }).catch(function(err){
     if(window.console) console.error(err);
     fail('Не получилось загрузить слова из словаря. Тренажёр читает их со страницы <a href="./">словаря</a>, поэтому открывай его с сайта, а не как отдельный файл, и проверь интернет.');
   });
-})();
-</script>
-<div id="ptr" aria-hidden="true"><span>↓ Потяните, чтобы обновить</span></div>
-<script>
-(function(){
-  var el=document.getElementById('ptr'); if(!el) return;
-  var lab=el.firstChild, startY=null, pull=0, busy=false, LIM=70, MAX=110;
-  function set(p,anim){
-    el.style.transition=anim?'transform .2s,opacity .2s':'none';
-    el.style.transform='translateY('+(p-70)+'px)';
-    el.style.opacity=p>8?'1':'0';
-  }
-  function top(){ return (window.pageYOffset||document.documentElement.scrollTop||0)<=0; }
-  addEventListener('touchstart',function(e){
-    if(busy||e.touches.length!==1||!top()){ startY=null; return; }
-    startY=e.touches[0].clientY; pull=0;
-  },{passive:true});
-  addEventListener('touchmove',function(e){
-    if(startY===null||busy) return;
-    var dy=e.touches[0].clientY-startY;
-    if(dy<=0||!top()){ pull=0; set(0,false); return; }
-    pull=Math.min(dy*0.5,MAX); set(pull,false);
-    lab.textContent=pull>=LIM?'↑ Отпустите для обновления':'↓ Потяните, чтобы обновить';
-  },{passive:true});
-  function end(){
-    if(startY===null) return; startY=null;
-    if(pull>=LIM && !busy){
-      busy=true; el.className='go'; lab.textContent='Обновляю…'; set(LIM,true);
-      setTimeout(function(){ location.reload(); },250);
-    } else { set(0,true); }
-    pull=0;
-  }
-  addEventListener('touchend',end,{passive:true});
-  addEventListener('touchcancel',end,{passive:true});
 })();
 </script>
 </body>
