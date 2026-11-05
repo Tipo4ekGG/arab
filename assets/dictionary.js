@@ -27,7 +27,7 @@
 
   const grammarTopics = {have:'f-have',prepsuf:'f-prep',pronouns:'f-pron'};
   function trainURL(id) {
-    const params = new URLSearchParams();
+    const params = new URLSearchParams({start:'1'});
     if (id === 'conjugation') params.set('track','conj');
     else {
       params.set('track', grammarTopics[id] ? 'form' : 'ru');

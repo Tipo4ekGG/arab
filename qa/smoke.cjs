@@ -2,7 +2,7 @@ const http = require('node:http');
 const fs = require('node:fs');
 const path = require('node:path');
 const assert = require('node:assert/strict');
-const { chromium } = require('playwright');
+const { chromium, webkit } = require('playwright');
 
 const server = http.createServer((req, res) => {
   const name = new URL(req.url, 'http://localhost').pathname.slice(1) || 'index.html';
@@ -51,7 +51,10 @@ async function run(page, origin, width) {
     localStorage.setItem('arab-trainer-v2',JSON.stringify({track:'ru',mode:'choice',wsecs:{verbs:true,food:false},count:10,smart:false,onlyHard:false}));
     localStorage.setItem('arab-trainer-stats-v1',JSON.stringify({'ru|previous':{b:3,r:5,w:1}}));
   });
-  await section.locator('.topic-train').click();await page.locator('#start').waitFor();
+  await section.locator('.topic-train').click();
+  await page.locator('#play:not([hidden])').waitFor();
+  await page.locator('#toset').click();
+  await page.locator('#start').waitFor();
   assert.ok((await page.locator('#avail').innerText()).includes('37 '));
   assert.ok(await page.locator('#secs [aria-pressed=true]').count()===1);
   assert.equal(await page.locator('body').evaluate(e=>e.classList.contains('font-naskh')),true);
@@ -92,11 +95,28 @@ async function run(page, origin, width) {
 (async()=>{
   await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));
   const origin='http://127.0.0.1:'+server.address().port;
-  const browser=await chromium.launch({headless:true});
+  for(const engine of [chromium,webkit]){
+  const browser=await engine.launch({headless:true});
+  console.log('Engine',engine.name());
   try{
     for(const [width,height] of [[360,780],[768,1024],[1280,800]]){
       const page=await browser.newPage({viewport:{width,height}});
       await run(page,origin,width);await page.close();
     }
-  }finally{await browser.close();server.close();}
+    const blockedFonts=await browser.newPage();
+    await blockedFonts.route(/https:\/\/fonts\./,()=>{});
+    await blockedFonts.goto(origin+'/trainer.html?start=1&track=ru&topic=food',{waitUntil:'domcontentloaded'});
+    await blockedFonts.locator('#play:not([hidden])').waitFor({timeout:3000});
+    await blockedFonts.close();
+    const stalled=await browser.newPage();
+    await stalled.route(/https:\/\/fonts\./,route=>route.abort());
+    await stalled.route('**/index.html',()=>{});
+    await stalled.goto(origin+'/trainer.html?start=1&track=ru&topic=food',{waitUntil:'domcontentloaded'});
+    await stalled.locator('#retry-load').waitFor({timeout:16000});
+    assert.ok(await stalled.locator('#err').isVisible());
+    await stalled.close();
+    console.log('PASS blocked fonts and stalled dictionary recovery');
+  }finally{await browser.close();}
+  }
+  server.close();
 })().catch(error=>{console.error(error);process.exit(1)});

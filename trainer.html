@@ -13,7 +13,7 @@
 <meta name="apple-mobile-web-app-title" content="Арабский">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@400;500;600&family=Noto+Naskh+Arabic:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Serif:wght@600&display=swap">
+<link rel="stylesheet" media="print" onload="this.media='all'" href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@400;500;600&family=Noto+Naskh+Arabic:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Serif:wght@600&display=swap">
 <style>
   :root{
     color-scheme:light;
@@ -875,10 +875,17 @@
 
   try{ if(localStorage.getItem(FONTKEY) === 'naskh') document.body.classList.add('font-naskh'); }catch(e){}
 
-  fetch('index.html').then(function(r){
-    if(!r.ok) throw new Error('HTTP ' + r.status);
-    return r.text();
-  }).then(function(html){
+  function loadDictionary(){
+    var controller = new AbortController();
+    var timeout = setTimeout(function(){controller.abort();}, 12000);
+    return fetch('index.html', {signal:controller.signal})
+      .then(function(response){
+        if(!response.ok) throw new Error('HTTP ' + response.status);
+        return response.text();
+      }).finally(function(){clearTimeout(timeout);});
+  }
+
+  loadDictionary().then(function(html){
     var res = parse(new DOMParser().parseFromString(html, 'text/html'));
     WORDS = res.items; WSECS = res.secs; FORMS = res.forms; FSECS = res.fsecs;
     var conjugations = buildConjugations(); CONJ = conjugations.items; CSECS = conjugations.secs;
@@ -905,9 +912,19 @@
     if(S.track === 'form' && !FORMS.length) S.track = 'ar';
     openLesson();
     renderSetup(); show('setup');
+    var launch = new URLSearchParams(location.search);
+    if(launch.get('start') === '1' && TRACKS.some(function(t){return t.id === launch.get('track');})){
+      var questions = pool();
+      if(questions.length) begin(draw(questions));
+    }
+    var backTopic = launch.get('topic');
+    var sourceTopics = {'f-prep':'prepsuf','f-have':'have','f-pron':'pronouns'};
+    if(backTopic) document.querySelector('.backlink').href = './#' + encodeURIComponent(sourceTopics[backTopic] || backTopic);
+    else if(launch.get('track') === 'conj') document.querySelector('.backlink').href = './#conjugation';
   }).catch(function(err){
     if(window.console) console.error(err);
-    fail('Не получилось загрузить слова из словаря. Тренажёр читает их со страницы <a href="./">словаря</a>, поэтому открывай его с сайта, а не как отдельный файл, и проверь интернет.');
+    fail('Загрузка словаря прервалась. <button class="btn" type="button" id="retry-load">Повторить загрузку</button> <a href="./">Вернуться в словарь</a>');
+    $('retry-load').addEventListener('click', function(){location.reload();});
   });
 })();
 </script>
