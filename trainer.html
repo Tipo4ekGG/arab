@@ -403,6 +403,7 @@
             }else if(c[0] && c[2]){
               var word = mk(id, label, c[0], c[1], c[2], extra);
               word.alsoIn = tr.getAttribute('data-also-in');
+              word.id = tr.getAttribute('data-trainer-id') || word.id;
               items.push(word);
             }
             if(heads[3] === 'Антоним' && c.length >= 6 && c[3] && c[5]) items.push(mk(id, label, c[3], c[4], c[5], [], label + ' · антоним'));
@@ -548,6 +549,7 @@
       list.forEach(function(s){selected[s.id] = s.id === topic;});
       lesson = {track:track, selected:selected};
     }
+    return true;
   }
   function inSecs(){ var m = secMap(); return base().filter(function(w){ return m[w.sec] || (w.alsoIn && m[w.alsoIn]); }); }
   function pool(){ var p = inSecs(); return S.onlyHard ? p.filter(isHard) : p; }
@@ -910,16 +912,16 @@
     S.fsecs = initSecs(FSECS, saved.fsecs);
     S.csecs = initSecs(CSECS, saved.csecs);
     if(S.track === 'form' && !FORMS.length) S.track = 'ar';
-    openLesson();
+    var validLesson = openLesson();
     renderSetup(); show('setup');
     var launch = new URLSearchParams(location.search);
-    if(launch.get('start') === '1' && TRACKS.some(function(t){return t.id === launch.get('track');})){
+    if(validLesson && launch.get('start') === '1'){
       var questions = pool();
       if(questions.length) begin(draw(questions));
     }
     var backTopic = launch.get('topic');
     var sourceTopics = {'f-prep':'prepsuf','f-have':'have','f-pron':'pronouns'};
-    if(backTopic) document.querySelector('.backlink').href = './#' + encodeURIComponent(sourceTopics[backTopic] || backTopic);
+    if(validLesson && backTopic) document.querySelector('.backlink').href = './#' + encodeURIComponent(sourceTopics[backTopic] || backTopic);
     else if(launch.get('track') === 'conj') document.querySelector('.backlink').href = './#conjugation';
   }).catch(function(err){
     if(window.console) console.error(err);
