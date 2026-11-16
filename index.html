@@ -50,6 +50,7 @@
     </div>
     <nav class="chips" id="chips" aria-label="Разделы">
       <a href="#day-one">День 1 · Знакомство</a>
+      <a href="#day-two">День 2 · Мой день</a>
       <a href="#verbs">Глаголы</a>
       <a href="#conjugation">Спряжение</a>
       <a href="#people">Люди</a>
@@ -84,9 +85,9 @@
 <main class="wrap">
   <p class="empty" id="empty" hidden>Совпадений нет. Попробуй часть слова. <button class="reset-search" type="button">Очистить поиск</button></p>
 
-  <section id="day-one" data-review-list>
+  <section id="day-one" data-review-list="1">
     <h2>День 1 · Знакомство</h2>
-    <p class="count">5 слов, 9 фраз и 2 правила · примерно 15 минут</p>
+    <p class="count">11 слов, 11 фраз и 2 правила</p>
     <p class="note">Прочитай список вслух, затем пройди «Тренировать». В конце без подсказки назови своё имя, скажи, откуда ты и где учишься.</p>
     <div class="tablebox">
       <table class="rtl">
@@ -96,6 +97,20 @@
     </div>
     <p class="note"><b>1. «Мой» и «твой».</b> <bdi class="a">اِسْمِي</bdi> — «моё имя», <bdi class="a">اِسْمُكَ</bdi> — «твоё имя» (к мужчине). Окончания <bdi class="a">ـِي</bdi> и <bdi class="a">ـكَ</bdi> пишутся вместе со словом. <a href="#pronouns">Все окончания</a></p>
     <p class="note"><b>2. «Я» и «ты» в настоящем времени.</b> <bdi class="a">أَدْرُسُ</bdi> — «я учусь», <bdi class="a">تَدْرُسُ</bdi> — «ты учишься» (к мужчине). Меняется первая буква глагола. <a href="#conjugation">Таблица спряжения</a></p>
+  </section>
+
+  <section id="day-two" data-review-list="2">
+    <h2>День 2 · Мой день</h2>
+    <p class="count">12 слов и выражений, 8 фраз и 2 правила</p>
+    <p class="note">Изучи новые карточки ниже. В тренажёре они перемешаны с карточками первого дня. В настройках тренажёра выбери «Все», чтобы пройти все 42 карточки за один раз.</p>
+    <div class="tablebox">
+      <table class="rtl">
+        <thead><tr><th>Слово</th><th>Вслух</th><th>Перевод</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <p class="note"><b>1. Как сказать, во сколько.</b> <bdi class="a">فِي السَّاعَةِ السَّابِعَةِ صَبَاحًا</bdi> — «в семь утра». После <bdi class="a">السَّاعَةِ</bdi> ставим порядковое числительное женского рода. <a href="#time">Как говорить о времени</a></p>
+    <p class="note"><b>2. Как связать действия.</b> <bdi class="a">بَعْدَ الْعَشَاءِ</bdi> — «после ужина». После <bdi class="a">بَعْدَ</bdi> слово стоит в родительном падеже. В этом примере у него кясра: <bdi class="a">الْعَشَاءِ</bdi>. <bdi class="a">ثُمَّ</bdi> — «затем», с него можно начать следующее действие.</p>
   </section>
 
   <section id="verbs">
@@ -366,8 +381,8 @@
           <tr><td class="ar">الْمَأْكُولَاتُ</td><td class="tr">аль-ма’куля́т</td><td class="ru">еда</td><td class="pos"></td></tr>
           <tr><td class="ar">مَشْرُوبَاتٌ</td><td class="tr">машруба́т</td><td class="ru">напитки</td><td class="pos"></td></tr>
           <tr><td class="ar">وَجْبَةٌ</td><td class="tr">ва́джба</td><td class="ru">приём пищи</td><td class="pos"><span class="ar">وَجَبَاتٌ</span> ваджаба́т</td></tr>
-          <tr><td class="ar">الْفُطُورُ</td><td class="tr">аль-футу́р</td><td class="ru">завтрак</td><td class="pos"></td></tr>
-          <tr><td class="ar">الْعَشَاءُ</td><td class="tr">аль-‘аша́’</td><td class="ru">ужин</td><td class="pos"></td></tr>
+          <tr data-also-in="day-two"><td class="ar">الْفُطُورُ</td><td class="tr">аль-футу́р</td><td class="ru">завтрак</td><td class="pos"></td></tr>
+          <tr data-also-in="day-two"><td class="ar">الْعَشَاءُ</td><td class="tr">аль-‘аша́’</td><td class="ru">ужин</td><td class="pos"></td></tr>
           <tr><td class="ar">شَبْعَانُ</td><td class="tr">шаб‘а́н</td><td class="ru">сытый</td><td class="pos"></td></tr>
           <tr><td class="ar">جَائِعٌ</td><td class="tr">джа́’и‘</td><td class="ru">голодный</td><td class="pos"></td></tr>
           <tr><td class="ar">ثَلَّاجَةٌ</td><td class="tr">салля́джа</td><td class="ru">холодильник</td><td class="pos"></td></tr>
@@ -381,7 +396,7 @@
           <tr><td class="ar">لَبَنٌ</td><td class="tr">ля́бан</td><td class="ru">молоко; кисломолочный напиток (в зависимости от страны)</td><td class="pos"></td></tr>
           <tr><td class="ar">حَلِيبٌ</td><td class="tr">хали́б</td><td class="ru">молоко</td><td class="pos"></td></tr>
           <tr><td class="ar">عَسَلٌ</td><td class="tr">‘а́саль</td><td class="ru">мёд</td><td class="pos"></td></tr>
-          <tr><td class="ar">شَايٌ</td><td class="tr">шай</td><td class="ru">чай</td><td class="pos"></td></tr>
+          <tr data-also-in="day-two"><td class="ar">شَايٌ</td><td class="tr">шай</td><td class="ru">чай</td><td class="pos"></td></tr>
           <tr><td class="ar">عَصِيرٌ</td><td class="tr">‘аси́р</td><td class="ru">сок</td><td class="pos"><span class="ar">عَصَائِرُ</span> ‘аса́’ир</td></tr>
           <tr><td class="ar">مُرَبًّى</td><td class="tr">мура́бба</td><td class="ru">варенье, джем</td><td class="pos"></td></tr>
           <tr><td class="ar">زَبَادِيٌّ</td><td class="tr">заба́ди</td><td class="ru">йогурт</td><td class="pos"></td></tr>
@@ -432,8 +447,8 @@
       <table class="rtl">
         <thead><tr><th>Фраза</th><th>Вслух</th><th>Перевод</th></tr></thead>
         <tbody>
-          <tr data-trainer-id="oral-test|مَاذَا تَأْكُلُ وَتَشْرَبُ فِي الْفُطُورِ؟|"><td class="ar">مَاذَا تَأْكُلُ وَتَشْرَبُ فِي الْفُطُورِ؟</td><td class="tr">ма́за та́'кулю ва-та́шрабу фи-ль-футу́р?</td><td class="ru">Что ты ешь и пьёшь на завтрак?</td></tr>
-          <tr data-trainer-id="oral-test|آكُلُ الْخُبْزَ وَالْجُبْنَ، وَأَشْرَبُ الشَّايَ.|"><td class="ar">آكُلُ الْخُبْزَ وَالْجُبْنَ، وَأَشْرَبُ الشَّايَ.</td><td class="tr">'а́кулю-ль-хубз ва-ль-джубн, ва-'а́шрабу-ш-шай</td><td class="ru">Я ем хлеб и сыр и пью чай.</td></tr>
+          <tr data-also-in="day-two" data-trainer-id="oral-test|مَاذَا تَأْكُلُ وَتَشْرَبُ فِي الْفُطُورِ؟|"><td class="ar">مَاذَا تَأْكُلُ وَتَشْرَبُ فِي الْفُطُورِ؟</td><td class="tr">ма́за та́'кулю ва-та́шрабу фи-ль-футу́р?</td><td class="ru">Что ты ешь и пьёшь на завтрак?</td></tr>
+          <tr data-also-in="day-two" data-trainer-id="oral-test|آكُلُ الْخُبْزَ وَالْجُبْنَ، وَأَشْرَبُ الشَّايَ.|"><td class="ar">آكُلُ الْخُبْزَ وَالْجُبْنَ، وَأَشْرَبُ الشَّايَ.</td><td class="tr">'а́кулю-ль-хубз ва-ль-джубн, ва-'а́шрабу-ш-шай</td><td class="ru">Я ем хлеб и сыр и пью чай.</td></tr>
           <tr><td class="ar">ثَلَاثُ وَجَبَاتٍ فِي الْيَوْمِ</td><td class="tr">саля́су ваджаба́тин фи-ль-яум</td><td class="ru">три приёма пищи в день</td></tr>
           <tr><td class="ar">الشَّايُ الثَّقِيلُ</td><td class="tr">аш-ша́й ас-саки́ль</td><td class="ru">крепкий чай</td></tr>
           <tr><td class="ar">هَلْ تِلْكَ الْمَائِدَةُ مَحْجُوزَةٌ؟</td><td class="tr">халь ти́лька ль-ма́'ида махджу́за?</td><td class="ru">Тот столик забронирован?</td></tr>
@@ -611,8 +626,8 @@
           <tr><td class="ar">لَا</td><td class="tr">ля</td><td class="ru">нет</td><td class="pos">ответ</td></tr>
           <tr data-also-in="day-one"><td class="ar">وَ</td><td class="tr">ва</td><td class="ru">и (пишется слитно)</td><td class="pos">союз</td></tr>
           <tr data-also-in="day-one"><td class="ar">أَنَا</td><td class="tr">а́на</td><td class="ru">я</td><td class="pos">местоимение</td></tr>
-          <tr><td class="ar">أَنْتَ</td><td class="tr">а́нта</td><td class="ru">ты (м)</td><td class="pos">местоимение</td></tr>
-          <tr><td class="ar">أَنْتِ</td><td class="tr">а́нти</td><td class="ru">ты (ж)</td><td class="pos">местоимение</td></tr>
+          <tr data-also-in="day-one"><td class="ar">أَنْتَ</td><td class="tr">а́нта</td><td class="ru">ты (м)</td><td class="pos">местоимение</td></tr>
+          <tr data-also-in="day-one"><td class="ar">أَنْتِ</td><td class="tr">а́нти</td><td class="ru">ты (ж)</td><td class="pos">местоимение</td></tr>
           <tr><td class="ar">هُوَ</td><td class="tr">ху́ва</td><td class="ru">он</td><td class="pos">местоимение</td></tr>
           <tr><td class="ar">هِيَ</td><td class="tr">хи́я</td><td class="ru">она</td><td class="pos">местоимение</td></tr>
           <tr><td class="ar">نَحْنُ</td><td class="tr">на́хну</td><td class="ru">мы</td><td class="pos">местоимение</td></tr>
@@ -622,7 +637,7 @@
           <tr><td class="ar">هُمَا</td><td class="tr">ху́ма</td><td class="ru">они оба (дв. число, м. и ж.)</td><td class="pos">местоимение</td></tr>
           <tr><td class="ar">هُمْ</td><td class="tr">хум</td><td class="ru">они (м)</td><td class="pos">местоимение</td></tr>
           <tr><td class="ar">هُنَّ</td><td class="tr">хунна</td><td class="ru">они (ж)</td><td class="pos">местоимение</td></tr>
-          <tr><td class="ar">فِي</td><td class="tr">фи</td><td class="ru">в</td><td class="pos">предлог</td></tr>
+          <tr data-also-in="day-one"><td class="ar">فِي</td><td class="tr">фи</td><td class="ru">в</td><td class="pos">предлог</td></tr>
           <tr><td class="ar">عَلَى</td><td class="tr">'аля́</td><td class="ru">на (с касанием)</td><td class="pos">предлог</td></tr>
           <tr><td class="ar">فَوْقَ</td><td class="tr">фа́вка</td><td class="ru">над</td><td class="pos">предлог</td></tr>
           <tr><td class="ar">تَحْتَ</td><td class="tr">та́хта</td><td class="ru">под</td><td class="pos">предлог</td></tr>
@@ -991,16 +1006,16 @@
         <thead><tr><th>Слово</th><th>Вслух</th><th>Перевод</th><th>Мн. число</th></tr></thead>
         <tbody>
           <tr><td class="ar">الدِّرَاسَةُ</td><td class="tr">ад-дира́са</td><td class="ru">учёба</td><td class="pos"></td></tr>
-          <tr><td class="ar">أَكَادِيمِيَّةٌ</td><td class="tr">акади́мийя</td><td class="ru">академия</td><td class="pos"></td></tr>
+          <tr data-also-in="day-one"><td class="ar">أَكَادِيمِيَّةٌ</td><td class="tr">акади́мийя</td><td class="ru">академия</td><td class="pos"></td></tr>
           <tr><td class="ar">كُلِّيَّةٌ</td><td class="tr">кулли́йя</td><td class="ru">факультет</td><td class="pos">мн. <span class="ar">كُلِّيَّاتٌ</span> кулли́йят</td></tr>
           <tr><td class="ar">جَامِعَةٌ</td><td class="tr">джа́ми'а</td><td class="ru">университет</td><td class="pos">мн. <span class="ar">جَامِعَاتٌ</span> джами'а́т</td></tr>
-          <tr><td class="ar">لُغَةٌ</td><td class="tr">лу́га</td><td class="ru">язык</td><td class="pos">мн. <span class="ar">لُغَاتٌ</span> луга́т</td></tr>
+          <tr data-also-in="day-one"><td class="ar">لُغَةٌ</td><td class="tr">лу́га</td><td class="ru">язык</td><td class="pos">мн. <span class="ar">لُغَاتٌ</span> луга́т</td></tr>
           <tr><td class="ar">مَادَّةٌ</td><td class="tr">ма́дда</td><td class="ru">предмет (учебный)</td><td class="pos">мн. <span class="ar">مَوَادُّ</span> мава́дд</td></tr>
           <tr><td class="ar">اللُّغَةُ الشَّرْقِيَّةُ</td><td class="tr">аль-лу́га аш-шарки́йя</td><td class="ru">восточный язык</td><td class="pos"></td></tr>
           <tr><td class="ar">اللُّغَةُ الْأُورُوبِّيَّةُ</td><td class="tr">аль-лу́га аль-урубби́йя</td><td class="ru">европейский язык</td><td class="pos"></td></tr>
           <tr><td class="ar">الِاقْتِصَادُ</td><td class="tr">аль-иктиса́д</td><td class="ru">экономика</td><td class="pos"></td></tr>
           <tr><td class="ar">الْقَانُونُ</td><td class="tr">аль-кану́н</td><td class="ru">право, закон</td><td class="pos"></td></tr>
-          <tr><td class="ar">الْإِدَارَةُ</td><td class="tr">аль-ида́ра</td><td class="ru">менеджмент, управление</td><td class="pos"></td></tr>
+          <tr data-also-in="day-one"><td class="ar">الْإِدَارَةُ</td><td class="tr">аль-ида́ра</td><td class="ru">менеджмент, управление</td><td class="pos"></td></tr>
           <tr><td class="ar">الرِّيَاضِيَّاتُ</td><td class="tr">ар-рияди́йят</td><td class="ru">математика</td><td class="pos"></td></tr>
           <tr><td class="ar">التَّارِيخُ</td><td class="tr">ат-та́рих</td><td class="ru">история</td><td class="pos"></td></tr>
           <tr><td class="ar">الْفَلْسَفَةُ</td><td class="tr">аль-фальса́фа</td><td class="ru">философия</td><td class="pos"></td></tr>
@@ -1045,10 +1060,10 @@
         <thead><tr><th>Фраза</th><th>Вслух</th><th>Перевод</th></tr></thead>
         <tbody>
           <tr data-also-in="day-one" data-trainer-id="oral-test|أَدْرُسُ فِي الْأَكَادِيمِيَّةِ.|"><td class="ar">أَدْرُسُ فِي الْأَكَادِيمِيَّةِ.</td><td class="tr">'а́друсу фи-ль-'акади́мийя</td><td class="ru">Я учусь в академии.</td></tr>
-          <tr data-trainer-id="oral-test|أَدْرُسُ الْإِدَارَةَ وَاللُّغَةَ الْعَرَبِيَّةَ.|"><td class="ar">أَدْرُسُ الْإِدَارَةَ وَاللُّغَةَ الْعَرَبِيَّةَ.</td><td class="tr">'а́друсу-ль-'ида́ра ва-ль-лу́га аль-'араби́йя</td><td class="ru">Я изучаю менеджмент и арабский язык.</td></tr>
+          <tr data-also-in="day-one" data-trainer-id="oral-test|أَدْرُسُ الْإِدَارَةَ وَاللُّغَةَ الْعَرَبِيَّةَ.|"><td class="ar">أَدْرُسُ الْإِدَارَةَ وَاللُّغَةَ الْعَرَبِيَّةَ.</td><td class="tr">'а́друсу-ль-'ида́ра ва-ль-лу́га аль-'араби́йя</td><td class="ru">Я изучаю менеджмент и арабский язык.</td></tr>
           <tr data-trainer-id="oral-test|أُحِبُّ اللُّغَةَ الْعَرَبِيَّةَ.|"><td class="ar">أُحِبُّ اللُّغَةَ الْعَرَبِيَّةَ.</td><td class="tr">'ухи́ббу-ль-лу́га аль-'араби́йя</td><td class="ru">Мне нравится арабский язык.</td></tr>
           <tr data-also-in="day-one" data-trainer-id="oral-test|أَيْنَ تَدْرُسُ؟|"><td class="ar">أَيْنَ تَدْرُسُ؟</td><td class="tr">'а́йна та́друсу?</td><td class="ru">Где ты учишься?</td></tr>
-          <tr data-trainer-id="oral-test|مَاذَا تَدْرُسُ؟|"><td class="ar">مَاذَا تَدْرُسُ؟</td><td class="tr">ма́за та́друсу?</td><td class="ru">Что ты изучаешь?</td></tr>
+          <tr data-also-in="day-one" data-trainer-id="oral-test|مَاذَا تَدْرُسُ؟|"><td class="ar">مَاذَا تَدْرُسُ؟</td><td class="tr">ма́за та́друсу?</td><td class="ru">Что ты изучаешь?</td></tr>
         </tbody>
       </table>
     </div>
@@ -1060,18 +1075,18 @@
     <div class="tablebox"><table class="rtl">
       <thead><tr><th>Слово</th><th>Вслух</th><th>Перевод</th></tr></thead>
       <tbody>
-          <tr><td class="ar">أَيَّامُ الدِّرَاسَةِ</td><td class="tr">'айя́м ад-дира́са</td><td class="ru">учебные дни</td></tr>
-          <tr><td class="ar">عَادَةً</td><td class="tr">'а́датан</td><td class="ru">обычно</td></tr>
-          <tr><td class="ar">مُبَكِّرًا</td><td class="tr">муба́ккиран</td><td class="ru">рано</td></tr>
-          <tr><td class="ar">أَحْيَانًا</td><td class="tr">'ахья́нан</td><td class="ru">иногда</td></tr>
+          <tr data-also-in="day-two"><td class="ar">أَيَّامُ الدِّرَاسَةِ</td><td class="tr">'айя́м ад-дира́са</td><td class="ru">учебные дни</td></tr>
+          <tr data-also-in="day-two"><td class="ar">عَادَةً</td><td class="tr">'а́датан</td><td class="ru">обычно</td></tr>
+          <tr data-also-in="day-two"><td class="ar">مُبَكِّرًا</td><td class="tr">муба́ккиран</td><td class="ru">рано</td></tr>
+          <tr data-also-in="day-two"><td class="ar">أَحْيَانًا</td><td class="tr">'ахья́нан</td><td class="ru">иногда</td></tr>
           <tr><td class="ar">كَعْكَةٌ</td><td class="tr">ка́'ка</td><td class="ru">булочка, кекс</td></tr>
           <tr><td class="ar">لَذِيذٌ</td><td class="tr">лязи́з</td><td class="ru">вкусный</td></tr>
           <tr><td class="ar">بَطَاطِسُ مَقْلِيَّةٌ</td><td class="tr">бата́тыс макли́йя</td><td class="ru">жареная картошка</td></tr>
           <tr><td class="ar">الْحِنْطَةُ السَّوْدَاءُ</td><td class="tr">аль-хи́нта ас-сауда́'</td><td class="ru">гречка (как в пособии)</td></tr>
           <tr><td class="ar">سَلَطَةُ أُولِيفْيِه</td><td class="tr">саля́та 'ули́вье</td><td class="ru">салат оливье</td></tr>
           <tr><td class="ar">قَبْلَ</td><td class="tr">кабля</td><td class="ru">до, перед</td></tr>
-          <tr><td class="ar">بَعْدَ</td><td class="tr">ба'да</td><td class="ru">после</td></tr>
-          <tr><td class="ar">ثُمَّ</td><td class="tr">су́мма</td><td class="ru">затем, потом</td></tr>
+          <tr data-also-in="day-two"><td class="ar">بَعْدَ</td><td class="tr">ба'да</td><td class="ru">после</td></tr>
+          <tr data-also-in="day-two"><td class="ar">ثُمَّ</td><td class="tr">су́мма</td><td class="ru">затем, потом</td></tr>
           <tr><td class="ar">قَلِيلًا</td><td class="tr">кали́лян</td><td class="ru">немного</td></tr>
           <tr><td class="ar">بِالْإِضَافَةِ إِلَى</td><td class="tr">би-ль-'ида́фа 'иля</td><td class="ru">в дополнение к; кроме того</td></tr>
           <tr><td class="ar">أَمَّا … فَـ</td><td class="tr">'а́мма … фа-</td><td class="ru">что касается …, то …</td></tr>
@@ -1080,7 +1095,7 @@
           <tr><td class="ar">وَاجِبٌ</td><td class="tr">ва́джиб</td><td class="ru">домашнее задание; обязанность</td></tr>
         <tr><td class="ar">عَادَةٌ</td><td class="tr">'а́да</td><td class="ru">привычка (мн. عَادَاتٌ — 'ада́т)</td></tr>
         <tr><td class="ar">غَالِبًا</td><td class="tr">га́либан</td><td class="ru">чаще всего, обычно</td></tr>
-        <tr><td class="ar">دَائِمًا</td><td class="tr">да́'иман</td><td class="ru">всегда</td></tr>
+        <tr data-also-in="day-two"><td class="ar">دَائِمًا</td><td class="tr">да́'иман</td><td class="ru">всегда</td></tr>
         <tr><td class="ar">نَادِرًا</td><td class="tr">на́диран</td><td class="ru">редко</td></tr>
         <tr><td class="ar">أَبَدًا</td><td class="tr">'а́бадан</td><td class="ru">никогда (при отрицании)</td></tr>
         <tr><td class="ar">فِي الْخَارِجِ</td><td class="tr">фи-ль-ха́ридж</td><td class="ru">вне дома, не дома (о еде)</td></tr>
@@ -1091,12 +1106,12 @@
       <table class="rtl">
         <thead><tr><th>Фраза</th><th>Вслух</th><th>Перевод</th></tr></thead>
         <tbody>
-          <tr data-trainer-id="oral-test|مَتَى تَسْتَيْقِظُ؟|"><td class="ar">مَتَى تَسْتَيْقِظُ؟</td><td class="tr">ма́та таста́йкизу?</td><td class="ru">Когда ты просыпаешься?</td></tr>
-          <tr data-trainer-id="oral-test|مَتَى تَرْجِعُ إِلَى الْبَيْتِ؟|"><td class="ar">مَتَى تَرْجِعُ إِلَى الْبَيْتِ؟</td><td class="tr">ма́та та́рджи'у 'иля-ль-байт?</td><td class="ru">Когда ты возвращаешься домой?</td></tr>
-          <tr data-trainer-id="oral-test|مَاذَا تَفْعَلُ بَعْدَ الْعَشَاءِ؟|"><td class="ar">مَاذَا تَفْعَلُ بَعْدَ الْعَشَاءِ؟</td><td class="tr">ма́за та́ф'алю ба́'да-ль-'аша́'?</td><td class="ru">Что ты делаешь после ужина?</td></tr>
-          <tr data-trainer-id="oral-test|أَسْتَيْقِظُ فِي السَّاعَةِ السَّابِعَةِ صَبَاحًا.|"><td class="ar">أَسْتَيْقِظُ فِي السَّاعَةِ السَّابِعَةِ صَبَاحًا.</td><td class="tr">'аста́йкизу фи-с-са́'а ас-са́би'а саба́хан</td><td class="ru">Я просыпаюсь в семь утра.</td></tr>
-          <tr data-trainer-id="oral-test|أَرْجِعُ إِلَى الْبَيْتِ مَسَاءً.|"><td class="ar">أَرْجِعُ إِلَى الْبَيْتِ مَسَاءً.</td><td class="tr">'а́рджи'у 'иля-ль-байт маса́'ан</td><td class="ru">Я возвращаюсь домой вечером.</td></tr>
-          <tr data-trainer-id="oral-test|بَعْدَ الْعَشَاءِ أَسْتَرِيحُ قَلِيلًا، ثُمَّ أَقْرَأُ كِتَابًا.|"><td class="ar">بَعْدَ الْعَشَاءِ أَسْتَرِيحُ قَلِيلًا، ثُمَّ أَقْرَأُ كِتَابًا.</td><td class="tr">ба́'да-ль-'аша́' 'астари́ху кали́лян, су́мма 'а́кра'у кита́бан</td><td class="ru">После ужина я немного отдыхаю, потом читаю книгу.</td></tr>
+          <tr data-also-in="day-two" data-trainer-id="oral-test|مَتَى تَسْتَيْقِظُ؟|"><td class="ar">مَتَى تَسْتَيْقِظُ؟</td><td class="tr">ма́та таста́йкизу?</td><td class="ru">Когда ты просыпаешься?</td></tr>
+          <tr data-also-in="day-two" data-trainer-id="oral-test|مَتَى تَرْجِعُ إِلَى الْبَيْتِ؟|"><td class="ar">مَتَى تَرْجِعُ إِلَى الْبَيْتِ؟</td><td class="tr">ма́та та́рджи'у 'иля-ль-байт?</td><td class="ru">Когда ты возвращаешься домой?</td></tr>
+          <tr data-also-in="day-two" data-trainer-id="oral-test|مَاذَا تَفْعَلُ بَعْدَ الْعَشَاءِ؟|"><td class="ar">مَاذَا تَفْعَلُ بَعْدَ الْعَشَاءِ؟</td><td class="tr">ма́за та́ф'алю ба́'да-ль-'аша́'?</td><td class="ru">Что ты делаешь после ужина?</td></tr>
+          <tr data-also-in="day-two" data-trainer-id="oral-test|أَسْتَيْقِظُ فِي السَّاعَةِ السَّابِعَةِ صَبَاحًا.|"><td class="ar">أَسْتَيْقِظُ فِي السَّاعَةِ السَّابِعَةِ صَبَاحًا.</td><td class="tr">'аста́йкизу фи-с-са́'а ас-са́би'а саба́хан</td><td class="ru">Я просыпаюсь в семь утра.</td></tr>
+          <tr data-also-in="day-two" data-trainer-id="oral-test|أَرْجِعُ إِلَى الْبَيْتِ مَسَاءً.|"><td class="ar">أَرْجِعُ إِلَى الْبَيْتِ مَسَاءً.</td><td class="tr">'а́рджи'у 'иля-ль-байт маса́'ан</td><td class="ru">Я возвращаюсь домой вечером.</td></tr>
+          <tr data-also-in="day-two" data-trainer-id="oral-test|بَعْدَ الْعَشَاءِ أَسْتَرِيحُ قَلِيلًا، ثُمَّ أَقْرَأُ كِتَابًا.|"><td class="ar">بَعْدَ الْعَشَاءِ أَسْتَرِيحُ قَلِيلًا، ثُمَّ أَقْرَأُ كِتَابًا.</td><td class="tr">ба́'да-ль-'аша́' 'астари́ху кали́лян, су́мма 'а́кра'у кита́бан</td><td class="ru">После ужина я немного отдыхаю, потом читаю книгу.</td></tr>
         </tbody>
       </table>
     </div>
@@ -1318,10 +1333,10 @@
     <p class="note">В обычной речи часто используется двенадцатичасовой формат. Уточняй время суток, если оно не понятно из контекста: صَبَاحًا — утром, مَسَاءً — вечером. Например, السَّاعَةُ الرَّابِعَةُ مَسَاءً — четыре часа пополудни, то есть 16:00.</p>
     <h3>Слова и выражения со страницы</h3>
     <div class="tablebox"><table class="rtl"><thead><tr><th>Слово</th><th>Вслух</th><th>Перевод</th><th>Мн. число</th></tr></thead><tbody>
-<tr><td class="ar">صَبَاحًا</td><td class="tr">саба́хан</td><td class="ru">утром</td><td class="pos"></td></tr>
+<tr data-also-in="day-two"><td class="ar">صَبَاحًا</td><td class="tr">саба́хан</td><td class="ru">утром</td><td class="pos"></td></tr>
 <tr><td class="ar">ظُهْرًا</td><td class="tr">зу́хран</td><td class="ru">в полдень</td><td class="pos"></td></tr>
 <tr><td class="ar">بَعْدَ الظُّهْرِ</td><td class="tr">ба'да-з-зухр</td><td class="ru">после полудня</td><td class="pos"></td></tr>
-<tr><td class="ar">مَسَاءً</td><td class="tr">маса́'ан</td><td class="ru">вечером</td><td class="pos"></td></tr>
+<tr data-also-in="day-two"><td class="ar">مَسَاءً</td><td class="tr">маса́'ан</td><td class="ru">вечером</td><td class="pos"></td></tr>
 <tr><td class="ar">لَيْلًا</td><td class="tr">ля́йлян</td><td class="ru">ночью</td><td class="pos"></td></tr>
 <tr><td class="ar">تَمَامًا</td><td class="tr">тама́ман</td><td class="ru">ровно (о времени)</td><td class="pos"></td></tr>
 <tr><td class="ar">وَالنِّصْفُ</td><td class="tr">ва-н-нисф</td><td class="ru">и половина; … тридцать минут</td><td class="pos"></td></tr>

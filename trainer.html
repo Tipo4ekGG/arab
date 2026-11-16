@@ -367,10 +367,12 @@
   function parse(doc){
     var chips = {};
     [].forEach.call(doc.querySelectorAll('#chips a'), function(a){ chips[(a.getAttribute('href') || '').slice(1)] = clean(a.textContent); });
-    var items = [], secs = [], F = [];
+    var items = [], secs = [], F = [], studyDays = {};
     [].forEach.call(doc.querySelectorAll('section[id]'), function(sec){
       var id = sec.id, h2 = sec.querySelector('h2');
       var label = chips[id] || clean(h2 ? h2.textContent : id);
+      var studyDay = Number(sec.getAttribute('data-review-list')) || 0;
+      if(studyDay) studyDays[id] = studyDay;
       var before = items.length;
       [].forEach.call(sec.querySelectorAll('table'), function(tb){
         var heads = [].map.call(tb.querySelectorAll('thead th'), function(th){ return clean(th.textContent); });
@@ -425,12 +427,15 @@
         items.push(it);
       });
       var n = items.slice(before).filter(function(x){ return x.sec === id; }).length;
-      if(n > 0 || sec.hasAttribute('data-review-list')) secs.push({id:id, label:label, n:n});
+      if(n > 0 || studyDay) secs.push({id:id, label:label, n:n, studyDay:studyDay});
       var np = items.slice(before).filter(function(x){ return x.sec === PRON_SEC; }).length;
       if(np > 0) secs.push({id:PRON_SEC, label:'Местоимения', n:np});
     });
+    items.forEach(function(word){ word.studyDay = studyDays[word.alsoIn] || 0; });
     secs.forEach(function(sec){
-      sec.n += items.filter(function(word){ return word.alsoIn === sec.id; }).length;
+      sec.n += items.filter(function(word){
+        return sec.studyDay ? word.studyDay && word.studyDay <= sec.studyDay : word.alsoIn === sec.id;
+      }).length;
     });
     var fsecs = [];
     Object.keys(FLABEL).forEach(function(k){
@@ -552,7 +557,13 @@
     }
     return true;
   }
-  function inSecs(){ var m = secMap(); return base().filter(function(w){ return m[w.sec] || (w.alsoIn && m[w.alsoIn]); }); }
+  function inSecs(){
+    var m = secMap(), through = 0;
+    secList().forEach(function(s){ if(m[s.id] && s.studyDay > through) through = s.studyDay; });
+    return base().filter(function(w){
+      return m[w.sec] || (w.alsoIn && m[w.alsoIn]) || (w.studyDay && w.studyDay <= through);
+    });
+  }
   function pool(){ var p = inSecs(); return S.onlyHard ? p.filter(isHard) : p; }
   function plural(n, a, b, c){ var x = n % 10, y = n % 100; return (x === 1 && y !== 11) ? a : (x >= 2 && x <= 4 && (y < 12 || y > 14)) ? b : c; }
   function unit(n){ return (isForm() || isConj()) ? plural(n, 'форма', 'формы', 'форм') : plural(n, 'слово', 'слова', 'слов'); }
@@ -647,10 +658,21 @@
 
   function draw(p){
     var n = S.count ? Math.min(S.count, p.length) : p.length;
-    if(!S.smart) return shuffle(p).slice(0, n);
-    var keyed = p.map(function(w){ return {w:w, k:Math.pow(Math.random(), 1 / weight(w))}; });
-    keyed.sort(function(a, b){ return b.k - a.k; });
-    return shuffle(keyed.slice(0, n).map(function(x){ return x.w; }));
+    var ranked = S.smart
+      ? p.map(function(w){ return {w:w, k:Math.pow(Math.random(), 1 / weight(w))}; })
+          .sort(function(a, b){ return b.k - a.k; }).map(function(x){ return x.w; })
+      : shuffle(p);
+    var m = secMap(), selected = secList().filter(function(s){ return m[s.id]; });
+    if(n < p.length && selected.length && selected.every(function(s){ return s.studyDay; })){
+      // Give each available study day a place in a shortened review.
+      var seenDays = new Set(), first = [], rest = [];
+      ranked.forEach(function(w){
+        if(seenDays.has(w.studyDay)) rest.push(w);
+        else { seenDays.add(w.studyDay); first.push(w); }
+      });
+      return shuffle(first.concat(rest).slice(0, n));
+    }
+    return S.smart ? shuffle(ranked.slice(0, n)) : ranked.slice(0, n);
   }
 
   function begin(list){ Q = list; idx = 0; ok = 0; missed = []; renderQ(); }
