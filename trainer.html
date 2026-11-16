@@ -401,11 +401,11 @@
               // местоимения — отдельным разделом; id прежний, чтобы не терялся прогресс
               var pw = mk(PRON_SEC, 'Местоимения', c[0], c[1], c[2], [], 'Местоимение');
               pw.id = id + '|' + c[0] + '|';
-              pw.alsoIn = tr.getAttribute('data-also-in');
+              pw.alsoIn = clean(tr.getAttribute('data-also-in')).split(' ').filter(Boolean);
               items.push(pw);
             }else if(c[0] && c[2]){
               var word = mk(id, label, c[0], c[1], c[2], extra);
-              word.alsoIn = tr.getAttribute('data-also-in');
+              word.alsoIn = clean(tr.getAttribute('data-also-in')).split(' ').filter(Boolean);
               word.id = tr.getAttribute('data-trainer-id') || word.id;
               items.push(word);
             }
@@ -427,14 +427,17 @@
         items.push(it);
       });
       var n = items.slice(before).filter(function(x){ return x.sec === id; }).length;
-      if(n > 0 || studyDay) secs.push({id:id, label:label, n:n, studyDay:studyDay});
+      if(n > 0 || studyDay || sec.hasAttribute('data-linked-topic')) secs.push({id:id, label:label, n:n, studyDay:studyDay});
       var np = items.slice(before).filter(function(x){ return x.sec === PRON_SEC; }).length;
       if(np > 0) secs.push({id:PRON_SEC, label:'Местоимения', n:np});
     });
-    items.forEach(function(word){ word.studyDay = studyDays[word.alsoIn] || 0; });
+    items.forEach(function(word){
+      word.alsoIn = word.alsoIn || [];
+      word.studyDay = studyDays[word.alsoIn.find(function(id){ return studyDays[id]; })] || 0;
+    });
     secs.forEach(function(sec){
       sec.n += items.filter(function(word){
-        return sec.studyDay ? word.studyDay && word.studyDay <= sec.studyDay : word.alsoIn === sec.id;
+        return sec.studyDay ? word.studyDay && word.studyDay <= sec.studyDay : word.alsoIn.includes(sec.id);
       }).length;
     });
     var fsecs = [];
@@ -561,7 +564,7 @@
     var m = secMap(), through = 0;
     secList().forEach(function(s){ if(m[s.id] && s.studyDay > through) through = s.studyDay; });
     return base().filter(function(w){
-      return m[w.sec] || (w.alsoIn && m[w.alsoIn]) || (w.studyDay && w.studyDay <= through);
+      return m[w.sec] || (w.alsoIn && w.alsoIn.some(function(id){ return m[id]; })) || (w.studyDay && w.studyDay <= through);
     });
   }
   function pool(){ var p = inSecs(); return S.onlyHard ? p.filter(isHard) : p; }

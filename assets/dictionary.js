@@ -8,7 +8,7 @@
   const topic = $('topic');
   const themeNames = new Map(chipLinks.map(a => [a.hash.slice(1), a.textContent]));
   const foodBody = $('food').querySelector('tbody');
-  for (const row of document.querySelectorAll('tr[data-also-in="food"]')) {
+  for (const row of document.querySelectorAll('tr[data-also-in~="food"]')) {
     const copy = row.cloneNode(true);
     copy.removeAttribute('data-also-in');
     const extra = copy.cells[3];
@@ -25,9 +25,9 @@
     } else foodBody.append(copy);
   }
 
-  for (const section of sections.filter(section => section.hasAttribute('data-review-list'))) {
+  for (const section of sections.filter(section => section.hasAttribute('data-review-list') || section.hasAttribute('data-linked-topic'))) {
     const body = section.querySelector('tbody');
-    for (const row of document.querySelectorAll('tr[data-also-in="' + section.id + '"]')) {
+    for (const row of document.querySelectorAll('tr[data-also-in~="' + section.id + '"]')) {
       const copy = body.insertRow();
       for (const cell of Array.from(row.cells).slice(0, 3)) copy.append(cell.cloneNode(true));
     }
