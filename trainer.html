@@ -399,6 +399,7 @@
               // местоимения — отдельным разделом; id прежний, чтобы не терялся прогресс
               var pw = mk(PRON_SEC, 'Местоимения', c[0], c[1], c[2], [], 'Местоимение');
               pw.id = id + '|' + c[0] + '|';
+              pw.alsoIn = tr.getAttribute('data-also-in');
               items.push(pw);
             }else if(c[0] && c[2]){
               var word = mk(id, label, c[0], c[1], c[2], extra);
@@ -424,7 +425,7 @@
         items.push(it);
       });
       var n = items.slice(before).filter(function(x){ return x.sec === id; }).length;
-      if(n > 0) secs.push({id:id, label:label, n:n});
+      if(n > 0 || sec.hasAttribute('data-review-list')) secs.push({id:id, label:label, n:n});
       var np = items.slice(before).filter(function(x){ return x.sec === PRON_SEC; }).length;
       if(np > 0) secs.push({id:PRON_SEC, label:'Местоимения', n:np});
     });

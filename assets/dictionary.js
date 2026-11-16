@@ -25,6 +25,14 @@
     } else foodBody.append(copy);
   }
 
+  for (const section of sections.filter(section => section.hasAttribute('data-review-list'))) {
+    const body = section.querySelector('tbody');
+    for (const row of document.querySelectorAll('tr[data-also-in="' + section.id + '"]')) {
+      const copy = body.insertRow();
+      for (const cell of Array.from(row.cells).slice(0, 3)) copy.append(cell.cloneNode(true));
+    }
+  }
+
   const grammarTopics = {have:'f-have',prepsuf:'f-prep',pronouns:'f-pron'};
   function trainURL(id) {
     const params = new URLSearchParams({start:'1'});

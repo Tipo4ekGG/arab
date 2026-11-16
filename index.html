@@ -49,6 +49,7 @@
       <a class="study-link" href="trainer.html">Тренажёр →</a>
     </div>
     <nav class="chips" id="chips" aria-label="Разделы">
+      <a href="#day-one">День 1 · Знакомство</a>
       <a href="#verbs">Глаголы</a>
       <a href="#conjugation">Спряжение</a>
       <a href="#people">Люди</a>
@@ -82,6 +83,20 @@
 
 <main class="wrap">
   <p class="empty" id="empty" hidden>Совпадений нет. Попробуй часть слова. <button class="reset-search" type="button">Очистить поиск</button></p>
+
+  <section id="day-one" data-review-list>
+    <h2>День 1 · Знакомство</h2>
+    <p class="count">5 слов, 9 фраз и 2 правила · примерно 15 минут</p>
+    <p class="note">Прочитай список вслух, затем пройди «Тренировать». В конце без подсказки назови своё имя, скажи, откуда ты и где учишься.</p>
+    <div class="tablebox">
+      <table class="rtl">
+        <thead><tr><th>Слово</th><th>Вслух</th><th>Перевод</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <p class="note"><b>1. «Мой» и «твой».</b> <bdi class="a">اِسْمِي</bdi> — «моё имя», <bdi class="a">اِسْمُكَ</bdi> — «твоё имя» (к мужчине). Окончания <bdi class="a">ـِي</bdi> и <bdi class="a">ـكَ</bdi> пишутся вместе со словом. <a href="#pronouns">Все окончания</a></p>
+    <p class="note"><b>2. «Я» и «ты» в настоящем времени.</b> <bdi class="a">أَدْرُسُ</bdi> — «я учусь», <bdi class="a">تَدْرُسُ</bdi> — «ты учишься» (к мужчине). Меняется первая буква глагола. <a href="#conjugation">Таблица спряжения</a></p>
+  </section>
 
   <section id="verbs">
     <h2>Глаголы</h2>
@@ -204,12 +219,12 @@
           <tr><td class="ar">مُمَرِّضَةٌ</td><td class="tr">мума́ррида</td><td class="ru">медсестра</td></tr>
           <tr><td class="ar">مُعَلِّمٌ</td><td class="tr">му'а́ллим</td><td class="ru">учитель</td></tr>
           <tr><td class="ar">مُعَلِّمَةٌ</td><td class="tr">му'а́ллима</td><td class="ru">учительница</td></tr>
-          <tr><td class="ar">طَالِبٌ</td><td class="tr">та́либ</td><td class="ru">студент, учащийся</td></tr>
+          <tr data-also-in="day-one"><td class="ar">طَالِبٌ</td><td class="tr">та́либ</td><td class="ru">студент, учащийся</td></tr>
           <tr><td class="ar">طَالِبَةٌ</td><td class="tr">та́либа</td><td class="ru">студентка</td></tr>
           <tr><td class="ar">ضَابِطٌ</td><td class="tr">да́бит</td><td class="ru">офицер</td></tr>
           <tr><td class="ar">طِفْلٌ</td><td class="tr">тыфль</td><td class="ru">ребёнок</td></tr>
           <tr><td class="ar">أُسْرَةٌ</td><td class="tr">у́сра</td><td class="ru">семья</td></tr>
-          <tr><td class="ar">صَدِيقٌ</td><td class="tr">сады́к</td><td class="ru">друг</td></tr>
+          <tr data-also-in="day-one"><td class="ar">صَدِيقٌ</td><td class="tr">сады́к</td><td class="ru">друг</td></tr>
           <tr><td class="ar">صَدِيقَةٌ</td><td class="tr">сады́ка</td><td class="ru">подруга</td></tr>
           <tr><td class="ar">زَمِيلٌ</td><td class="tr">зами́ль</td><td class="ru">коллега, однокурсник</td></tr>
           <tr><td class="ar">رَجُلٌ</td><td class="tr">ра́джуль</td><td class="ru">мужчина (мн. رِجَالٌ — риджа́ль)</td></tr>
@@ -275,7 +290,7 @@
       <table class="rtl">
         <thead><tr><th>Слово</th><th>Вслух</th><th>Перевод</th><th>Род</th></tr></thead>
         <tbody>
-          <tr><td class="ar">بَيْتٌ</td><td class="tr">байт</td><td class="ru">дом</td><td class="pos">м</td></tr>
+          <tr data-also-in="day-one"><td class="ar">بَيْتٌ</td><td class="tr">байт</td><td class="ru">дом</td><td class="pos">м</td></tr>
           <tr><td class="ar">عِمَارَةٌ</td><td class="tr">'има́ра</td><td class="ru">здание</td><td class="pos">ж</td></tr>
           <tr><td class="ar">بَابٌ</td><td class="tr">баб</td><td class="ru">дверь</td><td class="pos">м</td></tr>
           <tr><td class="ar">شُبَّاكٌ</td><td class="tr">шубба́к</td><td class="ru">окно</td><td class="pos">м</td></tr>
@@ -580,8 +595,8 @@
           <tr><td class="ar">أُولَئِكَ</td><td class="tr">'у́ляика</td><td class="ru">те (о людях)</td><td class="pos">указательное</td></tr>
           <tr><td class="ar">نَعَمْ</td><td class="tr">на́'ам</td><td class="ru">да</td><td class="pos">ответ</td></tr>
           <tr><td class="ar">لَا</td><td class="tr">ля</td><td class="ru">нет</td><td class="pos">ответ</td></tr>
-          <tr><td class="ar">وَ</td><td class="tr">ва</td><td class="ru">и (пишется слитно)</td><td class="pos">союз</td></tr>
-          <tr><td class="ar">أَنَا</td><td class="tr">а́на</td><td class="ru">я</td><td class="pos">местоимение</td></tr>
+          <tr data-also-in="day-one"><td class="ar">وَ</td><td class="tr">ва</td><td class="ru">и (пишется слитно)</td><td class="pos">союз</td></tr>
+          <tr data-also-in="day-one"><td class="ar">أَنَا</td><td class="tr">а́на</td><td class="ru">я</td><td class="pos">местоимение</td></tr>
           <tr><td class="ar">أَنْتَ</td><td class="tr">а́нта</td><td class="ru">ты (м)</td><td class="pos">местоимение</td></tr>
           <tr><td class="ar">أَنْتِ</td><td class="tr">а́нти</td><td class="ru">ты (ж)</td><td class="pos">местоимение</td></tr>
           <tr><td class="ar">هُوَ</td><td class="tr">ху́ва</td><td class="ru">он</td><td class="pos">местоимение</td></tr>
@@ -700,15 +715,15 @@
           <tr><td class="ar">صَبَاحُ النُّورِ</td><td class="tr">саба́ху-н-нур</td><td class="ru">Доброе утро (ответ)</td></tr>
           <tr><td class="ar">مَسَاءُ الْخَيْرِ</td><td class="tr">маса́'у-ль-хайр</td><td class="ru">Добрый вечер</td></tr>
           <tr><td class="ar">مَسَاءُ النُّورِ</td><td class="tr">маса́'у-н-нур</td><td class="ru">Добрый вечер (ответ)</td></tr>
-          <tr><td class="ar">كَيْفَ حَالُكَ؟</td><td class="tr">ке́йфа ха́лук</td><td class="ru">Как дела? (к мужчине)</td></tr>
+          <tr data-also-in="day-one"><td class="ar">كَيْفَ حَالُكَ؟</td><td class="tr">ке́йфа ха́лук</td><td class="ru">Как дела? (к мужчине)</td></tr>
           <tr><td class="ar">كَيْفَ الْحَالُ؟</td><td class="tr">ке́йфа-ль-халь</td><td class="ru">Как дела? (нейтрально)</td></tr>
-          <tr><td class="ar">بِخَيْرٍ وَالْحَمْدُ لِلَّهِ</td><td class="tr">би-хайр ва-ль-ха́мду ли-лля́х</td><td class="ru">Хорошо, слава Богу</td></tr>
+          <tr data-also-in="day-one"><td class="ar">بِخَيْرٍ وَالْحَمْدُ لِلَّهِ</td><td class="tr">би-хайр ва-ль-ха́мду ли-лля́х</td><td class="ru">Хорошо, слава Богу</td></tr>
           <tr><td class="ar">أَهْلًا وَسَهْلًا</td><td class="tr">а́хлян ва-са́хлян</td><td class="ru">Добро пожаловать</td></tr>
           <tr><td class="ar">مَرْحَبًا</td><td class="tr">ма́рхабан</td><td class="ru">Здравствуйте, привет</td></tr>
           <tr><td class="ar">أَهْلًا بِكَ</td><td class="tr">а́хлян бик</td><td class="ru">Рады тебе (ответ)</td></tr>
-          <tr><td class="ar">مَا اسْمُكَ؟</td><td class="tr">ма-сму́к</td><td class="ru">Как тебя зовут?</td></tr>
+          <tr data-also-in="day-one"><td class="ar">مَا اسْمُكَ؟</td><td class="tr">ма-сму́к</td><td class="ru">Как тебя зовут?</td></tr>
           <tr><td class="ar">اِسْمِي ...</td><td class="tr">и́сми</td><td class="ru">Меня зовут ...</td></tr>
-          <tr><td class="ar">مِنْ أَيْنَ أَنْتَ؟</td><td class="tr">мин а́йна анта</td><td class="ru">Откуда ты?</td></tr>
+          <tr data-also-in="day-one"><td class="ar">مِنْ أَيْنَ أَنْتَ؟</td><td class="tr">мин а́йна анта</td><td class="ru">Откуда ты?</td></tr>
           <tr><td class="ar">مَا جِنْسِيَّتُكَ؟</td><td class="tr">ма джинси́йятук</td><td class="ru">Кто ты по национальности?</td></tr>
           <tr><td class="ar">أَنَا مِنْ مِصْرَ</td><td class="tr">ана мин миср</td><td class="ru">Я из Египта</td></tr>
           <tr><td class="ar">تَشَرَّفْنَا</td><td class="tr">ташарра́фна</td><td class="ru">Рад знакомству</td></tr>
@@ -718,7 +733,7 @@
           <tr><td class="ar">حَسَنًا</td><td class="tr">ха́сана</td><td class="ru">Хорошо, ладно</td></tr>
           <tr><td class="ar">مِنْ فَضْلِكَ</td><td class="tr">мин фа́длик</td><td class="ru">Пожалуйста (просьба)</td></tr>
           <tr><td class="ar">تَفَضَّلْ</td><td class="tr">тафа́ддаль</td><td class="ru">Вот, прошу, пожалуйста</td></tr>
-          <tr><td class="ar">شُكْرًا</td><td class="tr">шу́кран</td><td class="ru">Спасибо</td></tr>
+          <tr data-also-in="day-one"><td class="ar">شُكْرًا</td><td class="tr">шу́кран</td><td class="ru">Спасибо</td></tr>
           <tr><td class="ar">مَرَّةً أُخْرَى</td><td class="tr">ма́рратан у́хра</td><td class="ru">Ещё раз</td></tr>
           <tr><td class="ar">وَأَنَا أَيْضًا</td><td class="tr">ва ана а́йдан</td><td class="ru">И я тоже</td></tr>
           <tr><td class="ar">الْآنَ</td><td class="tr">аль-а́н</td><td class="ru">сейчас</td></tr>
@@ -730,7 +745,7 @@
           <tr><td class="ar">فِي أَمَانِ اللهِ</td><td class="tr">фи 'ама́ни-ллах</td><td class="ru">С Богом (прощание)</td></tr>
           <tr><td class="ar">سَلَّمَكَ اللهُ</td><td class="tr">салла́мака-ллах</td><td class="ru">Да хранит тебя Аллах (прощание)</td></tr>
           <tr><td class="ar">اُنْظُرْ وَاسْتَمِعْ وَكَرِّرْ</td><td class="tr">у́нзур ва-иста́ми' ва-ка́ррир</td><td class="ru">Посмотри, послушай и повтори (задание в учебнике)</td></tr>
-          <tr data-trainer-id="oral-test|مَرْحَبًا. اِسْمِي إِيغُور.|"><td class="ar">مَرْحَبًا. اِسْمِي إِيغُور.</td><td class="tr">ма́рхабан. и́сми И́гор</td><td class="ru">Здравствуйте. Меня зовут Игорь.</td></tr>
+          <tr data-also-in="day-one" data-trainer-id="oral-test|مَرْحَبًا. اِسْمِي إِيغُور.|"><td class="ar">مَرْحَبًا. اِسْمِي إِيغُور.</td><td class="tr">ма́рхабан. и́сми И́гор</td><td class="ru">Здравствуйте. Меня зовут Игорь.</td></tr>
         </tbody>
       </table>
     </div>
@@ -1015,10 +1030,10 @@
       <table class="rtl">
         <thead><tr><th>Фраза</th><th>Вслух</th><th>Перевод</th></tr></thead>
         <tbody>
-          <tr data-trainer-id="oral-test|أَدْرُسُ فِي الْأَكَادِيمِيَّةِ.|"><td class="ar">أَدْرُسُ فِي الْأَكَادِيمِيَّةِ.</td><td class="tr">'а́друсу фи-ль-'акади́мийя</td><td class="ru">Я учусь в академии.</td></tr>
+          <tr data-also-in="day-one" data-trainer-id="oral-test|أَدْرُسُ فِي الْأَكَادِيمِيَّةِ.|"><td class="ar">أَدْرُسُ فِي الْأَكَادِيمِيَّةِ.</td><td class="tr">'а́друсу фи-ль-'акади́мийя</td><td class="ru">Я учусь в академии.</td></tr>
           <tr data-trainer-id="oral-test|أَدْرُسُ الْإِدَارَةَ وَاللُّغَةَ الْعَرَبِيَّةَ.|"><td class="ar">أَدْرُسُ الْإِدَارَةَ وَاللُّغَةَ الْعَرَبِيَّةَ.</td><td class="tr">'а́друсу-ль-'ида́ра ва-ль-лу́га аль-'араби́йя</td><td class="ru">Я изучаю менеджмент и арабский язык.</td></tr>
           <tr data-trainer-id="oral-test|أُحِبُّ اللُّغَةَ الْعَرَبِيَّةَ.|"><td class="ar">أُحِبُّ اللُّغَةَ الْعَرَبِيَّةَ.</td><td class="tr">'ухи́ббу-ль-лу́га аль-'араби́йя</td><td class="ru">Мне нравится арабский язык.</td></tr>
-          <tr data-trainer-id="oral-test|أَيْنَ تَدْرُسُ؟|"><td class="ar">أَيْنَ تَدْرُسُ؟</td><td class="tr">'а́йна та́друсу?</td><td class="ru">Где ты учишься?</td></tr>
+          <tr data-also-in="day-one" data-trainer-id="oral-test|أَيْنَ تَدْرُسُ؟|"><td class="ar">أَيْنَ تَدْرُسُ؟</td><td class="tr">'а́йна та́друсу?</td><td class="ru">Где ты учишься?</td></tr>
           <tr data-trainer-id="oral-test|مَاذَا تَدْرُسُ؟|"><td class="ar">مَاذَا تَدْرُسُ؟</td><td class="tr">ма́за та́друсу?</td><td class="ru">Что ты изучаешь?</td></tr>
         </tbody>
       </table>
@@ -1112,7 +1127,7 @@
           <tr><td class="ar">مِصْرِيٌّ</td><td class="tr">ми́сри</td><td class="ru">египтянин</td></tr>
           <tr><td class="ar">سُعُودِيٌّ</td><td class="tr">су'у́ди</td><td class="ru">саудовец</td></tr>
           <tr><td class="ar">أَمْرِيكِيٌّ</td><td class="tr">амри́ки</td><td class="ru">американец</td></tr>
-          <tr data-trainer-id="oral-test|أَنَا مِنْ رُوسِيَا، وَأَسْكُنُ فِي مُوسْكُو.|"><td class="ar">أَنَا مِنْ رُوسِيَا، وَأَسْكُنُ فِي مُوسْكُو.</td><td class="tr">а́на мин ру́сия, ва-'а́скуну фи му́ску</td><td class="ru">Я из России и живу в Москве.</td></tr>
+          <tr data-also-in="day-one" data-trainer-id="oral-test|أَنَا مِنْ رُوسِيَا، وَأَسْكُنُ فِي مُوسْكُو.|"><td class="ar">أَنَا مِنْ رُوسِيَا، وَأَسْكُنُ فِي مُوسْكُو.</td><td class="tr">а́на мин ру́сия, ва-'а́скуну фи му́ску</td><td class="ru">Я из России и живу в Москве.</td></tr>
           <tr><td class="ar">مَالِيزِيَا</td><td class="tr">мали́зия</td><td class="ru">Малайзия</td></tr>
           <tr><td class="ar">تُرْكِيَا</td><td class="tr">ту́ркия</td><td class="ru">Турция</td></tr>
         </tbody>
