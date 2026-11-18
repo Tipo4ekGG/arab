@@ -195,3 +195,22 @@ body.no-ar tbody .ar:not(.peek) .conj-affix{color:transparent}
 }
 
 @media(max-width:640px){.rtl[data-layout] td .ar,.rtl[data-layout] td .tr{white-space:normal;overflow-wrap:anywhere}}
+
+/* Keep daily lessons readable even when their phrases are long. */
+[data-review-list] table {
+  table-layout: fixed;
+}
+[data-review-list] td {
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 640px) {
+  [data-review-list] .rtl[data-layout] tr {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 4px;
+  }
+  [data-review-list] .rtl[data-layout] td {
+    grid-area: auto;
+  }
+}
