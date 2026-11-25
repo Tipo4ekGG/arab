@@ -230,7 +230,7 @@
   function nk(s){ return (s || '').toLowerCase().replace(/ё/g, 'е').replace(/[^a-zа-я0-9 ]+/g, ' ').replace(/\s+/g, ' ').trim(); }
   function nar(s){ return (s || '').replace(/[ً-ٰٟـۡ]/g, '').replace(/[؟?!.,،…]/g, '').replace(/\s+/g, ' ').trim(); }
   function narLoose(s){ return nar(s).replace(/[أإآٱ]/g, 'ا').replace(/ى/g, 'ي').replace(/ة/g, 'ه').replace(/ؤ/g, 'و').replace(/ئ/g, 'ي').replace(/ء/g, '').replace(/\s+/g, ''); }
-  function ntr(s){ return (s || '').toLowerCase().replace(/ё/g, 'е').replace(/[́'’ʼ`‘\-\s?.,!…]/g, ''); }
+  function ntr(s){ return (s || '').toLowerCase().replace(/ё/g, 'е').replace(/э/g, 'а').replace(/[́'’ʼ`‘\-\s?.,!…]/g, ''); }
   function shuffle(a){ a = a.slice(); for(var i = a.length - 1; i > 0; i--){ var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
   function lev(a, b){
     var p = [], i, j;
